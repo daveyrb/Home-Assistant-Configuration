@@ -1,0 +1,19 @@
+# Updated 22-04-2018
+
+###############################################################################
+# Comms Cupboard Fan #
+###############################################################################
+ - platform: mqtt
+   name: "Comms Fan"
+   state_topic: "stat/Comms-Fan/POWER"
+   command_topic: "cmnd/Comms-Fan/POWER"
+   availability_topic: "tele/Comms-Fan/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"  
+   optimistic: false
+   retain: true
+###############################################################################
+

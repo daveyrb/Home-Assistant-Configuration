@@ -1,0 +1,28 @@
+# Updated 22-04-2018
+# Breaking down customize into separate parts 19-04-2018
+# Added Comms Cupboard Fan 22-04-2018
+
+###############################################################################
+# Customize Power Switches #
+############################################################################### 
+switch.photo_frame:
+  friendly_name: 'Lounge Photo Frame'
+  assumed_state: false
+  icon: mdi:image-album
+switch.christmas_front_garden:
+  icon: mdi:pine-tree
+switch.christmas_lounge_window:
+  icon: mdi:pine-tree  
+switch.christmas_tree:
+  icon: mdi:pine-tree
+switch.christmas_back_porch:
+  icon: mdi:pine-tree
+switch.back_porch_laser:
+  icon: mdi:pine-tree
+switch.christmas_the_bat_cave:
+  icon: mdi:pine-tree
+switch.the_bat_cave:
+  icon: mdi:fan
+switch.comms_fan:
+  icon: mdi:fan  
+###############################################################################

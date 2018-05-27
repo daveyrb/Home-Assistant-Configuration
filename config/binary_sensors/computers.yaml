@@ -1,0 +1,44 @@
+# Updated 10-05-2018
+# Added Amy's iPad
+# Added Ben's PC 12-04-2018
+# Updated IP addresses 18-04-2018
+# Removed some PC's 10-05-2018
+
+###############################################################################
+# Binary Sensor to monitor on line computers #
+###############################################################################
+- platform: command_line
+  name: Amy's PC
+  command: ping -W 1 -c 1 192.168.0.142 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Big Mac
+  command: ping -W 1 -c 1 192.168.0.75 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Ben's PC
+  command: ping -W 1 -c 1 192.168.0.78 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"    
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Sonic Music Player
+  command: ping -W 1 -c 1 192.168.0.50 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"    
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Ben's Xbox
+  command: ping -W 1 -c 1 192.168.0.138 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"    
+###############################################################################

@@ -1,0 +1,19 @@
+# Updated 31-10-2017
+
+###############################################################################
+# Hallway Night Light #
+###############################################################################
+ - platform: mqtt
+   name: "Hallway Night Light"
+   state_topic: "stat/Hallway-Night-Light/POWER"
+   command_topic: "cmnd/Hallway-Night-Light/POWER"
+   availability_topic: "tele/Hallway-Night-Light/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"
+   optimistic: false
+   retain: true
+###############################################################################
+

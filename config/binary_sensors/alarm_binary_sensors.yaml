@@ -1,0 +1,107 @@
+# Updated 09-05-2018
+
+ # Check on line status the Two ESP8266's that control the Burglar Alarm
+ # Added additional ESP to control the Alarm NFC Reader 09-05-2018
+
+###############################################################################
+# Binary Sensor Alarm MCU Status #
+############################################################################### 
+- platform: command_line
+  name: Burglar Alarm MCU 1
+  command: ping -W 1 -c 1 192.168.0.44 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  #device_class: online
+  payload_on: "success"
+  payload_off: "fail"
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Burglar Alarm MCU 2
+  command: ping -W 1 -c 1 192.168.0.45 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  #device_class: online
+  payload_on: "success"
+  payload_off: "fail"
+#-----------------------------------------------------------------------------#
+- platform: command_line
+  name: Burglar Alarm MCU 3
+  command: ping -W 1 -c 1 192.168.0.47 > /dev/null 2>&1 && echo success || echo fail
+  device_class: connectivity
+  #device_class: online
+  payload_on: "success"
+  payload_off: "fail"
+###############################################################################
+
+###############################################################################
+# Binary Sensors Alarm Sensors #
+###############################################################################
+- platform: mqtt
+  name: "Alarm Amy Bedroom"
+  state_topic: "/Burglar_Alarm_01/Alarm_Amy_Bedroom/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#  
+- platform: mqtt
+  name: "Alarm Dining Room"
+  state_topic: "/Burglar_Alarm_01/Alarm_Dining_Room/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#  
+- platform: mqtt
+  name: "Alarm Front Door"
+  state_topic: "/Burglar_Alarm_02/Alarm_Front_Door/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: opening
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Alarm Hallway"
+  state_topic: "/Burglar_Alarm_01/Alarm_Hallway/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Alarm Kitchen"
+  state_topic: "/Burglar_Alarm_01/Alarm_Kitchen/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Alarm Lounge"
+  state_topic: "/Burglar_Alarm_01/Alarm_Lounge/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Alarm The Bat Cave"
+  state_topic: "/Burglar_Alarm_01/Alarm_The_Bat_Cave/Switch"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+  #optimistic: false
+  retain: true
+###############################################################################
+    

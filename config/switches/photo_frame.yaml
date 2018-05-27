@@ -1,0 +1,16 @@
+# Updated 03-04-2018
+# Replaces PIGPIO switch
+
+###############################################################################
+# Lounge Live Photo Frame #
+###############################################################################
+ - platform: mqtt
+   name: "Photo Frame"
+   state_topic: "photo/output/screen"
+   command_topic: "photo/output/screen/set"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   optimistic: false
+   retain: true
+###############################################################################

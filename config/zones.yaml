@@ -1,0 +1,44 @@
+# Updated 21-04-2017
+
+###############################################################################    
+# Zones for Location tracking
+###############################################################################
+- name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 50
+  icon: mdi:home
+#-----------------------------------------------------------------------------#
+- name: School
+  latitude: !secret school_latitude
+  longitude: !secret school_longitude
+  radius: 250
+  icon: mdi:school
+#-----------------------------------------------------------------------------#
+- name: Work
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+  radius: 150
+  icon: mdi:worker
+#-----------------------------------------------------------------------------#
+- name: Asda
+  latitude: !secret asda_latitude
+  longitude: !secret asda_longitude
+  radius: 250
+  icon: mdi:worker
+#-----------------------------------------------------------------------------#
+
+###############################################################################    
+# Zones for Location tracking
+# BlueTooth Example
+###############################################################################
+#- name: The Bat Cave
+#  latitude: !secret the_bat_cave_latitude
+#  longitude: !secret the_bat_cave_longitude
+#  radius: 20
+#  passive: true
+#  icon: mdi:bluetooth
+###############################################################################
+
+
+  

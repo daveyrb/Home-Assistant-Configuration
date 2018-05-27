@@ -1,0 +1,21 @@
+# Updated 18-04-2017
+# Triggered by bell_press.py from the front door Raspberry Pi Camera
+# This triggers /automation/door_bell.yaml
+
+###############################################################################
+# Binary Sensor Door Bell #
+###############################################################################
+- platform: mqtt
+  name: "Door Bell"
+  state_topic: "home/door_bell"
+  qos: 1
+  payload_on: "Ring"
+  payload_off: "Stop"
+  #optimistic: false
+  #retain: true
+###############################################################################
+
+
+
+
+  

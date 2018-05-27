@@ -1,0 +1,18 @@
+# Updated 19-05-2018
+
+###############################################################################
+# Front Garden Garage Lights #
+###############################################################################
+ - platform: mqtt
+   name: "Front Garage Lights"
+   state_topic: "stat/front-garden-garage-lights/POWER"
+   command_topic: "cmnd/front-garden-garage-lights/POWER"
+   availability_topic: "tele/front-garden-garage-lights/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"
+   optimistic: false
+   retain: true
+###############################################################################

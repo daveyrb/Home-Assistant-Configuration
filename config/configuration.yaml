@@ -1,0 +1,321 @@
+# Updated 21-05-2018
+# IP addresses are resolved via local hosts file
+# Apple TV Update
+# Added javascript_version: latest to the frontend:
+# Removed javascript_version: latest seems to break the history display only tried it in Safari.
+# Removed Apple TV
+# Swapped Wemo round with TP-Link 1 31-01-2018
+# Excluded so entries from History 16-04-2018
+# Added Notify Ralph 19-04-2018
+# Broken down customize into separate parts 19-04-2018
+# Excluded stuff from the logbook 1-05-2018
+# Added washing up to logbook 21-05-2018
+###############################################################################
+homeassistant:
+  # Name of the location where Home Assistant is running #
+  name: Jarvis
+  # Location required to calculate the time the sun rises and sets #
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters) #
+  elevation: 102
+  # metric for Metric, imperial for Imperial #
+  unit_system: metric
+  time_zone: Europe/London
+  customize: !include_dir_merge_named customize
+###############################################################################
+
+###############################################################################
+# Show links to resources in log and frontend #
+#introduction:
+###############################################################################
+
+###############################################################################
+# Enables the frontend #
+frontend:
+  #javascript_version: es5
+  javascript_version: latest
+###############################################################################
+
+###############################################################################  
+# Configuration Panel #
+config:
+###############################################################################
+
+###############################################################################
+http:
+  api_password: !secret ha_api_password
+  server_port: !secret ha_port
+  trusted_networks:
+    - 192.168.0.0/24
+  ip_ban_enabled: True
+  login_attempts_threshold: 1    
+###############################################################################
+
+###############################################################################
+# Enable iOS App #
+ios:
+###############################################################################
+
+###############################################################################
+# Notifications #
+notify:
+#  - name: email
+#    platform: smtp
+#    server: !secret email_server
+#    port: 587
+#    sender: !secret email_sender
+#    username: !secret email_username
+#    password: !secret email_password
+#    recipient: !secret email_recipient
+#    sender_name: !secret email_sender_name
+
+  - name: ralph_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_ralph
+    sender_name: !secret email_sender_name
+
+  - name: tracy_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_tracy
+    sender_name: !secret email_sender_name
+
+  - name: ben_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_ben
+    sender_name: !secret email_sender_name
+
+  - name: amy_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_amy
+    sender_name: !secret email_sender_name
+
+
+# Group notifications #
+  - name: ralph
+    platform: group
+    services:
+      - service: ralph_email
+      - service: ios_ralph_daveys_iphone
+
+  - name: alarm
+    platform: group
+    services:
+      - service: ralph_email
+      - service: tracy_email
+      - service: ios_ralph_daveys_iphone
+      - service: ios_tracys_iphone
+
+  - name: doorbell
+    platform: group
+    services:
+      - service: ralph_email
+      - service: tracy_email
+      - service: ios_ralph_daveys_iphone
+      - service: ios_tracys_iphone
+      
+#  - name: ben
+#    platform: group
+#    services:
+#      - service: ben_email
+      
+#  - name: amy
+#    platform: group
+#    services:
+#      - service: amy_email
+###############################################################################    
+
+###############################################################################
+# Groups #
+group: !include groups.yaml
+###############################################################################
+      
+###############################################################################
+# Checks for available updates #
+updater:
+###############################################################################
+
+###############################################################################
+# Discover some devices automatically #
+#discovery:
+###############################################################################
+
+###############################################################################
+# Allows you to issue voice commands from the frontend in enabled browsers #
+#conversation:
+###############################################################################
+
+###############################################################################
+# Recorder #
+recorder:
+  purge_interval: 1
+  purge_keep_days: 8
+  #purge_days: 21
+###############################################################################
+
+###############################################################################
+# Enables support for tracking state changes over time #
+history:
+  exclude:
+    domains:
+      - automation
+      - group
+      - script
+    entities:
+      - sensor.adsl_line_1
+      - sensor.adsl_line_2
+      - sensor.bedroom_wap
+      - sensor.computer_room_switch
+      - sensor.dining_room_wap
+      - sensor.dns_1
+      - sensor.dns_2
+      - sensor.hallway_wap
+      - sensor.kitchen_wap
+      - sensor.lounge_temperature
+      - sensor.lounge_wap
+      - sensor.lounge_switch
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_blocked_today_2
+      - sensor.pihole_dns_queries_today
+      - sensor.pihole_dns_queries_today_2
+      - sensor.poe_switch
+      - sensor.router
+      - sensor.the_burrow_wap
+      - sensor.vpn_server
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_daily_summary
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_precip
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_speed
+      - sensor.jarvis_uptime
+      - sensor.since_last_boot
+      - sensor.since_last_boot_adjusted
+      - sensor.ha_installed_version
+###############################################################################
+
+###############################################################################      
+# View all events in a logbook #
+logbook:
+  exclude:
+    domains:
+      - automation
+      - group   
+    entities:
+      - binary_sensor.alarm_amy_bedroom
+      - binary_sensor.alarm_the_bat_cave
+      - binary_sensor.alarm_dining_room
+      - binary_sensor.alarm_hallway
+      - binary_sensor.alarm_kitchen
+      - binary_sensor.alarm_lounge
+      - sensor.jarvis_uptime
+      - sensor.since_last_boot
+      - sensor.since_last_boot_adjusted
+      - sensor.ha_installed_version
+  include:
+    entities:
+    - automation.amy_empty_the_dishwasher_sunday
+    - automation.amy_load_the_dishwasher_sunday
+    - automation.amy_washing_up_saturday
+    - automation.amy_washing_up_weekday
+    - automation.ben_empty_the_dishwasher_sunday
+    - automation.ben_load_the_dishwasher_sunday
+    - automation.ben_washing_up_saturday
+    - automation.ben_washing_up_weekday    
+###############################################################################
+
+###############################################################################
+# Track the sun #
+sun:
+###############################################################################
+
+###############################################################################
+# Camera #
+#camera: !include_dir_merge_list cameras
+###############################################################################
+
+###############################################################################
+# Sensors #
+sensor: !include_dir_merge_list sensors
+###############################################################################
+
+###############################################################################
+# Binary Sensors #
+binary_sensor: !include_dir_merge_list binary_sensors
+###############################################################################
+
+###############################################################################
+# Wemo Socket #
+wemo:
+  static:
+    #- 192.168.0.23
+    - 192.168.0.151
+###############################################################################
+
+###############################################################################
+# Mosquitto MQTT Broker #
+mqtt:
+  broker: 192.168.0.22
+  port: 1883
+  client_id: !secret mqt_client_id
+  keepalive: 60
+  username: !secret mqt_username   
+  password: !secret mqt_password
+  protocol: 3.1
+###############################################################################
+
+###############################################################################
+# Zones #
+zone: !include zones.yaml
+###############################################################################
+
+###############################################################################
+# Switches #
+switch: !include_dir_merge_list switches
+###############################################################################
+
+###############################################################################
+# Scenes #
+#scene: !include_dir_merge_list scenes
+###############################################################################
+
+###############################################################################
+# Automation #
+automation: !include_dir_merge_list automation            
+###############################################################################
+
+###############################################################################
+# Input Select #
+#input_select: !include input_select.yaml
+###############################################################################
+
+###############################################################################
+# Scripts #
+script: !include_dir_merge_named scripts
+###############################################################################
+
+
+

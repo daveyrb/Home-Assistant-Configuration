@@ -1,0 +1,16 @@
+# Updated 19-04-2018
+# Breaking down customize into separate parts 19-04-2018
+
+###############################################################################
+# Customize VPN and DNS Servers #
+############################################################################### 
+sensor.vpn_server_state:
+  icon: mdi:vpn
+sensor.dns_1_state:
+  friendly_name: 'DNS 1'
+  icon: mdi:dns
+# DNS Server 2
+sensor.dns_2_state:
+  friendly_name: 'DNS 2'
+  icon: mdi:dns
+###############################################################################

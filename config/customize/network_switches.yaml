@@ -1,0 +1,13 @@
+# Updated 19-04-2018
+# Breaking down customize into separate parts 19-04-2018
+
+###############################################################################
+# Customize Network Switches #
+############################################################################### 
+sensor.poe_switch_state:
+  icon: mdi:switch
+sensor.lounge_switch_state:
+  icon: mdi:switch
+sensor.the_bat_cave_switch_state:
+  icon: mdi:switch
+###############################################################################

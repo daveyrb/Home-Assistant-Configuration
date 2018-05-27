@@ -1,0 +1,305 @@
+# Updated 19-05-2018
+# Apple TV update
+# Removed iCloud Email Checking
+# Updated Raspberry PI System Status for V0.56.2
+# Added Front Porch Light
+# Changed Butterfly Lights Timing (Need to look at before summer when sunrise is earlier)
+# Added Christmas Group
+# Changed display layout
+# Removed Apple TV 10-02-2018
+# System Monitor Changes V63.0 11-02-2018
+# Added Wireless Access Points 12-02-2018
+# Added Mobile DHT Sensor 17-02-2018
+# Adjusted the lounge temperature 20-02-2018
+# Added Pi-Hole Server 14-03-2018
+# Added DNS Server 20-03-2018
+# Added Amy's iPad 20-03-2018
+# Added 2nd Pi-Hole Server 25-03-2018
+# Grouped DNS Sensors into one Sensor 31-03-2018
+# Added Ben's PC 12-04-2018
+# Added TP 6 Switch "The Bat Cave" 17-04-2018
+# Added Lounge Reading Light 23-04-2018
+# Added Bedroom DHT 28-04-2018
+# Changed Uptime Sensors 03-05-2018 Didn't do what I wanted
+# Started configuring the Burglar Alarm 07-05-2018
+# Removed some PC's 10-05-2018
+# Added Front Garage lights 19-05-2018
+
+###############################################################################    
+# Groups     
+###############################################################################
+  computers:
+    name: Computers
+    entities:
+      - binary_sensor.amys_pc
+      - binary_sensor.big_mac
+      - binary_sensor.bens_pc
+      - binary_sensor.bens_xbox
+      - sensor.knob_wiilys_server # Ben's Minecraft Server 
+      - binary_sensor.sonic_music_player
+#-----------------------------------------------------------------------------#
+  burglar_alarm_status:
+    name: Burglar Alarm Status
+    entities:
+      - binary_sensor.burglar_alarm_mcu_1
+      - binary_sensor.burglar_alarm_mcu_2
+      - binary_sensor.burglar_alarm_mcu_3
+#-----------------------------------------------------------------------------#
+  burglar_alarm_motion_sensors:
+    name: Burglar Alarm Motion Sensors
+    entities:
+      - binary_sensor.alarm_amy_bedroom
+      - binary_sensor.alarm_hallway
+      - binary_sensor.alarm_lounge      
+      - binary_sensor.alarm_kitchen
+      - binary_sensor.alarm_the_bat_cave
+      - binary_sensor.alarm_dining_room
+#-----------------------------------------------------------------------------#
+  burglar_alarm_door_widow_sensors:
+    name: Burglar Alarm Door / Window Sensors
+    entities:
+      - binary_sensor.alarm_front_door
+#-----------------------------------------------------------------------------#
+  activate_burglar_alarm:
+    name: Activate Burglar Alarm
+    control: hidden
+    entities:
+      - automation.alarm_live_frontdoor
+      - automation.alarm_live_motion
+      - switch.alarm
+      - switch.alarm_siren
+#-----------------------------------------------------------------------------#
+  tracker:
+    name: Tracker
+    entities:
+      - device_tracker.ralph_daveys_iphone
+      - device_tracker.tracys_iphone
+#-----------------------------------------------------------------------------#
+  speedtest:
+     name: SpeedTest
+     entities:
+       - sensor.speedtest_download
+       - sensor.speedtest_upload
+       - sensor.speedtest_ping
+#-----------------------------------------------------------------------------#
+  lights_internal:
+    name: Lights Internal
+    control: hidden
+    entities:
+      - switch.lounge_reading_light
+      - switch.hallway_night_light
+      - switch.butterfly
+      - switch.fireplace_white
+      - switch.fireplace_red
+#-----------------------------------------------------------------------------#
+  lights_external:
+    name: Lights External
+    control: hidden
+    entities:
+      - switch.front_porch_light
+      - switch.soffit_lights
+      - switch.front_garage_lights
+#-----------------------------------------------------------------------------#
+  lights_external_dusk_dawn:
+    name: Lights External Dusk To Dawn
+    control: hidden
+    entities:
+      - switch.front_porch_light
+      - switch.soffit_lights
+#-----------------------------------------------------------------------------#
+  switches:
+    name: Switches
+    control: hidden
+    entities:
+      - switch.photo_frame
+      - switch.the_bat_cave
+      - switch.comms_fan
+#-----------------------------------------------------------------------------#
+  network_devices:
+     name: Network Devices
+     entities:
+       #- sensor.adsl_line_1_state
+       #- sensor.adsl_line_2_state
+       - sensor.router_state
+       - sensor.dns_1_state
+       - sensor.dns_2_state
+       - sensor.vpn_server_state
+       - sensor.lounge_switch_state
+       - sensor.computer_room_switch_state
+       - sensor.poe_switch_state
+       - sensor.printer_page_count
+#-----------------------------------------------------------------------------#
+  wireless_access_points:
+     name: Wireless Access Points
+     entities:
+       - sensor.dining_room_wap_state
+       - sensor.kitchen_wap_state
+       - sensor.lounge_wap_state
+       - sensor.Hallway_wap_state
+       - sensor.bedroom_wap_state
+       - sensor.the_burrow_wap_state
+#-----------------------------------------------------------------------------#
+  pi_hole:
+    name: DNS / Advert Blocker
+    entities:
+      - sensor.dns_queries
+      - sensor.adverts_blocked
+      - sensor.percent_of_adverts_blocked
+#-----------------------------------------------------------------------------#
+  environment:
+    name: Environment
+    entities:
+      - sensor.comms_temperature
+      - sensor.comms_humidity
+      - sensor.bedroom_temperature
+      - sensor.bedroom_humidity
+      - sensor.lounge_temperature_adjusted
+      - sensor.greenhouse_temperature
+      - sensor.greenhouse_humidity
+      - sensor.garden_temperature
+      - sensor.garden_humidity
+#-----------------------------------------------------------------------------#
+  weather:
+    name: Weather
+    entities:
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_type
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_cloud_cover
+#-----------------------------------------------------------------------------#
+  tv_lounge:
+     name: TV Lounge
+     control: hidden
+     entities:
+       - script.tv
+       - script.sky
+       - script.dvd
+       - script.amplifier
+       - script.pause_sky
+       - script.pause_dvd
+       - script.play_dvd
+       - script.pause_apple_tv     
+#-----------------------------------------------------------------------------#
+  system:
+    name: System
+    entities:
+      - sensor.processor_use
+      - sensor.cpu_temp
+      - sensor.disk_use_percent_
+      - sensor.memory_free
+      - sensor.network_in_eth0
+      - sensor.network_out_eth0
+      - sensor.ha_installed_version
+      - sensor.jarvis_uptime
+      - sensor.last_boot
+      - sensor.since_last_boot_adjusted
+#-----------------------------------------------------------------------------#
+  christmas:
+    name: Christmas
+    #control: hidden
+    entities:
+      - switch.christmas_front_garden
+      - switch.christmas_lounge_window
+      - switch.christmas_tree
+      - switch.christmas_back_porch
+      - switch.back_porch_laser
+      - switch.christmas_the_bat_cave        
+###############################################################################
+# This is my test Group      
+# These are test LED's and a Switch Connected to an ESP-Easy ESP2866 #    
+###############################################################################
+  test_stuff:
+    name: Test Stuff
+    control: hidden
+    entities:
+      - binary_sensor.test_switch
+      - switch.test_led
+      - switch.test_led_2
+      # For Testing the Doorbell #
+      #- switch.door_bell     
+###############################################################################
+
+
+###############################################################################    
+# HA Home Screen with Tabbed Display     
+###############################################################################
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.computers
+      - group.network_devices
+      - group.wireless_access_points
+      - group.pi_hole
+      - group.environment
+      - group.weather
+      - group.speedtest
+      - group.tracker
+#-----------------------------------------------------------------------------#
+  LightsView:
+    name: Lights
+    view: yes
+    icon: mdi:lightbulb
+    entities:
+      - group.lights_internal
+      - group.lights_external
+#-----------------------------------------------------------------------------#
+  SwitchView:
+    name: Switches
+    view: yes
+    icon: mdi:power
+    entities:
+      - group.Switches
+#-----------------------------------------------------------------------------#
+  EntertainmentView:
+     name: Entertainment
+     view: yes
+     icon: mdi:television
+     entities:
+       - group.tv_lounge
+#-----------------------------------------------------------------------------#
+  SystemView:
+    name: System Status
+    view: yes
+    icon: mdi:server
+    entities:
+      - group.system
+#-----------------------------------------------------------------------------#
+  AlarmView:
+    name: Burglar Alarm
+    view: yes
+    icon: mdi:alarm-bell
+    entities:
+      - group.burglar_alarm_status
+      - group.burglar_alarm_motion_sensors
+      - group.burglar_alarm_door_widow_sensors
+      - group.activate_burglar_alarm
+#-----------------------------------------------------------------------------#
+  ChristmasView:
+    name: Christmas
+    view: yes
+    icon: mdi:pine-tree
+    entities:
+      - group.christmas
+#-----------------------------------------------------------------------------#
+  AutomationView:      
+    name: Automation
+    view: no # Hidden when not using for testing no = Hidden yes = Show
+    icon: mdi:home-automation
+    entities:
+      - group.all_automations
+#-----------------------------------------------------------------------------#
+###############################################################################
+# My Test group
+###############################################################################
+  TestView:
+    name: Test Stuff
+    view: yes # Hidden when not using for testing no = Hidden yes = Show
+    icon: mdi:test-tube
+    entities:
+      - group.test_stuff
+###############################################################################

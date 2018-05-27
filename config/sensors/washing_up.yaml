@@ -1,0 +1,15 @@
+# Modified 26-04-2018
+
+###############################################################################
+# Ben & Amy's washing up schedule this will send them an email at teatime     
+# to say who is doing the washing up.
+###############################################################################
+- platform: template
+  sensors:
+    washing_up_state:
+      value_template: '{{ ((now().strftime("%j") | int) % 2) == 0 }}'
+      friendly_name: 'Washing Up'
+###############################################################################
+
+
+

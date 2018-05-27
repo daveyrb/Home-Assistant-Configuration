@@ -1,0 +1,33 @@
+# Updated 19-05-2018
+
+###############################################################################
+# Automation for the Front Garden Garage lights #
+###############################################################################
+- alias: 'Front Garage Lights On'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.alarm_front_door
+      to: 'on'  
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    service: switch.turn_on
+    entity_id: switch.front_garage_lights
+#-----------------------------------------------------------------------------#
+- alias: 'Front Garage Lights Off'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.alarm_front_door 
+      to: 'off'
+      from: 'on'
+      for: '00:03:00'
+      #for:
+        #seconds: 30
+  action:
+    service: switch.turn_off
+    entity_id: switch.front_garage_lights 
+###############################################################################
+

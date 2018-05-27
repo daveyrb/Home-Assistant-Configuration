@@ -1,0 +1,35 @@
+# Updated 08-05-2018 
+# LED to indicate the Alarm is on
+
+###############################################################################
+#  Arm / Disarm The Burglar Alarm #
+###############################################################################
+ - platform: mqtt
+   name: "Alarm"
+   state_topic: "stat/Burglar_Alarm_03/POWER"
+   command_topic: "cmnd/Burglar_Alarm_03/POWER"
+   availability_topic: "tele/Burglar_Alarm_03/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"  
+   optimistic: false
+   retain: true
+#-----------------------------------------------------------------------------#
+
+###############################################################################
+#  Siren For The Burglar Alarm #
+###############################################################################
+ - platform: mqtt
+   name: "Alarm Siren"
+   state_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch"
+   command_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch/gpio/12"
+   qos: 1
+   payload_on: "0"
+   payload_off: "1"
+   #payload_on: "ON"
+   #payload_off: "OFF"
+   optimistic: false
+   retain: true
+#-----------------------------------------------------------------------------#

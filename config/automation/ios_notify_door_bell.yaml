@@ -1,0 +1,25 @@
+# Updated 18-04-2017
+# Notify my iPhone that someone is at the door
+
+###############################################################################
+# Automation for Front Door Notification #
+###############################################################################
+- alias: 'Someone At The Door'
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_bell
+    to: 'on'
+  action:
+    service: notify.doorbell
+    data:
+      title: "Someone At The Door"
+      message: "Sorry to disturb you, but someone seems to be at the front door"
+    #service: notify.ios_ralph_daveys_iphone
+    #data:
+      #message: "Someone At The Door"
+      #data:
+        #push:
+          #badge: 0
+###############################################################################
+        

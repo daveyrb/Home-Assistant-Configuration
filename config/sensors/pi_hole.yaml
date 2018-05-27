@@ -1,0 +1,61 @@
+# Updated 30-03-2018
+# Added 2nd Pi-Hole Server 25-03-2018
+# Added Templates to add the two DNS totals together 30-03-2018
+
+###############################################################################
+# Pi Hole DNS Sensors 
+###############################################################################
+- platform: pi_hole
+  host: !secret pi_hole_address_1
+  location: !secret pi_hole_location
+  monitored_conditions:
+    - ads_blocked_today
+    - ads_percentage_today
+    - dns_queries_today
+    #- domains_being_blocked
+    #- queries_cached
+    #- queries_forwarded
+    #- unique_clients
+    #- unique_domains
+#-----------------------------------------------------------------------------#
+- platform: pi_hole
+  host: !secret pi_hole_address_2
+  location: !secret pi_hole_location
+  monitored_conditions:
+    - ads_blocked_today
+    - ads_percentage_today
+    - dns_queries_today
+    #- domains_being_blocked
+    #- queries_cached
+    #- queries_forwarded
+    #- unique_clients
+    #- unique_domains
+###############################################################################
+
+    
+###############################################################################
+# Pi Hole DNS Template to add bot sets of data together from both DNS's 
+###############################################################################
+- platform: template
+  sensors:
+   dns_queries:
+     friendly_name: 'DNS Queries'
+     value_template: >-
+          {{ ( (states('sensor.pihole_dns_queries_today')|float) + (states('sensor.pihole_dns_queries_today_2')|float) )|round(0) }}
+#-----------------------------------------------------------------------------#
+- platform: template
+  sensors:
+   adverts_blocked:
+     friendly_name: 'Adverts Blocked'
+     value_template: >-
+          {{ ( (states('sensor.pihole_ads_blocked_today')|float) + (states('sensor.pihole_ads_blocked_today_2')|float) )|round(0) }}
+#-----------------------------------------------------------------------------#
+- platform: template
+  sensors:
+   percent_of_adverts_blocked:
+     friendly_name: 'Percent of Adverts Blocked'
+     unit_of_measurement: '%'
+     value_template: >-
+          {{ ( (states('sensor.pihole_ads_percentage_blocked_today')|float) + (states('sensor.pihole_ads_percentage_blocked_today_2')|float) )|round(2) }}
+###############################################################################
+           

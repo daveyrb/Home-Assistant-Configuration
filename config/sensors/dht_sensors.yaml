@@ -1,0 +1,106 @@
+# Updated 27-05-2018
+# Combined all the DHT Sensors into one file 27.05.2018
+ 
+###############################################################################
+# Green House DHT
+###############################################################################
+- platform: mqtt
+  name: "Greenhouse Humidity"
+  state_topic: "greenhouse/temp"
+  qos: 1
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.Humidity }}"
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Greenhouse Temperature"
+  state_topic: "greenhouse/temp"
+  qos: 1
+  unit_of_measurement: "ºC"
+  value_template: "{{ ( (value_json.Temp -4.5) |float) |round(2) }}"
+###############################################################################
+
+###############################################################################
+# Garden DHT Sensor 
+# Was Mobile hence MQTT Name 
+###############################################################################
+- platform: mqtt
+  name: "Garden Humidity"
+  state_topic: "mobile/temp"
+  qos: 1
+  unit_of_measurement: "%"
+  #value_template: "{{ value_json.Humidity }}"
+  value_template: "{{ value_json.Humidity }}"
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Garden Temperature"
+  state_topic: "mobile/temp"
+  qos: 1
+  unit_of_measurement: "ºC"
+  #value_template: "{{ value_json.Temp }}"
+  #value_template: "{{ value_json.Temp -4.5 }}"
+  #value_template: "{{ value_json.Temp -4.5 | round | int }}"
+  value_template: "{{ ( (value_json.Temp -4.5) |float) |round(2) }}"
+###############################################################################
+
+###############################################################################
+# Comms Cupboard DHT Sensor also used to turn cooling on / off
+###############################################################################
+- platform: mqtt
+  name: "Comms Humidity"
+  state_topic: "comms_cupboard/temp"
+  qos: 1
+  unit_of_measurement: "%"
+  #value_template: "{{ value_json.Humidity }}"
+  value_template: "{{ value_json.Humidity }}"
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Comms Temperature"
+  state_topic: "comms_cupboard/temp"
+  qos: 1
+  unit_of_measurement: "ºC"
+  #value_template: "{{ value_json.Temp -1 }}"
+  value_template: "{{ ( (value_json.Temp) |float) |round(2) }}"
+###############################################################################
+
+###############################################################################
+# Bedroom DHT Sensor #
+###############################################################################
+- platform: mqtt
+  name: "Bedroom Humidity"
+  state_topic: "bedroom/temp"
+  qos: 1
+  unit_of_measurement: "%"
+  #value_template: "{{ value_json.Humidity +5 }}"
+  value_template: "{{ value_json.Humidity }}"
+#-----------------------------------------------------------------------------#
+- platform: mqtt
+  name: "Bedroom Temperature"
+  state_topic: "bedroom/temp"
+  qos: 1
+  unit_of_measurement: "ºC"
+  #value_template: "{{ value_json.Temp }}"
+  value_template: "{{ ( (value_json.Temp) -8 |float) |round(2) }}"
+###############################################################################
+  
+###############################################################################
+# Lounge Temp via Broadlink RM Pro
+# Added a template sensor to adjust the temperature because it was to high 
+###############################################################################
+- platform: broadlink
+  name: "Lounge"
+  host: 192.168.0.150
+  mac: '34:EA:34:F4:35:4C'
+  update_interval: 60
+  timeout: 20
+  unit_of_measurement: "ºC"
+  monitored_conditions:
+    - temperature
+#-----------------------------------------------------------------------------#
+- platform: template
+  sensors:
+   lounge_temperature_adjusted:
+     friendly_name: 'Lounge Temperature'
+     unit_of_measurement: "ºC"
+     value_template: >-
+          {{ states.sensor.lounge_temperature.state | float - 2 }}
+###############################################################################

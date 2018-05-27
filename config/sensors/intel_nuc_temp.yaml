@@ -1,0 +1,12 @@
+# Modified 27-05-2018 
+
+###############################################################################
+# Intel NUC CPU Temperature Sensor
+###############################################################################
+- platform: command_line
+  name: CPU Temp
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  #command: "cat /sys/class/thermal/thermal_zone1/temp"
+  unit_of_measurement: "ºC"
+  value_template: '{{ value|multiply(0.001)|round }}'
+###############################################################################

@@ -1,0 +1,49 @@
+# Updated 13-05-2018
+# Added Soffit Lights 13-05-2018
+# Made Lights into a group 13-05-2018
+
+###############################################################################
+# External Lights dusk to dawn  #
+###############################################################################
+- alias: 'External Dusk To Dawn On'
+  initial_state: True
+  trigger:
+     platform: sun
+     event: sunset
+  action:
+    service: switch.turn_on
+    entity_id: group.lights_external_dusk_dawn
+
+- alias: 'External Dusk To Dawn Off'
+  initial_state: True
+  trigger:
+     platform: sun
+     event: sunrise
+  action:
+    service: switch.turn_off
+    entity_id: group.lights_external_dusk_dawn
+###############################################################################
+
+###############################################################################
+# Hallway Night Light 20 Minutes before dusk to dawn  #
+###############################################################################
+- alias: 'Hallway Night Light On'
+  initial_state: True
+  trigger:
+     platform: sun
+     event: sunset
+     offset: "-00:20:00"    
+  action:
+    service: switch.turn_on
+    entity_id: switch.hallway_night_light
+
+- alias: 'Hallway Night Light Off'
+  initial_state: True
+  trigger:
+     platform: sun
+     event: sunrise
+  action:
+    service: switch.turn_off
+    entity_id: switch.hallway_night_light
+###############################################################################
+

@@ -1,0 +1,17 @@
+# Updated 19-03-2017
+
+###############################################################################
+# Automation Check for HA Update #
+###############################################################################
+- alias: 'Update Available Notifications'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: updater.updater
+  action:
+    service: notify.email
+    data:
+      title: " Home Assistant Update"
+      message: "Update for Home Assistant is available"
+#-----------------------------------------------------------------------------#
+      

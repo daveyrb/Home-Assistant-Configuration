@@ -1,0 +1,29 @@
+# Updated 27-05-2018 
+# This is a test switch using ESP-Easy on an ESP8266
+# http://192.168.0.46
+
+###############################################################################
+# This is my TEST ESP-Easy Board for Lights & Switches
+# See Also Binary Sensor Test Switch
+###############################################################################
+ - platform: mqtt
+   name: "Test LED"
+   state_topic: "/Test_ESP/LED/Switch"
+   command_topic: "/Test_ESP/LED/Switch/gpio/5"
+   qos: 1
+   payload_on: "1"
+   payload_off: "0"
+   optimistic: false
+   retain: true
+#-----------------------------------------------------------------------------#
+ - platform: mqtt
+   name: "Test LED 2"
+   state_topic: "/Test_ESP/LED-2/Switch"
+   command_topic: "/Test_ESP/LED-2/Switch/gpio/12"
+   qos: 1
+   payload_on: "1"
+   payload_off: "0"
+   optimistic: false
+   retain: true
+###############################################################################
+

@@ -1,0 +1,102 @@
+# Updated 08-06-2017
+
+###############################################################################
+# Automations for Photo Frame #
+###############################################################################
+- alias: 'Photo Frame On Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '07:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: switch.turn_on
+    entity_id: switch.photo_frame
+#-----------------------------------------------------------------------------#
+- alias: 'Photo Frame Off Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '08:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: switch.turn_off
+    entity_id: switch.photo_frame
+#-----------------------------------------------------------------------------#
+- alias: 'Photo Frame On Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '15:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: switch.turn_on
+    entity_id: switch.photo_frame
+#-----------------------------------------------------------------------------#
+- alias: 'Photo Frame Off Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '22:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    service: switch.turn_off
+    entity_id: switch.photo_frame
+#-----------------------------------------------------------------------------#
+- alias: 'Photo Frame On Weekend'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '09:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sat
+      - sun
+  action:
+    service: switch.turn_on
+    entity_id: switch.photo_frame
+#-----------------------------------------------------------------------------#
+- alias: 'Photo Frame Off Weekend'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '23:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sat
+      - sun
+  action:
+    service: switch.turn_off
+    entity_id: switch.photo_frame
+###############################################################################
+

@@ -1,0 +1,18 @@
+# Updated 14-05-2018
+
+###############################################################################
+# Lounge Reading Light #
+###############################################################################
+ - platform: mqtt
+   name: "Lounge Reading Light"
+   state_topic: "stat/Lounge-Reading-Light/POWER"
+   command_topic: "cmnd/Lounge-Reading-Light/POWER"
+   availability_topic: "tele/Lounge-Reading-Light/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"
+   optimistic: false
+   retain: true
+###############################################################################

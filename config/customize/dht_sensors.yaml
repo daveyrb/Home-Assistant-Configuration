@@ -1,0 +1,45 @@
+# Updated 28-04-2018
+# Breaking down customize into separate parts 19-04-2018
+# Added Bedroom DHT 28-04-2018
+
+###############################################################################
+# Customize DHT Sensors #
+############################################################################### 
+sensor.comms_temperature:
+  friendly_name: 'Comms Temperature'
+  icon: mdi:thermometer
+sensor.comms_humidity:
+  friendly_name: 'Comms Humidity'
+  icon: mdi:water-percent
+sensor.bedroom_temperature:
+  friendly_name: 'Bedrooom Temperature'
+  icon: mdi:thermometer
+sensor.bedroom_humidity:
+  friendly_name: 'Bedroom Humidity'
+  icon: mdi:water-percent
+sensor.greenhouse_temperature:
+  friendly_name: 'Greenhouse Temperature'
+  icon: mdi:thermometer
+sensor.greenhouse_humidity:
+  friendly_name: 'Greenhouse Humidity'
+  icon: mdi:water-percent  
+sensor.garden_temperature:
+  friendly_name: 'Garden Temperature'
+  icon: mdi:thermometer
+sensor.garden_humidity:
+  friendly_name: 'Garden Humidity'
+  icon: mdi:water-percent  
+###############################################################################
+
+###############################################################################
+# Customize Lounge BroadLink RM Pro DHT Sensor #
+############################################################################### 
+sensor.lounge_temperature:
+  friendly_name: 'Lounge Temperature Raw'
+  icon: mdi:thermometer        
+
+# Lounge Temp via Broadlink RM Pro Adjusted via Template  
+sensor.lounge_temperature_adjusted:
+  friendly_name: 'Lounge Temperature'
+  icon: mdi:thermometer        
+###############################################################################

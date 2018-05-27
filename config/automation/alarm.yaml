@@ -1,0 +1,160 @@
+# Updated 11-05-2018
+# Removed script and added it to the automation 09-05-2018
+# Added notification 10-05-2018
+# Trying to figure out how to delay front door alarm and cancel if disarmed
+# Written a script "front_door_alarm" to introduce a delay when setting / unsetting the alarm 11-05-2018
+
+###############################################################################
+# Automations to control the Burglar Alarm #
+###############################################################################
+- alias: 'Alarm Live Frontdoor'
+  initial_state: 'off'
+  trigger:
+    - platform: state
+      entity_id: 
+        - binary_sensor.alarm_front_door
+      to: 'on'
+  action:
+     - service: script.turn_on
+       data:
+         entity_id:
+           - script.front_door_alarm      
+#-----------------------------------------------------------------------------#
+- alias: 'Alarm Live Motion'
+  initial_state: 'off'
+  trigger:
+    - platform: state
+      entity_id: 
+        - binary_sensor.alarm_amy_bedroom
+        - binary_sensor.alarm_hallway
+        - binary_sensor.alarm_lounge      
+        - binary_sensor.alarm_kitchen
+        - binary_sensor.alarm_the_bat_cave
+        - binary_sensor.alarm_dining_room
+      to: 'on'
+  action:
+     - service: switch.turn_on
+       data:
+         entity_id: 
+           #- switch.test_led_2 #Pretend Siren
+           - switch.alarm_siren
+     - service: notify.alarm
+       data_template:
+         title: "Alarm"
+         message: "Sorry to disturb you Sir, but the {{ trigger.to_state.attributes.friendly_name }} has been activated it seems we have an intruder"                 
+#-----------------------------------------------------------------------------#
+- alias: 'Alarm Reset'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: 
+        - group.burglar_alarm_motion_sensors
+        - group.burglar_alarm_door_widow_sensors
+      to: 'off'
+      from: 'on'
+      for:
+        seconds: 30
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: 
+          #- switch.test_led_2 #Pretend Siren
+          - switch.alarm_siren
+###############################################################################
+
+###############################################################################
+# Automations to turn the Burglar Alarm On & Off #
+###############################################################################    
+- alias: 'Alarm On'
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: switch.alarm
+    to: 'on'
+  action:
+     # Actions are scripts so can also be a list of actions
+     - delay:
+         seconds: 60 # 10 Seconds is only for testing extend once live
+     - service: automation.turn_on
+       data:
+         entity_id: 
+           - automation.alarm_live_frontdoor
+           - automation.alarm_live_motion
+#-----------------------------------------------------------------------------#    
+- alias: 'Alarm Off'
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: switch.alarm
+    to: 'off'
+  action:
+     # Actions are scripts so can also be a list of actions
+     - service: automation.turn_off
+       data:
+         entity_id: 
+           - automation.alarm_live_frontdoor
+           - automation.alarm_live_motion
+     - service: script.turn_off
+       data:
+         entity_id: 
+           - script.front_door_alarm
+     - service: switch.turn_off
+       data:
+         entity_id: 
+           #- switch.test_led_2
+           - switch.alarm_siren
+###############################################################################                  
+
+###############################################################################
+# Alert me if any Alarm controllers are down #
+###############################################################################
+- alias: 'Alarm 1 Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: binary_sensor.burglar_alarm_1
+     to: 'off'
+     for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+  action:
+    service: notify.ralph
+    data:
+      title: "Alarm 1 MCU Is Down"
+      message: "Sorry to disturb you Sir, but Alarm 1 MCU seems to be Down"
+#-----------------------------------------------------------------------------#                       
+- alias: 'Alarm 2 Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: binary_sensor.burglar_alarm_2
+     to: 'off'
+     for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+  action:
+    service: notify.ralph
+    data:
+      title: "Alarm 2 MCU Is Down"
+      message: "Sorry to disturb you Sir, but Alarm 2 MCU seems to be Down"
+#-----------------------------------------------------------------------------# 
+- alias: 'Alarm 3 Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: binary_sensor.burglar_alarm_3
+     to: 'off'
+     for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+  action:
+    service: notify.ralph
+    data:
+      title: "Alarm 3 MCU Is Down"
+      message: "Sorry to disturb you Sir, but Alarm 3 MCU seems to be Down"
+###############################################################################                       
+    
+       

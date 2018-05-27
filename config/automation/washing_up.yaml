@@ -1,0 +1,165 @@
+# Modified 26-04-2018
+# Ben & Amy's washing up schedule this will send them an email at teatime
+# to say who is doing the washing up.
+# Amy has Even Days and Ben has Odd Days 
+
+###############################################################################
+# Automation for Washing Up Schedule #
+###############################################################################
+- alias: 'Ben Washing Up Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '16:30:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'False'
+  action:
+    service: notify.ben_email
+    data:
+      title: "Washing Up"
+      message: "Sorry to disturb you Sir, but it's your turn to do the Washing and Wiping up today."
+#-----------------------------------------------------------------------------#
+- alias: 'Amy Washing Up Weekday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '16:30:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'True'
+  action:
+    service: notify.amy_email
+    data:
+      title: "Washing Up"
+      message: "Sorry to disturb you Ma'am, but it's your turn to do the Washing and Wiping up today."
+#      title: "Lavar"
+#      message: "Lamento molestarla, señora, pero es su turno de lavar y limpiar hoy."
+#-----------------------------------------------------------------------------#      
+- alias: 'Ben Washing Up Saturday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '12:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sat
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'False'
+  action:
+    service: notify.ben_email
+    data:
+      title: "Washing Up"
+      message: "Sorry to disturb you Sir, but it's your turn to do the Washing and Wiping up today."
+#-----------------------------------------------------------------------------#
+- alias: 'Amy Washing Up Saturday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '12:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sat
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'True'
+  action:
+    service: notify.amy_email
+    data:
+      title: "Washing Up"
+      message: "Sorry to disturb you Ma'am, but it's your turn to do the Washing and Wiping up today."
+#-----------------------------------------------------------------------------#      
+- alias: 'Ben Load The Dishwasher Sunday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '13:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sun
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'False'
+  action:
+    service: notify.ben_email
+    data:
+      title: "Load The Dishwasher"
+      message: "Sorry to disturb you Sir, but happy days today you get to load the dishwasher as a special treat."
+#-----------------------------------------------------------------------------#
+- alias: 'Amy Load The Dishwasher Sunday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '13:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sun
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'True'
+  action:
+    service: notify.amy_email
+    data:
+      title: "load The Dishwasher"
+      message: "Sorry to disturb you Ma'am, but happy days today you get to load the dishwasher as a special treat."
+#      title: "llena el lavaplatos"
+#      message: "Perdón por molestarla señora, pero los días felices de hoy puede cargar el lavavajillas como un regalo especial."
+#-----------------------------------------------------------------------------#      
+- alias: 'Ben Empty The Dishwasher Sunday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '14:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sun
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'True'
+  action:
+    service: notify.ben_email
+    data:
+      title: "Empty The Dishwasher"
+      message: "Sorry to disturb you Sir, but happy days today you get to empty the dishwasher as a special treat."
+#-----------------------------------------------------------------------------#
+- alias: 'Amy Empty The Dishwasher Sunday'
+  initial_state: True
+  trigger:
+     platform: time
+     at: '14:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - sun
+  - condition: state
+    entity_id: sensor.washing_up_state
+    state: 'False'
+  action:
+    service: notify.amy_email
+    data:
+      title: "Empty The Dishwasher"
+      message: "Sorry to disturb you Ma'am, but happy days today you get to empty the dishwasher as a special treat."
+###############################################################################
+      

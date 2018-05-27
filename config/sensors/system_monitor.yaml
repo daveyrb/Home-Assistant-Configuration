@@ -1,0 +1,126 @@
+# Updated 17-05-2018
+# Added Uptime and Version 17-05-2018
+
+###############################################################################
+# System Monitor #
+###############################################################################
+- platform: systemmonitor
+  resources:
+  - type: disk_use_percent
+    arg: /
+  - type: memory_free
+  - type: processor_use
+  - type: network_in
+    arg: eth0
+  - type: network_out
+    arg: eth0
+  #- type: last_boot
+  - type: since_last_boot
+###############################################################################
+
+###############################################################################
+# HA Version #
+###############################################################################
+- platform: version
+  name: HA Installed Version
+  scan_interval: 86400
+###############################################################################  
+
+###############################################################################
+# Home Assistant Uptime #
+# Thanks to  @CCOSTAN for the code #
+# https://github.com/CCOSTAN/Home-AssistantConfig#logo #
+###############################################################################
+- platform: command_line
+  name: "Jarvis Uptime"
+  command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
+  scan_interval: 720
+  value_template: >-
+    {% set uptime = value | int %}
+    {% set seconds = uptime % 60 %}
+    {% set minutes = ((uptime % 3600) / 60) | int %}
+    {% set hours = ((uptime % 86400) / 3600) | int %}
+    {% set days = (uptime / 86400) | int %}
+    {%- if days > 0 -%}
+      {%- if days == 1 -%}
+        1 day
+      {%- else -%}
+        {{ days }} days
+      {%- endif -%}
+      {{ ', ' }}
+    {%- endif -%}
+    {%- if hours > 0 -%}
+      {%- if hours == 1 -%}
+        1 hour
+      {%- else -%}
+        {{ hours }} hours
+      {%- endif -%}
+      {{ ', ' }}
+    {%- endif -%}
+    {%- if minutes > 0 -%}
+      {%- if minutes == 1 -%}
+        1 minute
+      {%- else -%}
+        {{ minutes }} minutes
+      {%- endif -%}
+    {%- endif -%}
+###############################################################################    
+    
+###############################################################################
+# Server Uptime adjusted to days, hours & minutes 
+# I Pinched this code but not sure from where
+###############################################################################
+- platform: template
+  sensors:
+    since_last_boot_adjusted:
+      value_template: >-
+        {%- if states.sensor.since_last_boot -%}
+          {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
+          {%- set count = slb | length -%}
+          {%- set hms = slb[count - 1] -%}
+          {%- set hms_split = hms.split(':') -%}
+          {%- set hours = hms_split[0] | int -%}
+          {%- set minutes = hms_split[1] | int -%}
+          {%- if count == 3 -%}
+            {%- set days = slb[0] | int -%}
+          {%- else -%}
+            {%- set days = 0 -%}
+          {%- endif -%}
+
+          {%- if days == 0 and hours == 0 and minutes == 0 -%}
+            less than a minute
+          {%- else -%}
+            {%- if days > 0 -%}
+              {%- if days == 1 -%}
+                1 day
+              {%- else -%}
+                {{ days }} days
+              {%- endif -%}
+            {%- endif -%}
+            {%- if hours > 0 -%}
+              {%- if days > 0 -%}
+                {{ ', ' }}
+              {%- endif -%}
+              {%- if hours == 1 -%}
+                1 hour
+              {%- else -%}
+                {{ hours }} hours
+              {%- endif -%}
+            {%- endif -%}
+            {%- if minutes > 0 -%}
+              {%- if days > 0 or hours > 0 -%}
+                {{ ', ' }}
+              {%- endif -%}
+              {%- if minutes == 1 -%}
+                1 minute
+              {%- else -%}
+                {{ minutes }} minutes
+              {%- endif -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- else -%}
+          n/a
+        {%- endif -%}
+      entity_id: sensor.since_last_boot
+###############################################################################
+
