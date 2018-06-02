@@ -5,9 +5,9 @@
 # Speed Test
 ###############################################################################
 - platform: speedtest
-  #server_id: "7028" # Sevenoaks
+  server_id: "7028" # Sevenoaks
   #server_id: "16379" # Middlesbrough
-  server_id: "11547" # London
+  #server_id: "11547" # London
   minute:
     - 0
     - 30

@@ -24,6 +24,7 @@
 # Started configuring the Burglar Alarm 07-05-2018
 # Removed some PC's 10-05-2018
 # Added Front Garage lights 19-05-2018
+# Network Changes 02-06-2018
 
 ###############################################################################    
 # Groups     
@@ -125,7 +126,8 @@
        - sensor.dns_2_state
        - sensor.vpn_server_state
        - sensor.lounge_switch_state
-       - sensor.computer_room_switch_state
+       - sensor.ip_camera_server_state
+       #- sensor.computer_room_switch_state
        - sensor.poe_switch_state
        - sensor.printer_page_count
 #-----------------------------------------------------------------------------#

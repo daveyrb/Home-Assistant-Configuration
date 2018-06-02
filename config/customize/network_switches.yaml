@@ -1,5 +1,6 @@
 # Updated 19-04-2018
 # Breaking down customize into separate parts 19-04-2018
+# Network Changes 02-06-2018
 
 ###############################################################################
 # Customize Network Switches #
@@ -8,6 +9,8 @@ sensor.poe_switch_state:
   icon: mdi:switch
 sensor.lounge_switch_state:
   icon: mdi:switch
-sensor.the_bat_cave_switch_state:
-  icon: mdi:switch
+sensor.ip_camera_server_state:
+  icon: mdi:cctv
+#sensor.the_bat_cave_switch_state:
+#  icon: mdi:switch
 ###############################################################################

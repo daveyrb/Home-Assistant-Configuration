@@ -1,4 +1,4 @@
-# Modified 19-05-2018
+# Modified 28-05-2018
 
 ###############################################################################
 # Automations for Comms Cupboard Fan 
@@ -8,7 +8,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.comms_temperature
-    above: '28.9'
+    above: '28.6'
   action:
     service: switch.turn_on
     entity_id: switch.comms_fan
