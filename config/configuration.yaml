@@ -1,15 +1,5 @@
-# Updated 21-05-2018
-# IP addresses are resolved via local hosts file
-# Apple TV Update
-# Added javascript_version: latest to the frontend:
-# Removed javascript_version: latest seems to break the history display only tried it in Safari.
-# Removed Apple TV
-# Swapped Wemo round with TP-Link 1 31-01-2018
-# Excluded so entries from History 16-04-2018
-# Added Notify Ralph 19-04-2018
-# Broken down customize into separate parts 19-04-2018
-# Excluded stuff from the logbook 1-05-2018
-# Added washing up to logbook 21-05-2018
+# Updated 10-06-2018
+
 ###############################################################################
 homeassistant:
   # Name of the location where Home Assistant is running #
@@ -26,15 +16,15 @@ homeassistant:
 ###############################################################################
 
 ###############################################################################
-# Show links to resources in log and frontend #
-#introduction:
-###############################################################################
-
-###############################################################################
 # Enables the frontend #
 frontend:
   #javascript_version: es5
   javascript_version: latest
+###############################################################################
+
+###############################################################################
+# Show links to resources in log and frontend #
+#introduction:
 ###############################################################################
 
 ###############################################################################  
@@ -43,113 +33,10 @@ config:
 ###############################################################################
 
 ###############################################################################
-http:
-  api_password: !secret ha_api_password
-  server_port: !secret ha_port
-  trusted_networks:
-    - 192.168.0.0/24
-  ip_ban_enabled: True
-  login_attempts_threshold: 1    
-###############################################################################
-
-###############################################################################
 # Enable iOS App #
 ios:
 ###############################################################################
 
-###############################################################################
-# Notifications #
-notify:
-#  - name: email
-#    platform: smtp
-#    server: !secret email_server
-#    port: 587
-#    sender: !secret email_sender
-#    username: !secret email_username
-#    password: !secret email_password
-#    recipient: !secret email_recipient
-#    sender_name: !secret email_sender_name
-
-  - name: ralph_email
-    platform: smtp
-    server: !secret email_server
-    port: 587
-    sender: !secret email_sender
-    username: !secret email_username
-    password: !secret email_password
-    recipient: !secret email_recipient_ralph
-    sender_name: !secret email_sender_name
-
-  - name: tracy_email
-    platform: smtp
-    server: !secret email_server
-    port: 587
-    sender: !secret email_sender
-    username: !secret email_username
-    password: !secret email_password
-    recipient: !secret email_recipient_tracy
-    sender_name: !secret email_sender_name
-
-  - name: ben_email
-    platform: smtp
-    server: !secret email_server
-    port: 587
-    sender: !secret email_sender
-    username: !secret email_username
-    password: !secret email_password
-    recipient: !secret email_recipient_ben
-    sender_name: !secret email_sender_name
-
-  - name: amy_email
-    platform: smtp
-    server: !secret email_server
-    port: 587
-    sender: !secret email_sender
-    username: !secret email_username
-    password: !secret email_password
-    recipient: !secret email_recipient_amy
-    sender_name: !secret email_sender_name
-
-
-# Group notifications #
-  - name: ralph
-    platform: group
-    services:
-      - service: ralph_email
-      - service: ios_ralph_daveys_iphone
-
-  - name: alarm
-    platform: group
-    services:
-      - service: ralph_email
-      - service: tracy_email
-      - service: ios_ralph_daveys_iphone
-      - service: ios_tracys_iphone
-
-  - name: doorbell
-    platform: group
-    services:
-      - service: ralph_email
-      - service: tracy_email
-      - service: ios_ralph_daveys_iphone
-      - service: ios_tracys_iphone
-      
-#  - name: ben
-#    platform: group
-#    services:
-#      - service: ben_email
-      
-#  - name: amy
-#    platform: group
-#    services:
-#      - service: amy_email
-###############################################################################    
-
-###############################################################################
-# Groups #
-group: !include groups.yaml
-###############################################################################
-      
 ###############################################################################
 # Checks for available updates #
 updater:
@@ -163,6 +50,41 @@ updater:
 ###############################################################################
 # Allows you to issue voice commands from the frontend in enabled browsers #
 #conversation:
+###############################################################################
+
+###############################################################################
+# Mosquitto MQTT Broker #
+mqtt:
+  broker: 192.168.0.22
+  port: 1883
+  client_id: !secret mqt_client_id
+  keepalive: 60
+  username: !secret mqt_username   
+  password: !secret mqt_password
+  protocol: 3.1
+###############################################################################
+
+###############################################################################
+http:
+  api_password: !secret ha_api_password
+  server_port: !secret ha_port
+  trusted_networks:
+    - 192.168.0.0/24
+    - 10.8.0.0/24
+  ip_ban_enabled: True
+  login_attempts_threshold: 1    
+###############################################################################
+
+###############################################################################
+# Track the sun #
+sun:
+###############################################################################
+
+###############################################################################
+# Wemo Socket #
+wemo:
+  static:
+    - 192.168.0.151
 ###############################################################################
 
 ###############################################################################
@@ -185,7 +107,8 @@ history:
       - sensor.adsl_line_1
       - sensor.adsl_line_2
       - sensor.bedroom_wap
-      - sensor.computer_room_switch
+      #- sensor.computer_room_switch
+      - sensor.ip_camera_server
       - sensor.dining_room_wap
       - sensor.dns_1
       - sensor.dns_2
@@ -248,45 +171,83 @@ logbook:
 ###############################################################################
 
 ###############################################################################
-# Track the sun #
-sun:
-###############################################################################
+# Notifications #
+notify:
 
-###############################################################################
-# Camera #
-#camera: !include_dir_merge_list cameras
-###############################################################################
+  - name: ralph_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_ralph
+    sender_name: !secret email_sender_name
 
-###############################################################################
-# Sensors #
-sensor: !include_dir_merge_list sensors
-###############################################################################
+  - name: tracy_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_tracy
+    sender_name: !secret email_sender_name
 
-###############################################################################
-# Binary Sensors #
-binary_sensor: !include_dir_merge_list binary_sensors
-###############################################################################
+  - name: ben_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_ben
+    sender_name: !secret email_sender_name
 
-###############################################################################
-# Wemo Socket #
-wemo:
-  static:
-    #- 192.168.0.23
-    - 192.168.0.151
-###############################################################################
+  - name: amy_email
+    platform: smtp
+    server: !secret email_server
+    port: 587
+    sender: !secret email_sender
+    username: !secret email_username
+    password: !secret email_password
+    recipient: !secret email_recipient_amy
+    sender_name: !secret email_sender_name
 
-###############################################################################
-# Mosquitto MQTT Broker #
-mqtt:
-  broker: 192.168.0.22
-  port: 1883
-  client_id: !secret mqt_client_id
-  keepalive: 60
-  username: !secret mqt_username   
-  password: !secret mqt_password
-  protocol: 3.1
-###############################################################################
+# Group notifications #
+  - name: ralph
+    platform: group
+    services:
+      - service: ralph_email
+      - service: ios_ralph_daveys_iphone
 
+  - name: alarm
+    platform: group
+    services:
+      - service: ralph_email
+      - service: tracy_email
+      - service: ios_ralph_daveys_iphone
+      - service: ios_tracys_iphone
+
+  - name: doorbell
+    platform: group
+    services:
+      - service: ralph_email
+      - service: tracy_email
+      - service: ios_ralph_daveys_iphone
+      - service: ios_tracys_iphone
+      
+#  - name: ben
+#    platform: group
+#    services:
+#      - service: ben_email
+      
+#  - name: amy
+#    platform: group
+#    services:
+#      - service: amy_email
+###############################################################################    
+     
 ###############################################################################
 # Zones #
 zone: !include zones.yaml
@@ -317,5 +278,23 @@ automation: !include_dir_merge_list automation
 script: !include_dir_merge_named scripts
 ###############################################################################
 
+###############################################################################
+# Groups #
+group: !include groups.yaml
+###############################################################################
 
+###############################################################################
+# Camera #
+#camera: !include_dir_merge_list cameras
+###############################################################################
+
+###############################################################################
+# Sensors #
+sensor: !include_dir_merge_list sensors
+###############################################################################
+
+###############################################################################
+# Binary Sensors #
+binary_sensor: !include_dir_merge_list binary_sensors
+###############################################################################
 
