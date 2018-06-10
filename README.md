@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <h1 align="center">
-  <img src="https://github.com/daveyrb/Home-Assistant-Configuration/tree/master/config/www/images/jarvis.png" alt="Jarvis Home Automation" width="200"></a>
+  <img src="https://github.com/daveyrb/Home-Assistant-Configuration/blob/master/config/www/images/jarvis.png" alt="Jarvis Home Automation" width="200"></a>
     <pre>
       <font size="4">
 This is my home automation system called Jarvis.
