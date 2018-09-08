@@ -1,5 +1,6 @@
-# Updated 08-05-2018 
+# Updated 23-06-2018 
 # LED to indicate the Alarm is on
+# Changed QOS to 0 23-06-2018
 
 ###############################################################################
 #  Arm / Disarm The Burglar Alarm #
@@ -25,7 +26,7 @@
    name: "Alarm Siren"
    state_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch"
    command_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch/gpio/12"
-   qos: 1
+   qos: 0
    payload_on: "0"
    payload_off: "1"
    #payload_on: "ON"

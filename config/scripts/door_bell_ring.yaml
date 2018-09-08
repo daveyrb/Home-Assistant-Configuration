@@ -1,4 +1,4 @@
-# Updated 30-04-2017
+# Updated 29-06-2018
 
 ###############################################################################
 # Script to ring the Door Bell by sending RF code from Broadlink RM2  #
@@ -6,10 +6,9 @@
 ring_door_bell:
     alias: Ring Door Bell
     sequence:
-      - service: broadlink.send_packet_192_168_0_150
+      - service: switch.broadlink_send_packet_192_168_0_150
         data:
           packet: 
             - 'sgUsABkbGRoaGhozGZgaZhl+GpgamBqXGWUaZRllGn8afhl/GpgafhlmGn4ZAAKnAAAAAAAAAAAAAAAA'
 ###############################################################################
-
 

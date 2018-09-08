@@ -21,7 +21,7 @@ switch.back_porch_laser:
   icon: mdi:pine-tree
 switch.christmas_the_bat_cave:
   icon: mdi:pine-tree
-switch.the_bat_cave:
+switch.bat_cave_fan:
   icon: mdi:fan
 switch.comms_fan:
   icon: mdi:fan  

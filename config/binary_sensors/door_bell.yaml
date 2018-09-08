@@ -8,7 +8,7 @@
 - platform: mqtt
   name: "Door Bell"
   state_topic: "home/door_bell"
-  qos: 1
+  qos: 0
   payload_on: "Ring"
   payload_off: "Stop"
   #optimistic: false

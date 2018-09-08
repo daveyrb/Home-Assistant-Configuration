@@ -34,7 +34,7 @@
 
     
 ###############################################################################
-# Pi Hole DNS Template to add bot sets of data together from both DNS's 
+# Pi Hole DNS Template to add both sets of data together from both DNS's 
 ###############################################################################
 - platform: template
   sensors:

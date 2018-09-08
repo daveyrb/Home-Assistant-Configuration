@@ -1,4 +1,4 @@
-# Updated 19-05-2018
+# Updated 12-07-2018
 # Apple TV update
 # Removed iCloud Email Checking
 # Updated Raspberry PI System Status for V0.56.2
@@ -25,6 +25,7 @@
 # Removed some PC's 10-05-2018
 # Added Front Garage lights 19-05-2018
 # Network Changes 02-06-2018
+# Added sensor.last_successful_authentication 11-07-2018 Removed 12-07-2018
 
 ###############################################################################    
 # Groups     
@@ -113,21 +114,22 @@
     control: hidden
     entities:
       - switch.photo_frame
-      - switch.the_bat_cave
+      - switch.bat_cave_fan
       - switch.comms_fan
 #-----------------------------------------------------------------------------#
-  network_devices:
-     name: Network Devices
+  core_network_devices:
+     name: Core Network Devices
      entities:
-       #- sensor.adsl_line_1_state
-       #- sensor.adsl_line_2_state
        - sensor.router_state
+       - sensor.router_uptime
+       - sensor.router_wan_rx
+       - sensor.router_wan_tx
        - sensor.dns_1_state
        - sensor.dns_2_state
        - sensor.vpn_server_state
        - sensor.lounge_switch_state
-       - sensor.ip_camera_server_state
-       #- sensor.computer_room_switch_state
+       #- sensor.ip_camera_server_state
+       - sensor.bat_cave_switch_state
        - sensor.poe_switch_state
        - sensor.printer_page_count
 #-----------------------------------------------------------------------------#
@@ -234,7 +236,7 @@
     icon: mdi:home
     entities:
       - group.computers
-      - group.network_devices
+      - group.core_network_devices
       - group.wireless_access_points
       - group.pi_hole
       - group.environment

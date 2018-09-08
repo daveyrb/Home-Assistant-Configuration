@@ -1,4 +1,4 @@
-# Updated 19-04-2018
+# Updated 06-09-2018
 # Monitor critical network components
 # Added DNS Server & Computer Room Switch 20-03-2018
 # Added 2nd DNS Server 25-03-2018
@@ -121,27 +121,11 @@
       title: "Lounge Switch"
       message: "Sorry to disturb you Sir, but the Lounge Switch seems to be Down"
 #-----------------------------------------------------------------------------#      
-- alias: 'IP Camera Server Is Down'
-  initial_state: True
-  trigger:
-     platform: state
-     entity_id: sensor.ip_camera_server_state
-     to: 'Down'
-     for:
-        hours: 0
-        minutes: 0 
-        seconds: 30
-  action:
-    service: notify.ralph
-    data:
-      title: "IP Camera Server"
-      message: "Sorry to disturb you Sir, but the IP Camera Server seems to be Down"
-#-----------------------------------------------------------------------------#
-#- alias: 'Computer Room Switch Is Down'
+#- alias: 'IP Camera Server Is Down'
 #  initial_state: True
 #  trigger:
 #     platform: state
-#     entity_id: sensor.computer_room_switch_state
+#     entity_id: sensor.ip_camera_server_state
 #     to: 'Down'
 #     for:
 #        hours: 0
@@ -150,7 +134,23 @@
 #  action:
 #    service: notify.ralph
 #    data:
-#      title: "Computer Room Switch"
-#      message: "Sorry to disturb you Sir, but the Computer Room Switch seems to be Down"
+#      title: "IP Camera Server"
+#      message: "Sorry to disturb you Sir, but the IP Camera Server seems to be Down"
+#-----------------------------------------------------------------------------#
+- alias: 'Bat Cave Switch Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.bat_cave_switch_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+    service: notify.ralph
+    data:
+      title: "Bat Cave Switch"
+      message: "Sorry to disturb you Sir, but the Bat Cave Switch seems to be Down"
 ###############################################################################
             

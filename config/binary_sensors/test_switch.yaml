@@ -9,7 +9,7 @@
 - platform: mqtt
   name: "Test Switch"
   state_topic: "/Test_ESP/Test_Switch/Switch"
-  qos: 1
+  qos: 0
   payload_on: "1"
   payload_off: "0"
   #device_class: opening

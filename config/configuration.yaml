@@ -1,4 +1,7 @@
-# Updated 10-06-2018
+# Updated 08-09-2018
+# Removed Wemo 09-08-2018
+# Playing with the new authentication method 22-08-2018
+# Exclude stuff from Logbook & History 08-09-2018
 
 ###############################################################################
 homeassistant:
@@ -13,6 +16,26 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/London
   customize: !include_dir_merge_named customize
+  # New Authentication Method
+  auth_providers:
+   - type: homeassistant
+   # Uncomment next line if you want to enable legacy API password support
+   - type: legacy_api_password
+   - type: trusted_networks
+###############################################################################
+# Enable the auth component
+auth:  
+###############################################################################
+
+###############################################################################
+http:
+  api_password: !secret ha_api_password
+  server_port: !secret ha_port
+  trusted_networks:
+    - 192.168.0.0/24
+    - 10.8.0.0/24
+  ip_ban_enabled: True
+  login_attempts_threshold: 1    
 ###############################################################################
 
 ###############################################################################
@@ -65,26 +88,23 @@ mqtt:
 ###############################################################################
 
 ###############################################################################
-http:
-  api_password: !secret ha_api_password
-  server_port: !secret ha_port
-  trusted_networks:
-    - 192.168.0.0/24
-    - 10.8.0.0/24
-  ip_ban_enabled: True
-  login_attempts_threshold: 1    
-###############################################################################
-
-###############################################################################
 # Track the sun #
 sun:
 ###############################################################################
 
 ###############################################################################
 # Wemo Socket #
-wemo:
-  static:
-    - 192.168.0.151
+#wemo:
+#  static:
+#    - 192.168.0.151
+###############################################################################
+
+###############################################################################
+# Logging #
+#logger:
+#  default: warn
+#  logs:
+#    homeassistant.components: info
 ###############################################################################
 
 ###############################################################################
@@ -104,11 +124,8 @@ history:
       - group
       - script
     entities:
-      - sensor.adsl_line_1
-      - sensor.adsl_line_2
       - sensor.bedroom_wap
-      #- sensor.computer_room_switch
-      - sensor.ip_camera_server
+      - sensor.bat_cave_switch
       - sensor.dining_room_wap
       - sensor.dns_1
       - sensor.dns_2
@@ -117,10 +134,6 @@ history:
       - sensor.lounge_temperature
       - sensor.lounge_wap
       - sensor.lounge_switch
-      - sensor.pihole_ads_blocked_today
-      - sensor.pihole_ads_blocked_today_2
-      - sensor.pihole_dns_queries_today
-      - sensor.pihole_dns_queries_today_2
       - sensor.poe_switch
       - sensor.router
       - sensor.the_burrow_wap
@@ -138,6 +151,22 @@ history:
       - sensor.since_last_boot
       - sensor.since_last_boot_adjusted
       - sensor.ha_installed_version
+      - sensor.router_uptime
+      - sensor.router_wan_1_rx
+      - sensor.router_wan_1_tx
+      - sensor.router_wan_2_rx
+      - sensor.router_wan_2_tx
+      - sensor.router_wan_rx
+      - sensor.router_wan_tx
+      - sensor.adverts_blocked
+      - sensor.dns_queries
+      - sensor.percent_of_adverts_blocked
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_blocked_today_2
+      - sensor.pihole_ads_percentage_blocked_today
+      - sensor.pihole_ads_percentage_blocked_today_2
+      - sensor.pihole_dns_queries_today
+      - sensor.pihole_dns_queries_today_2
 ###############################################################################
 
 ###############################################################################      
@@ -158,6 +187,22 @@ logbook:
       - sensor.since_last_boot
       - sensor.since_last_boot_adjusted
       - sensor.ha_installed_version
+      - sensor.router_uptime
+      - sensor.router_wan_1_rx
+      - sensor.router_wan_1_tx
+      - sensor.router_wan_2_rx
+      - sensor.router_wan_2_tx
+      - sensor.router_wan_rx
+      - sensor.router_wan_tx
+      - sensor.adverts_blocked
+      - sensor.dns_queries
+      - sensor.percent_of_adverts_blocked
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_blocked_today_2
+      - sensor.pihole_ads_percentage_blocked_today
+      - sensor.pihole_ads_percentage_blocked_today_2
+      - sensor.pihole_dns_queries_today
+      - sensor.pihole_dns_queries_today_2
   include:
     entities:
     - automation.amy_empty_the_dishwasher_sunday
@@ -285,6 +330,14 @@ group: !include groups.yaml
 
 ###############################################################################
 # Camera #
+#ffmpeg:
+
+#camera:
+#  - platform: ffmpeg
+#    ffmpeg_bin: /usr/bin/ffmpeg
+#    name: Cam2
+#    input: rtsp://192.168.0.158/12
+    
 #camera: !include_dir_merge_list cameras
 ###############################################################################
 
@@ -298,3 +351,7 @@ sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
 ###############################################################################
 
+###############################################################################
+# Media Player #
+#media_player: !include_dir_merge_list media_player
+###############################################################################

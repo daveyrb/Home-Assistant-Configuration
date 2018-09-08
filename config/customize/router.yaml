@@ -1,13 +1,18 @@
-# Updated 19-04-2018
-# Breaking down customize into separate parts 19-04-2018
+# Updated 08-09-2018
 
 ###############################################################################
 # Customize WAN and Router Sensors #
 ############################################################################### 
-sensor.adsl_line_1_state:
-  icon: mdi:access-point-network
-sensor.adsl_line_2_state:
-  icon: mdi:access-point-network
+#sensor.adsl_line_1_state:
+#  icon: mdi:access-point-network
+#sensor.adsl_line_2_state:
+#  icon: mdi:access-point-network
 sensor.router_state:
   icon: mdi:network
+sensor.router_wan_rx:
+  icon: mdi:download-network
+sensor.router_wan_tx:
+  icon: mdi:upload-network
+sensor.router_uptime:
+    icon: mdi:progress-clock
 ###############################################################################
