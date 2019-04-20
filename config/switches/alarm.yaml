@@ -1,22 +1,40 @@
-# Updated 23-06-2018 
+# Updated 20-02-2019 
+# Path = /config/switches/alarm.yaml
+
 # LED to indicate the Alarm is on
 # Changed QOS to 0 23-06-2018
+# Changed to use a RPI 20-02-2019
 
 ###############################################################################
-#  Arm / Disarm The Burglar Alarm #
+# Arm / Disarm The Burglar Alarm #
+# Currently nothing is connect to this Switch it's just used in the UI
+# RPI Pin = 12 GPIO = 18 
 ###############################################################################
+# - platform: mqtt
+#   name: "Alarm"
+#   state_topic: "stat/Burglar_Alarm_03/POWER"
+#   command_topic: "cmnd/Burglar_Alarm_03/POWER"
+#   availability_topic: "tele/Burglar_Alarm_03/LWT"
+#   qos: 0
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   payload_available: "Online"
+#   payload_not_available: "Offline"  
+#   optimistic: false
+#   retain: true
+
  - platform: mqtt
-   name: "Alarm"
-   state_topic: "stat/Burglar_Alarm_03/POWER"
-   command_topic: "cmnd/Burglar_Alarm_03/POWER"
-   availability_topic: "tele/Burglar_Alarm_03/LWT"
-   qos: 0
+   name: "Alarm Armed"
+   state_topic: "alarm/output/alarm_armed"
+   command_topic: "alarm/output/alarm_armed/set"
+   availability_topic: "alarm/status"
+   payload_available: "running"
+   payload_not_available: "dead"  
+   qos: 2
    payload_on: "ON"
    payload_off: "OFF"
-   payload_available: "Online"
-   payload_not_available: "Offline"  
-   optimistic: false
-   retain: true
+   #optimistic: false #Should default to false as have state_topic
+   #retain: true
 #-----------------------------------------------------------------------------#
 
 ###############################################################################
@@ -24,13 +42,14 @@
 ###############################################################################
  - platform: mqtt
    name: "Alarm Siren"
-   state_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch"
-   command_topic: "/Burglar_Alarm_02/Alarm-Siren/Switch/gpio/12"
+   state_topic: "alarm/output/alarm_bell"
+   command_topic: "alarm/output/alarm_bell/set"
+   availability_topic: "alarm/status"
+   payload_available: "running"
+   payload_not_available: "dead"  
    qos: 0
-   payload_on: "0"
-   payload_off: "1"
-   #payload_on: "ON"
-   #payload_off: "OFF"
-   optimistic: false
-   retain: true
+   payload_on: "ON"
+   payload_off: "OFF"
+   #optimistic: false
+   #retain: true
 #-----------------------------------------------------------------------------#

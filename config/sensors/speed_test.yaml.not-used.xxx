@@ -1,0 +1,21 @@
+# Updated 21-02-2019
+# Added Server ID
+# Sevenoaks seems to be Broken 10-08-2018
+# Breaking change V88 21-02-2019
+
+###############################################################################
+# Speed Test
+###############################################################################
+#- platform: speedtest
+#  #server_id: "7028" # Sevenoaks
+#  #server_id: "16379" # Middlesbrough
+#  server_id: "11547" # London
+#  minute:
+#    - 0
+#    - 30
+#  monitored_conditions:
+#    - ping
+#    - download
+#    - upload
+###############################################################################
+      

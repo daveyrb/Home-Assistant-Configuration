@@ -1,0 +1,81 @@
+# Updated 20-04-2019
+# Path = /config/packages/media_players.yaml
+
+
+###############################################################################
+homeassistant:
+###############################################################################
+
+###############################################################################
+  customize:
+    sensor.apple_tv_lounge_media_title:
+       icon: mdi:television-box
+    media_player.apple_tv:
+       friendly_name: "Apple TV Lounge"
+
+    sensor.roku_dining_room_media_title:
+       icon: mdi:television-box
+    media_player.dining_room:
+       friendly_name: "Roku TV Dining Room"
+    remote.dining_room:
+       friendly_name: "Roku TV Remote Dining Room"
+
+    sensor.roku_mum_media_title:
+       icon: mdi:television-box
+    media_player.mum:
+       friendly_name: "Roku TV Mum's Lounge"
+    remote.mum:
+       friendly_name: "Roku TV Remote Mum's Lounge"
+
+    sensor.fire_tv_office_media_title:
+       icon: mdi:television-box
+
+# Hallway GCC
+    media_player.hall_speaker:
+       icon: mdi:speaker
+
+# Office GCC
+    media_player.office_speaker:
+       icon: mdi:speaker
+
+# Mum's Kodi
+    media_player.mum_speaker:
+       icon: mdi:speaker
+###############################################################################
+
+###############################################################################
+# Media Players #
+###############################################################################
+apple_tv:
+    # Lounge
+  - host: !secret apple_tv_lounge
+    login_id: !secret apple_tv_lounge_login_id
+
+roku:
+    # Mums Lounge Roku
+  - host: !secret roku_mum_lounge
+    # Dining Room Roku
+  - host: !secret roku_dining_room
+  
+cast:
+  media_player:
+      # Hallway GCC Audio
+    - host: !secret gcc_hallway
+      # Office GCC Audio
+    - host: !secret gcc_office
+    
+media_player:
+  - platform: androidtv
+    # Office Fire TV Stick
+    name: Fire TV Office
+    device_class: firetv
+    host: !secret fire_tv_office
+    adbkey: "/config/fire_tv_1/adbkey"
+    get_sources: false
+    
+  - platform: kodi
+    # Mum's Lounge RPI Kodi
+    name: Mum Speaker
+    host: !secret kodi_mum_speaker
+    enable_websocket: true    
+###############################################################################

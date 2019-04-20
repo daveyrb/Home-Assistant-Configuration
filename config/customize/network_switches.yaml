@@ -1,4 +1,6 @@
 # Updated 06-09-2018
+# Path = /config/customize/network_switches.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 # Network Changes 02-06-2018
 
@@ -9,6 +11,6 @@ sensor.poe_switch_state:
   icon: mdi:switch
 sensor.lounge_switch_state:
   icon: mdi:switch
-sensor.bat_cave_switch_state:
+sensor.office_switch_state:
   icon: mdi:switch
 ###############################################################################

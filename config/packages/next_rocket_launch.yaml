@@ -1,0 +1,80 @@
+# Updated 16-03-2019
+# Path = /config/packages/next_rocket_launch.yaml
+
+# V0.86.0 Breaking & Lovelace changes 24-01-2019
+# Changed over to Lovelace 26-01-2019
+# Updated with people in space 16-03-2019
+
+homeassistant:
+
+  customize:
+    sensor.next_rocket_launch_day:
+      friendly_name: "Launch Day" 
+      icon: mdi:calendar
+    sensor.next_rocket_launch_time:
+      friendly_name: "Launch Time" 
+      icon: mdi:clock-outline
+    sensor.next_rocket_launch_site:
+      friendly_name: "Launch Site" 
+      icon: mdi:map-marker-radius
+    sensor.next_rocket_launch_type:
+      friendly_name: "Rocket / Mission" 
+      icon: mdi:rocket
+    sensor.number_of_people_in_space:
+      #friendly_name: "Number Of People in Space" 
+      icon: mdi:weather-night
+
+
+sensor:
+
+  - platform: rest
+    scan_interval: 3600
+    name: "Next Rocket Launch Date"
+    value_template: "{{ value_json.launches[0].wsstamp }}"
+    #resource: 'https://launchlibrary.net/1.4/launch/next/1'
+    resource: 'https://launchlibrary.net/1.4/launch?next=1&fields=wsstamp'
+
+  - platform: rest
+    scan_interval: 3600
+    name: "Next Rocket Launch Type"
+    value_template: "{{ value_json.launches[0].name }}"
+    #resource: 'https://launchlibrary.net/1.4/launch/next/1'
+    resource: 'https://launchlibrary.net/1.4/launch?next=1&fields=name'
+
+  - platform: rest
+    scan_interval: 3600
+    name: "Next Rocket Launch Site"
+    #value_template: "{{ value_json.launches[0].location.name }}"
+    value_template: "{{ value_json.launches[0].location.pads[0].name }}"
+    #resource: 'https://launchlibrary.net/1.4/launch/next/1'
+    resource: 'https://launchlibrary.net/1.4/launch?next=1&fields=location'
+
+  - platform: rest
+    scan_interval: 3600
+    name: "Number Of People In Space"
+    #value_template: "{{ value_json.launches[0].location.name }}"
+    value_template: "{{ value_json.number }}"
+    #resource: 'https://launchlibrary.net/1.4/launch/next/1'
+    resource: 'http://api.open-notify.org/astros.json'
+
+#  - platform: rest
+#    scan_interval: 3600
+#    name: " People In Space"
+#    #value_template: "{{ value_json.launches[0].location.name }}"
+#    value_template: "{{ value_json.people[ ].name }}"
+#    #resource: 'https://launchlibrary.net/1.4/launch/next/1'
+#    resource: 'http://api.open-notify.org/astros.json'
+
+
+  - platform: template
+    sensors:   
+      next_rocket_launch_day:
+        friendly_name: "Next Rocket Launch Day"
+        value_template: '{{ states.sensor.next_rocket_launch_date.state | int | timestamp_custom("%d.%m.%Y")}}'
+      next_rocket_launch_time:
+        friendly_name: "Next Rocket Launch Time"
+        value_template: '{{ states.sensor.next_rocket_launch_date.state | int | timestamp_custom("%H:%M")}}'
+        unit_of_measurement: 'hrs'
+#      people_in_space:
+#        friendly_name: "People in Space"
+#        value_template: '{{ states.binary_sensor.iss.attributes.number_of_people_in_space }}'

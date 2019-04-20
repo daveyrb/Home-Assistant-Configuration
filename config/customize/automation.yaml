@@ -1,10 +1,11 @@
 # Modified 07-05-2018
+# Path = /config/customize/automation.yaml
 
 ###############################################################################
 # Customize Automations #
 ############################################################################### 
 group.all_automations:
-  friendly_name: 'All Automations'
+  friendly_name: "All Automations"
   icon: mdi:home-automation
   hidden: false
 ############################################################################### 

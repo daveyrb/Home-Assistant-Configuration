@@ -1,0 +1,37 @@
+# Updated 02-03-2019
+# Path = /config/binary_sensors/wan_ports.yaml
+
+# Changed router # Router Enable Policy Based Routing to ping google DNS Servers 02-03-2019
+# Changed to Ping (ICMP) Binary sensor 02-03-2019
+
+###############################################################################
+# Ping (ICMP) Binary sensor to monitor the two WAN Interfaces #
+# Router Enable Policy Based Routing
+# jarvis/32 8.8.8.8/32 ICMP Ping Request(ICMP) WAN1 Off
+# jarvis/32 8.8.4.4/32 ICMP Ping Request(ICMP) WAN2 Off
+###############################################################################
+#- platform: command_line
+#  name: WAN 1
+#  command: ping -W 1 -c 1 8.8.8.8 > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"
+- platform: ping
+  name: "WAN 1"
+  host: 8.8.8.8
+  count: 5
+  scan_interval: 300
+#-----------------------------------------------------------------------------#
+#- platform: command_line
+#  name: WAN 2
+#  command: ping -W 1 -c 1 8.8.4.4 > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"
+- platform: ping
+  name: "WAN 2"
+  host: 8.8.4.4
+  count: 5
+  scan_interval: 300
+#-----------------------------------------------------------------------------#
+    

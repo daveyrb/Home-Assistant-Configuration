@@ -1,108 +1,71 @@
-# Updated 23-06-2018
+# Updated 19-02-2019
+# Path = /config/binary_sensors/alarm_binary_sensors.yaml
 
- # Check on line status the Two ESP8266's that control the Burglar Alarm
- # Added additional ESP to control the Alarm NFC Reader 09-05-2018
- # Changed QOS to 0 23-06-2018
- 
-###############################################################################
-# Binary Sensor Alarm MCU Status #
-############################################################################### 
-- platform: command_line
-  name: Burglar Alarm MCU 1
-  command: ping -W 1 -c 1 192.168.0.44 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  #device_class: online
-  payload_on: "success"
-  payload_off: "fail"
-#-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Burglar Alarm MCU 2
-  command: ping -W 1 -c 1 192.168.0.45 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  #device_class: online
-  payload_on: "success"
-  payload_off: "fail"
-#-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Burglar Alarm MCU 3
-  command: ping -W 1 -c 1 192.168.0.47 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  #device_class: online
-  payload_on: "success"
-  payload_off: "fail"
-###############################################################################
+# Check on line status the Two ESP8266's that control the Burglar Alarm
+# Added additional ESP to control the Alarm NFC Reader 09-05-2018
+# Changed QOS to 0 23-06-2018
+# Changed Office Sensor Name 28-01-2019
+# Removed "optimistic: false" & "retain: true" as it broke the sensors in V0.87.0 07-02-2019
+# Replaced Wireless MCU's with a wired Raspberry ping 19-02-2019
+
 
 ###############################################################################
 # Binary Sensors Alarm Sensors #
 ###############################################################################
 - platform: mqtt
   name: "Alarm Amy Bedroom"
-  state_topic: "/Burglar_Alarm_01/Alarm_Amy_Bedroom/Switch"
+  state_topic: "alarm/input/front_bedroom_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#  
 - platform: mqtt
   name: "Alarm Dining Room"
-  state_topic: "/Burglar_Alarm_01/Alarm_Dining_Room/Switch"
+  state_topic: "alarm/input/dining_room_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#  
 - platform: mqtt
   name: "Alarm Front Door"
-  state_topic: "/Burglar_Alarm_02/Alarm_Front_Door/Switch"
+  state_topic: "alarm/input/front_door"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: opening
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#
 - platform: mqtt
   name: "Alarm Hallway"
-  state_topic: "/Burglar_Alarm_01/Alarm_Hallway/Switch"
+  state_topic: "alarm/input/hallway_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#
 - platform: mqtt
   name: "Alarm Kitchen"
-  state_topic: "/Burglar_Alarm_01/Alarm_Kitchen/Switch"
+  state_topic: "alarm/input/kitchen_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#
 - platform: mqtt
   name: "Alarm Lounge"
-  state_topic: "/Burglar_Alarm_01/Alarm_Lounge/Switch"
+  state_topic: "alarm/input/lounge_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 #-----------------------------------------------------------------------------#
 - platform: mqtt
-  name: "Alarm The Bat Cave"
-  state_topic: "/Burglar_Alarm_01/Alarm_The_Bat_Cave/Switch"
+  name: "Alarm Office"
+  state_topic: "alarm/input/office_sensor"
   qos: 0
-  payload_on: "1"
-  payload_off: "0"
+  payload_on: "ON"
+  payload_off: "OFF"
   device_class: motion
-  optimistic: false
-  retain: true
 ###############################################################################
     

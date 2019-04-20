@@ -1,0 +1,37 @@
+# Updated 27-05-2018
+# Path = /config/lights/fireplace_lights.yaml
+
+###############################################################################
+# Lounge Fireplace lights Red #
+###############################################################################
+ - platform: mqtt
+   name: "Fireplace Red Light"
+   state_topic: "stat/Fire/POWER2"
+   command_topic: "cmnd/Fire/POWER2"
+   availability_topic: "tele/Fire/LWT"   
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"  
+   optimistic: false
+   retain: true
+###############################################################################
+
+
+###############################################################################
+# Lounge Fireplace lights White #
+###############################################################################
+ - platform: mqtt
+   name: "Fireplace White Light"
+   state_topic: "stat/Fire/POWER1"
+   command_topic: "cmnd/Fire/POWER1"
+   availability_topic: "tele/Fire/LWT"   
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"  
+   optimistic: false
+   retain: true
+###############################################################################

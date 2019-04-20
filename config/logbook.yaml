@@ -1,0 +1,61 @@
+# Updated 26-03-2019
+# Path = /config/logbook.yaml
+
+###############################################################################
+  exclude:
+    domains:
+      - automation
+      - group   
+    entities:
+      - binary_sensor.alarm_amy_bedroom
+      - binary_sensor.alarm_the_bat_cave
+      - binary_sensor.alarm_dining_room
+      - binary_sensor.alarm_hallway
+      - binary_sensor.alarm_kitchen
+      - binary_sensor.alarm_lounge
+      - sensor.jarvis_uptime
+      - sensor.host_uptime
+      - sensor.alarm_mcu_uptime
+      - sensor.ha_installed_version
+      - sensor.router_uptime
+      - sensor.router_wan_1_rx
+      - sensor.router_wan_1_tx
+      - sensor.router_wan_2_rx
+      - sensor.router_wan_2_tx
+      - sensor.router_wan_rx
+      - sensor.router_wan_tx
+      - sensor.adverts_blocked
+      - sensor.dns_queries
+      - sensor.percent_of_adverts_blocked
+      - sensor.pi_hole_ads_blocked_today
+      - sensor.pi_hole_ads_blocked_today_2
+      - sensor.pi_hole_ads_percentage_blocked_today
+      - sensor.pi_hole_ads_percentage_blocked_today_2
+      - sensor.pi_hole_dns_queries_today
+      - sensor.pi_hole_dns_queries_today_2
+      - sensor.dns_1_uptime
+      - sensor.dns_2_uptime
+      - sensor.dns_vip_uptime
+      - sensor.vpn_server_uptime
+      - sensor.next_rocket_launch_date
+      - sensor.nas_1_uptime
+      - sensor.disk_1_status
+      - sensor.disk_2_status
+      - sensor.fan_status
+      - sensor.raid_status
+      - sensor.date
+      - sensor.time
+      - switch.alarm
+      - sensor.proxy_server_uptime
+      - binary_sensor.office_motion
+#  include:
+#    entities:
+#    - automation.amy_empty_the_dishwasher_sunday
+#    - automation.amy_load_the_dishwasher_sunday
+#    - automation.amy_washing_up_saturday
+#    - automation.amy_washing_up_weekday
+#    - automation.ben_empty_the_dishwasher_sunday
+#    - automation.ben_load_the_dishwasher_sunday
+#    - automation.ben_washing_up_saturday
+#    - automation.ben_washing_up_weekday    
+###############################################################################

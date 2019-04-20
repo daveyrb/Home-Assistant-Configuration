@@ -1,0 +1,40 @@
+# Updated 24-02-2019
+# Path = /config/sensors/office_sensor.yaml
+
+# Changed Temperature Sensor to "ºC" instead of "°C" this matches all the other sensors
+# Also rounded the Temperature Sensor 31-01-2019
+# Changed unit_of_measurement: "ºC" -> unit_of_measurement: "°C" 24-02-2019
+
+###############################################################################
+# Office Philips Sensor Temperature #
+###############################################################################
+- platform: "mqtt"
+  name: "Office Temperature"
+  state_topic: "zigbee2mqtt/0x0017880104b5599b"
+  availability_topic: "zigbee2mqtt/bridge/state"
+  unit_of_measurement: "°C"
+#  unit_of_measurement: "ºC"
+  device_class: "temperature"
+#  value_template: "{{ value_json.temperature }}"
+  value_template: "{{ ( (value_json.temperature) +2 |float) |round(2) }}"
+###############################################################################
+# Office Philips Sensor Brightness #
+###############################################################################
+- platform: "mqtt"
+  name: "Office light Level"
+  state_topic: "zigbee2mqtt/0x0017880104b5599b"
+  availability_topic: "zigbee2mqtt/bridge/state"
+  unit_of_measurement: "lx"
+  device_class: "illuminance"
+  value_template: "{{ value_json.illuminance }}"
+
+###############################################################################
+# Office Philips Sensor Battery #
+###############################################################################
+- platform: "mqtt"
+  name: "Office Sensor Battery"
+  state_topic: "zigbee2mqtt/0x0017880104b5599b"
+  availability_topic: "zigbee2mqtt/bridge/state"
+  unit_of_measurement: "%"
+  device_class: "battery"
+  value_template: "{{ value_json.battery }}"

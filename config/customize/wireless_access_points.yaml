@@ -1,25 +1,22 @@
-# Updated 19-04-2018
+# Updated 11-03-2019
+# Path = /config/customize/wireless_access_points.yaml
+
 # Breaking down customize into separate parts 19-04-2018
+# Moved Bendroom WAP to Ben's Bedrom 11-03-2019
 
 ###############################################################################
 # Customize Wireless Access Points (WAP) #
 ############################################################################### 
 sensor.dining_room_wap_state:
-  friendly_name: 'Dining Room WAP'
   icon: mdi:access-point
 sensor.kitchen_wap_state:
-  friendly_name: 'Kitchen WAP'
   icon: mdi:access-point
 sensor.lounge_wap_state:
-  friendly_name: 'Lounge WAP'
   icon: mdi:access-point
 sensor.hallway_wap_state:
-  friendly_name: 'Hallway WAP'
   icon: mdi:access-point
-sensor.bedroom_wap_state:
-  friendly_name: 'Bedroom WAP'
+sensor.bens_bedroom_wap_state:
   icon: mdi:access-point
 sensor.the_burrow_wap_state:
-  friendly_name: 'The Burrow WAP'
   icon: mdi:access-point
 ###############################################################################

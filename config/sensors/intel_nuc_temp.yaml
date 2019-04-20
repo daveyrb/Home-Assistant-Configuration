@@ -1,12 +1,17 @@
-# Modified 27-05-2018 
+# Updated 24-02-2019
+# Path = /config/sensors/intel_nuc_temp.yaml
+
+# V0.86.0 Breaking & Lovelace changes 24-01-2019
+# Changed over to Lovelace 26-01-2019
+# Changed unit_of_measurement: "ºC" -> unit_of_measurement: "°C" 24-02-2019
 
 ###############################################################################
 # Intel NUC CPU Temperature Sensor
 ###############################################################################
 - platform: command_line
-  name: CPU Temp
+  name: "CPU Temp"
   command: "cat /sys/class/thermal/thermal_zone0/temp"
   #command: "cat /sys/class/thermal/thermal_zone1/temp"
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
   value_template: '{{ value|multiply(0.001)|round }}'
 ###############################################################################

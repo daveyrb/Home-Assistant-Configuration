@@ -1,5 +1,10 @@
-# Updated 27-05-2018
+# Updated 21-02-2019
+# Path = /config/sensors/dht_sensors.yaml
+
 # Combined all the DHT Sensors into one file 27.05.2018
+# Changed update_interval -> scan_interval Breaking change V88 21-02-2019
+# Changed unit_of_measurement: "ºC" -> unit_of_measurement: "°C" Breaking change V88 21-02-2019
+# Removed unit_of_measurement: "°C" from Broadlink Breaking change V88 21-02-2019
  
 ###############################################################################
 # Green House DHT
@@ -15,7 +20,8 @@
   name: "Greenhouse Temperature"
   state_topic: "greenhouse/temp"
   qos: 1
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
+  device_class: "temperature"
   value_template: "{{ ( (value_json.Temp -4.5) |float) |round(2) }}"
 ###############################################################################
 
@@ -35,7 +41,8 @@
   name: "Garden Temperature"
   state_topic: "mobile/temp"
   qos: 1
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
+  device_class: "temperature"
   #value_template: "{{ value_json.Temp }}"
   #value_template: "{{ value_json.Temp -4.5 }}"
   #value_template: "{{ value_json.Temp -4.5 | round | int }}"
@@ -57,7 +64,8 @@
   name: "Comms Temperature"
   state_topic: "comms_cupboard/temp"
   qos: 1
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
+  device_class: "temperature"
   #value_template: "{{ value_json.Temp -1 }}"
   value_template: "{{ ( (value_json.Temp) |float) |round(2) }}"
 ###############################################################################
@@ -77,7 +85,8 @@
   name: "Bedroom Temperature"
   state_topic: "bedroom/temp"
   qos: 1
-  unit_of_measurement: "ºC"
+  unit_of_measurement: "°C"
+  device_class: "temperature"
   #value_template: "{{ value_json.Temp }}"
   value_template: "{{ ( (value_json.Temp) -8 |float) |round(2) }}"
 ###############################################################################
@@ -90,17 +99,19 @@
   name: "Lounge"
   host: 192.168.0.150
   mac: '34:EA:34:F4:35:4C'
-  update_interval: 60
+  #update_interval: 60
+  scan_interval: 60
   timeout: 20
-  unit_of_measurement: "ºC"
+  #unit_of_measurement: "°C"
   monitored_conditions:
     - temperature
 #-----------------------------------------------------------------------------#
 - platform: template
   sensors:
    lounge_temperature_adjusted:
-     friendly_name: 'Lounge Temperature'
-     unit_of_measurement: "ºC"
+     friendly_name: "Lounge Temperature"
+     unit_of_measurement: "°C"
+     device_class: "temperature"
      value_template: >-
           {{ states.sensor.lounge_temperature.state | float - 2 }}
 ###############################################################################

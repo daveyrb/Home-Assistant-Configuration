@@ -1,4 +1,6 @@
 # Updated 13-05-2018
+# Path = /config/automation/dusk_dawn_lights.yaml
+
 # Added Soffit Lights 13-05-2018
 # Made Lights into a group 13-05-2018
 
@@ -11,7 +13,7 @@
      platform: sun
      event: sunset
   action:
-    service: switch.turn_on
+    service: light.turn_on
     entity_id: group.lights_external_dusk_dawn
 
 - alias: 'External Dusk To Dawn Off'
@@ -20,7 +22,7 @@
      platform: sun
      event: sunrise
   action:
-    service: switch.turn_off
+    service: light.turn_off
     entity_id: group.lights_external_dusk_dawn
 ###############################################################################
 
@@ -34,8 +36,8 @@
      event: sunset
      offset: "-00:20:00"    
   action:
-    service: switch.turn_on
-    entity_id: switch.hallway_night_light
+    service: light.turn_on
+    entity_id: light.hallway_night_light
 
 - alias: 'Hallway Night Light Off'
   initial_state: True
@@ -43,7 +45,7 @@
      platform: sun
      event: sunrise
   action:
-    service: switch.turn_off
-    entity_id: switch.hallway_night_light
+    service: light.turn_off
+    entity_id: light.hallway_night_light
 ###############################################################################
 

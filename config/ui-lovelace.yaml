@@ -1,0 +1,339 @@
+# Updated 16-04-2019
+# Not used kept as a backup
+# Path = /config/u--lovelace.yaml
+
+title: Jarvis
+views:
+  - cards:
+      - entities:
+          - entity: binary_sensor.amys_pc
+          - entity: binary_sensor.big_mac
+          - entity: binary_sensor.bens_pc
+          - entity: switch.bens_pc_internet_access
+          - entity: binary_sensor.bens_xbox
+        show_header_toggle: false
+        title: Computers / Game Consoles
+        type: entities
+      - entities:
+          - sensor.router_uptime
+          - binary_sensor.wan_1
+          - binary_sensor.wan_2
+          - sensor.dns_1_uptime
+          - sensor.dns_2_uptime
+          - sensor.dns_vip_uptime
+          - sensor.vpn_server_uptime
+          - sensor.proxy_server_uptime
+          - sensor.alarm_mcu_uptime
+          - sensor.lounge_switch_state
+          - sensor.office_switch_state
+          - sensor.poe_switch_state
+        show_header_toggle: false
+        title: Core Network Devices
+        type: entities
+      - entities:
+          - sensor.nas_1_uptime
+          - sensor.disk_1_state
+          - sensor.disk_1_temperature
+          - sensor.disk_1_status_state
+          - sensor.disk_2_state
+          - sensor.disk_2_temperature
+          - sensor.disk_2_status_state
+          - sensor.fan_status_state
+          - sensor.raid_status_state
+        show_header_toggle: false
+        title: NAS 1 Status
+        type: entities
+      - entities:
+          - entity: sensor.dining_room_wap_state
+          - entity: sensor.kitchen_wap_state
+          - entity: sensor.lounge_wap_state
+          - entity: sensor.hallway_wap_state
+          - entity: sensor.bens_bedroom_wap_state
+          - entity: sensor.the_burrow_wap_state
+        show_header_toggle: false
+        title: Wireless Access Points
+        type: entities
+      - entities:
+          - entity: sensor.dns_queries
+          - entity: sensor.adverts_blocked
+          - entity: sensor.percent_of_adverts_blocked
+        show_header_toggle: false
+        title: DNS Stats
+        type: entities
+      - entities:
+          - entity: sensor.comms_temperature
+          - entity: sensor.comms_humidity
+          - entity: sensor.office_temperature
+          - entity: sensor.bedroom_temperature
+          - entity: sensor.bedroom_humidity
+          - entity: sensor.lounge_temperature_adjusted
+          - entity: sensor.greenhouse_temperature
+          - entity: sensor.greenhouse_humidity
+          - entity: sensor.garden_temperature
+          - entity: sensor.garden_humidity
+        show_header_toggle: false
+        title: Environment
+        type: entities
+      - entities:
+          - sensor.dark_sky_summary
+          - sensor.dark_sky_precip_intensity
+          - sensor.dark_sky_precip_probability
+          - sensor.dark_sky_temperature
+          - sensor.dark_sky_humidity
+          - sensor.dark_sky_wind_speed
+        show_header_toggle: false
+        title: Weather
+        type: entities
+      - entities:
+          - sensor.printer_page_count
+        show_header_toggle: false
+        title: Printers
+        type: entities
+      - entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+          - sensor.speedtest_ping
+        show_header_toggle: false
+        title: SpeedTest
+        type: entities
+      - entities:
+          - device_tracker.ralph_daveys_iphone
+          - device_tracker.tracys_iphone
+          - device_tracker.bens_iphone_5
+        show_header_toggle: false
+        title: Tracker
+        type: entities
+    badges: []
+    icon: 'mdi:home'
+    path: homeview
+    title: Home
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.office_lights
+          - entity: sensor.office_light_level
+          - entity: light.lounge_reading_light
+          - entity: light.hallway_lights
+          - entity: light.hallway_night_light
+          - entity: light.butterfly_lights
+          - entity: switch.tp_8
+          - entity: light.fireplace_white_light
+          - entity: light.fireplace_red_light
+        show_header_toggle: false
+        title: Lights Internal
+        type: entities
+      - entities:
+          - entity: light.front_porch_light
+          - entity: light.soffit_lights
+          - entity: light.front_garage_lights
+        show_header_toggle: false
+        title: Lights External
+        type: entities
+    icon: 'mdi:lightbulb'
+    path: lightsview
+    title: Lights
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.photo_frame
+          - entity: switch.tp_6
+          - entity: switch.comms_fan
+        show_header_toggle: false
+        title: Switches
+        type: entities
+    icon: 'mdi:power'
+    path: switchview
+    title: Switches
+  - badges: []
+    cards:
+      - entities:
+          - script.tv
+          - script.sky
+          - script.dvd
+          - script.amplifier
+          - script.pause_sky
+          - script.pause_dvd
+          - script.play_dvd
+          - script.pause_apple_tv
+        show_header_toggle: false
+        title: TV Lounge
+        type: entities
+      - entities:
+          - entity: binary_sensor.sonic_music_player
+          - entity: media_player.hall_speaker
+          - entity: media_player.office_speaker
+          - entity: media_player.mum_speaker
+        show_header_toggle: false
+        title: Speakers
+        type: entities
+      - entities:
+          - entity: sensor.apple_tv_lounge_media_title
+          - entity: sensor.roku_dining_room_media_title
+          - entity: sensor.roku_mum_media_title
+          - entity: sensor.fire_tv_office_media_title
+        show_header_toggle: false
+        title: Media Players
+        type: entities
+    icon: 'mdi:television'
+    path: entertainmentview
+    title: Entertainment
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.cpu_speed
+          - entity: sensor.processor_use
+          - entity: sensor.cpu_temp
+          - entity: sensor.disk_use_percent
+          - entity: sensor.memory_free
+          - entity: sensor.network_in_eth0
+          - entity: sensor.network_out_eth0
+          - entity: sensor.ha_installed_version
+          - entity: sensor.jarvis_uptime
+          - entity: sensor.host_uptime
+        show_header_toggle: false
+        title: System
+        type: entities
+      - entities:
+          - entity: sensor.zigbee2mqtt_bridge_state
+          - entity: input_boolean.zigbee_permit_join
+          - entity: timer.zigbee_permit_join
+          - entity: input_select.zigbee2mqtt_log_level
+        show_header_toggle: false
+        title: ZigBee
+        type: entities
+      - entities:
+          - entity: sensor.office_sensor_battery
+        show_header_toggle: false
+        title: Batteries
+        type: entities
+      - entities:
+          - entity: sensor.ssl_certificate_expiry_wan_1
+          - entity: sensor.ssl_certificate_expiry_wan_2
+        show_header_toggle: false
+        title: Certificates
+        type: entities
+      - entities:
+          - entity: sensor.wan_1_external_address
+          - entity: sensor.wan_2_external_address
+        show_header_toggle: false
+        title: External IP Addresses
+        type: entities
+    icon: 'mdi:server'
+    path: systemview
+    title: System Status
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.alarm_armed
+          - entity: switch.alarm_siren
+          - entity: switch.test_led_2
+        show_header_toggle: false
+        title: Activate Burglar Alarm
+        type: entities
+      - entities:
+          - entity: binary_sensor.alarm_amy_bedroom
+          - entity: binary_sensor.alarm_hallway
+          - entity: binary_sensor.alarm_lounge
+          - entity: binary_sensor.alarm_kitchen
+          - entity: binary_sensor.alarm_office
+          - entity: binary_sensor.office_motion
+          - entity: binary_sensor.alarm_dining_room
+        show_header_toggle: false
+        title: Burglar Alarm Motion Sensors
+        type: entities
+      - entities:
+          - binary_sensor.alarm_front_door
+        show_header_toggle: false
+        title: Burglar Alarm Door / Window Sensors
+        type: entities
+      - entities:
+          - entity: binary_sensor.door_bell
+          - entity: sensor.door_bell_presses_today
+          - entity: sensor.door_bell_presses_yesterday
+        show_header_toggle: false
+        title: Door Bell
+        type: entities
+    icon: 'mdi:alarm-bell'
+    path: alarmview
+    title: Burglar Alarm
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.tp_7
+          - entity: switch.tp_2
+          - entity: switch.tp_3
+          - entity: switch.tp_4
+          - entity: switch.tp_1
+          - entity: switch.tp_5
+        show_header_toggle: true
+        title: Christmas
+        type: entities
+      - entities:
+          - entity: automation.activate_christmas_pre_new_year
+          - entity: automation.activate_christmas_post_new_year
+          - entity: automation.de_activate_christmas
+          - entity: automation.christmas_inside_on_weekday_am
+          - entity: automation.christmas_inside_off_weekday_am
+          - entity: automation.christmas_inside_on_weekday_pm
+          - entity: automation.christmas_inside_off_weekday_pm
+          - entity: automation.christmas_inside_on_weekend
+          - entity: automation.christmas_inside_off_weekend
+          - entity: automation.christmas_outside_on_morning
+          - entity: automation.christmas_outside_off_morning
+          - entity: automation.christmas_outside_on_evening
+          - entity: automation.christmas_outside_off_evening
+        show_header_toggle: false
+        title: Christmas Automations
+        type: entities
+    icon: 'mdi:pine-tree'
+    path: christmasview
+    title: Christmas
+  - badges: []
+    cards:
+      - entities:
+          - sensor.next_rocket_launch_type
+          - sensor.next_rocket_launch_site
+          - sensor.next_rocket_launch_day
+          - sensor.next_rocket_launch_time
+          - sensor.number_of_people_in_space
+        show_header_toggle: false
+        title: Next Rocket Launch
+        type: entities
+    icon: 'mdi:rocket'
+    path: spaceview
+    title: Space Stuff
+  - badges: []
+    cards:
+      - entities:
+          - entity: binary_sensor.test_switch
+          - entity: binary_sensor.kill_switch
+          - entity: sensor.test_switch_on_today
+          - entity: sensor.test_switch_on_yesterday
+          - entity: switch.test_led
+          - entity: switch.test_led_2
+          - entity: sensor.washing_up_state
+          - entity: camera.test_camera
+          - entity: camera.front_door
+        show_header_toggle: false
+        title: Test Stuff
+        type: entities
+      - entity: sensor.comms_temperature
+        max: 100
+        min: 0
+        name: Comms Temp
+        severity:
+          green: 0
+          red: 29
+          yellow: 28.7
+        theme: default
+        type: gauge
+      - entities:
+          - entity: script.office_lights_day
+          - entity: script.office_lights_night
+          - entity: switch.test_pi_internet_access
+        show_header_toggle: false
+        title: Office Test
+        type: entities
+    icon: 'mdi:test-tube'
+    path: testview
+    title: Test Stuff

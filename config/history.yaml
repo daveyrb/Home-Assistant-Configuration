@@ -1,0 +1,82 @@
+# Updated 26-03-2019
+# Path = /config/history.yaml
+
+###############################################################################
+  include:
+    domains:
+      - sensor
+      - switch
+      - media_player
+      - light
+      - binary_sensor
+  
+  exclude:
+    domains:
+      - automation
+      - group
+      - script
+    entities:
+      - sensor.bens_bedroom_wap
+      - sensor.office_switch
+      - sensor.dining_room_wap
+      - sensor.dns_1
+      - sensor.dns_2
+      - sensor.hallway_wap
+      - sensor.kitchen_wap
+      - sensor.lounge_temperature
+      - sensor.lounge_wap
+      - sensor.lounge_switch
+      - sensor.poe_switch
+      - sensor.router
+      - sensor.the_burrow_wap
+      - sensor.vpn_server
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_daily_summary
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_precip
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_wind_speed
+      - sensor.jarvis_uptime
+      - sensor.host_uptime
+      - sensor.alarm_mcu_uptime
+      - sensor.since_last_boot_adjusted
+      - sensor.ha_installed_version
+      - sensor.router_uptime
+      - sensor.router_wan_1_rx
+      - sensor.router_wan_1_tx
+      - sensor.router_wan_2_rx
+      - sensor.router_wan_2_tx
+      - sensor.router_wan_rx
+      - sensor.router_wan_tx
+      - sensor.adverts_blocked
+      - sensor.dns_queries
+      - sensor.percent_of_adverts_blocked
+      - sensor.pi_hole_ads_blocked_today
+      - sensor.pi_hole_ads_blocked_today_2
+      - sensor.pi_hole_ads_percentage_blocked_today
+      - sensor.pi_hole_ads_percentage_blocked_today_2
+      - sensor.pi_hole_dns_queries_today
+      - sensor.pi_hole_dns_queries_today_2
+      - sensor.dns_1_uptime
+      - sensor.dns_2_uptime
+      - sensor.dns_vip_uptime
+      - sensor.vpn_server_uptime
+      - sensor.next_rocket_launch_date
+      - sensor.nas_1_uptime
+      - sensor.disk_1_status
+      - sensor.disk_2_status
+      - sensor.fan_status
+      - sensor.raid_status
+      - sensor.date
+      - sensor.time
+      - switch.alarm
+      - sensor.proxy_server_uptime
+      - remote.dining_room
+      - remote.mum
+      - media_player.mum
+      - media_player.dining_room
+      - media_player.apple_tv
+###############################################################################

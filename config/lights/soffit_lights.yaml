@@ -1,0 +1,20 @@
+# Updated 28-10-2017
+# Path = /config/lights/soffit_lights.yaml
+
+###############################################################################
+# Outside Night Lights in the Soffit Boards #
+###############################################################################
+ - platform: mqtt
+   name: "Soffit Lights"
+   state_topic: "stat/soffit-lights/POWER"
+   command_topic: "cmnd/soffit-lights/POWER"
+   availability_topic: "tele/soffit-lights/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"
+   optimistic: false
+   retain: true
+###############################################################################
+

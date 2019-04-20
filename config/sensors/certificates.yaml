@@ -1,0 +1,13 @@
+# Updated 06-03-2019
+# Path = /config/sensors/certificates.yaml
+
+###############################################################################
+# Monitor Certificate Expiry #
+###############################################################################
+
+- platform: cert_expiry
+  name: "SSL Certificate Expiry WAN 1"
+  host: !secret wan1_cert
+- platform: cert_expiry
+  name: "SSL Certificate Expiry WAN 2"
+  host: !secret wan2_cert

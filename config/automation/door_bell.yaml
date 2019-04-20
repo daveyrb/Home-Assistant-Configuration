@@ -1,18 +1,45 @@
-# Updated 30-04-2017
+# Updated 11-04-2019
+# Path = /config/automation/door_bell.yaml
+
 # Ring the door bell and pause the TV & DVD
+# Now using Google Chromecast Audio 02-03-2019
+# Changed to a single automation remove TV stuff for now 05-03-2019
+# Added Snapshot photo with email notification 11-04-2019
 
 ###############################################################################
-# Automations for the Door Bell #
+# Door Bell 
 ###############################################################################
-- alias: 'Ring Door Bell Start'
+- alias: 'Door Bell'
   initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.door_bell
     to: 'on'
   action:
-    service: script.turn_on
-    entity_id: script.ring_door_bell, script.pause_sky, script.pause_dvd, script.pause_apple_tv
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           group.door_bell
+       volume_level: 0.8
+#       volume_level: 0.1
+   - service: media_player.play_media
+     data:
+       entity_id: 
+           group.door_bell
+       media_content_id: >-
+         http://192.168.0.22:8123/local/sounds/door_bell/doorbell.mp3
+       media_content_type: music
+   - service: camera.snapshot
+     data:
+       entity_id: camera.front_door
+       filename: '/config/www/cameras/front_door/snapshot/snaphot.jpg'
+   - service: notify.doorbell
+#   - service: notify.ralph
+     data:
+       title: "Someone is at the door"
+       message: 'Someone is at the door'
+       data:
+           images:
+               - /config/www/cameras/front_door/snapshot/snaphot.jpg
 ###############################################################################
-    
-        
+

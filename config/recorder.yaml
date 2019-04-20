@@ -1,0 +1,22 @@
+# Updated 19-11-2018
+# Path = /config/recorder.yaml
+
+###############################################################################
+purge_interval: 1
+purge_keep_days: 8
+db_url: !secret database
+#include:
+#  entities:
+#    - group.test_stuff
+#exclude:
+#  domains:
+#    - updater
+#    - automation
+#    - device_tracker
+#    - group
+#    - scene
+#    - script
+#  entities:
+#    - sensor.ha_uptime
+#    - sun.sun
+###############################################################################

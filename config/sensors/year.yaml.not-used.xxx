@@ -1,0 +1,7 @@
+- platform: template
+  sensors:
+    year:
+      value_template: '{{ now().strftime("%Y")}}'
+      entity_id: sensor.date
+      friendly_name: 'Year'
+      

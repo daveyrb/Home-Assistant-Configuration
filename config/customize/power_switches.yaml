@@ -1,4 +1,6 @@
 # Updated 22-04-2018
+# Path = /config/customize/power_switches.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 # Added Comms Cupboard Fan 22-04-2018
 
@@ -6,23 +8,9 @@
 # Customize Power Switches #
 ############################################################################### 
 switch.photo_frame:
-  friendly_name: 'Lounge Photo Frame'
+  friendly_name: "Lounge Photo Frame"
   assumed_state: false
   icon: mdi:image-album
-switch.christmas_front_garden:
-  icon: mdi:pine-tree
-switch.christmas_lounge_window:
-  icon: mdi:pine-tree  
-switch.christmas_tree:
-  icon: mdi:pine-tree
-switch.christmas_back_porch:
-  icon: mdi:pine-tree
-switch.back_porch_laser:
-  icon: mdi:pine-tree
-switch.christmas_the_bat_cave:
-  icon: mdi:pine-tree
-switch.bat_cave_fan:
-  icon: mdi:fan
 switch.comms_fan:
   icon: mdi:fan  
 ###############################################################################

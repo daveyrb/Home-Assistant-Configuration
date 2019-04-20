@@ -1,31 +1,33 @@
 # Updated 19-04-2018
+# Path = /config/customize/entertainment_media.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 
 ###############################################################################
 # Customize Entertainment & Media #
 ############################################################################### 
 script.tv:
-  friendly_name: 'TV'
+  friendly_name: "TV"
   icon: mdi:power
 script.sky:
-  friendly_name: 'Sky'
+  friendly_name: "Sky"
   icon: mdi:power
 script.dvd:
-  friendly_name: 'DVD'
+  friendly_name: "DVD"
   icon: mdi:power  
 script.amplifier:
-  friendly_name: 'Amplifier'
+  friendly_name: "Amplifier"
   icon: mdi:power
 script.pause_sky:
-  friendly_name: 'Sky'
+  friendly_name: "Sky"
   icon: mdi:play-pause
 script.pause_dvd:
-  friendly_name: 'DVD'
+  friendly_name: "DVD"
   icon: mdi:pause
 script.play_dvd:
-  friendly_name: 'DVD'
+  friendly_name: "DVD"
   icon: mdi:play
 script.pause_apple_tv:
-  friendly_name: 'Apple TV'
-  icon: mdi:play-pause                                  
+  friendly_name: "Apple TV"
+  icon: mdi:play-pause
 ###############################################################################

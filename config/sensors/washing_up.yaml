@@ -1,4 +1,10 @@
-# Modified 26-04-2018
+# Modified 20-11-2018
+# Path = /config/sensors/washing_up.yaml
+# Even day = True Odd day = False based on the Julian Date
+
+# Added entity_id: sensor.date see:
+# https://www.home-assistant.io/components/sensor.template/#working-with-dates
+# https://community.home-assistant.io/t/v0-81-and-template-sensors/75422/4
 
 ###############################################################################
 # Ben & Amy's washing up schedule this will send them an email at teatime     
@@ -7,9 +13,11 @@
 - platform: template
   sensors:
     washing_up_state:
-      value_template: '{{ ((now().strftime("%j") | int) % 2) == 0 }}'
-      friendly_name: 'Washing Up'
+      entity_id: sensor.date
+      value_template: >-
+        {{ ((now().strftime("%j") | int) % 2) == 0 }}
+      friendly_name: "Washing Up"
 ###############################################################################
 
-
-
+#{{ ((now().strftime("%j") | int) % 2) == 0 }}
+#{% if is_state("sensor.washing_up_state", "True") %}Odd{% else %}Even{% endif %}

@@ -1,56 +1,51 @@
-# Updated 09-05-2018
+# Updated 26-02-2019
+# Path = /config/customize/alarm.yaml
 
 # Added Security Sensors 06-05-2018 
 # Added 3rd MCU 09-05-2018
 # Changed friendly name of sensors 10-05-2018
+# Changed Office Sensor Name 28-01-2019
+# Changed "mdi:shield-home" to "mdi:shield-home" Breaking Change V0.87.0 07-02-2019
+# Removed MCU"s as changed to RPI MQTT 26-02-2019
 
 ###############################################################################
 # Customize Burglar Alarm #
 ###############################################################################
-binary_sensor.burglar_alarm_mcu_1:
-  friendly_name: 'MCU 1'
-  icon: mdi:security-network
-binary_sensor.burglar_alarm_mcu_2:
-  friendly_name: 'MCU 2'
-  icon: mdi:security-network
-binary_sensor.burglar_alarm_mcu_3:
-  friendly_name: 'MCU 3'
-  icon: mdi:security-network
 binary_sensor.alarm_amy_bedroom:
-  friendly_name: 'Front Bedroom Sensor'
-  icon: mdi:security-home
-binary_sensor.alarm_the_bat_cave:
-  friendly_name: 'Bat Cave Sensor'
-  icon: mdi:security-home
+  friendly_name: "Front Bedroom Sensor"
+  icon: mdi:shield-home
+binary_sensor.alarm_Office:
+  friendly_name: "Office Sensor"
+  icon: mdi:shield-home
 binary_sensor.alarm_dining_room:
-  friendly_name: 'Dining Room sensor'
-  icon: mdi:security-home
+  friendly_name: "Dining Room sensor"
+  icon: mdi:shield-home
 binary_sensor.alarm_front_door:
-  friendly_name: 'Front Door Sensor'
-  icon: mdi:security-home
+  friendly_name: "Front Door Sensor"
+  icon: mdi:shield-home
 binary_sensor.alarm_hallway:
-  friendly_name: 'Hallway Sensor'
-  icon: mdi:security-home
+  friendly_name: "Hallway Sensor"
+  icon: mdi:shield-home
 binary_sensor.alarm_kitchen:
-  friendly_name: 'Kitchen Sensor'
-  icon: mdi:security-home
+  friendly_name: "Kitchen Sensor"
+  icon: mdi:shield-home
 binary_sensor.alarm_lounge:
-  friendly_name: 'Lounge Sensor'
-  icon: mdi:security-home
+  friendly_name: "Lounge Sensor"
+  icon: mdi:shield-home
 automation.alarm_armed:  
-  friendly_name: 'Arm'
+  friendly_name: "Arm"
   icon: mdi:alarm-bell
 automation.alarm_disarmed:  
-  friendly_name: 'Disarm'
+  friendly_name: "Disarm"
   icon: mdi:alarm-bell
 automation.alarm_live:
-  friendly_name: 'Alarm Active'
+  friendly_name: "Alarm Active"
   icon: mdi:alarm-bell  
 switch.alarm:
-  friendly_name: 'Alarm On / Off'
+  friendly_name: "Alarm On / Off"
   icon: mdi:alarm-bell
 switch.alarm_siren:
-  friendly_name: 'Alarm Siren'
+  friendly_name: "Alarm Siren"
   icon: mdi:alarm-bell
 ###############################################################################
   

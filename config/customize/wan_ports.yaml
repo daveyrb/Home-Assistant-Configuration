@@ -1,0 +1,16 @@
+# Updated 06-03-2019
+# Path = /config/customize/wan_ports.yaml
+
+###############################################################################
+# Customize WAN Ports #
+############################################################################### 
+binary_sensor.wan_1:
+  icon: mdi:wan
+binary_sensor.wan_2:
+  icon: mdi:wan       
+############################################################################### 
+sensor.wan_1_external_address:
+  icon: mdi:wan
+sensor.wan_2_external_address:
+  icon: mdi:wan       
+###############################################################################

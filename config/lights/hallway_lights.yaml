@@ -1,0 +1,16 @@
+# Updated 14-02-2019
+# Path = /config/lights/hallway_lights.yaml
+
+###############################################################################    
+# Hallway Lights Lights  
+# Xiaomi QBKG04LM Aqara Wall Switch ZigBee
+###############################################################################
+
+ - platform: "mqtt"
+   name: "Hallway Lights"
+   state_topic: "zigbee2mqtt/0x00158d00016146cb"
+   availability_topic: "zigbee2mqtt/bridge/state"
+   payload_off: "OFF"
+   payload_on: "ON"
+   value_template: "{{ value_json.state }}"
+   command_topic: "zigbee2mqtt/0x00158d00016146cb/set"

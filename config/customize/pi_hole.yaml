@@ -1,0 +1,57 @@
+# Updated 19-04-2018
+# Path = /config/customize/pi_hole.yaml
+
+# Breaking down customize into separate parts 19-04-2018
+
+###############################################################################
+# Customize Pi-Hole DNS Server #
+############################################################################### 
+sensor.dns_queries:
+  friendly_name: "DNS Queries"
+  icon: mdi:dns
+sensor.adverts_blocked:
+  friendly_name: "Adverts Blocked"
+  icon: mdi:close-octagon-outline  
+sensor.percent_of_adverts_blocked:
+  friendly_name: "Percent of Adverts Blocked"
+  icon: mdi:close-octagon-outline
+#sensor.pihole_ads_percentage_blocked_today_2:
+#  friendly_name: "DNS 2 Percentage Adverts Blocked Today"
+#  icon: mdi:close-octagon-outline
+#sensor.pihole_dns_queries_cached:
+#  friendly_name: "DNS 1 Queries Cached Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_queries_cached_2:
+#  friendly_name: "DNS 2 Queries Cached Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_queries_forwarded:
+#  friendly_name: "DNS 1 Queries Forwarded Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_queries_forwarded_2:
+#  friendly_name: "DNS 2 Queries Forwarded Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_queries_today:
+#  friendly_name: "DNS 1 Total Queries Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_queries_today_2:
+#  friendly_name: "DNS 2 Total Queries Today"
+#  icon: mdi:comment-question-outline
+#sensor.pihole_dns_unique_clients:
+#  friendly_name: "DNS 1 Clients"
+#  icon: mdi:account-outline
+#sensor.pihole_dns_unique_clients_2:
+#  friendly_name: "DNS 2 Clients"
+#  icon: mdi:account-outline
+#sensor.pihole_dns_unique_domains:
+#  friendly_name: "DNS 1 Unique Domains"
+#  icon: mdi:domain
+#sensor.pihole_dns_unique_domains_2:
+#  friendly_name: "DNS 2 Unique Domains"
+#  icon: mdi:domain
+#sensor.pihole_domains_blocked:
+#  friendly_name: "DNS 1 Number Of Blocked Domains"
+#  icon: mdi:block-helper
+#sensor.pihole_domains_blocked_2:
+#  friendly_name: " DNS 2 Number Of Blocked Domains"
+#  icon: mdi:block-helper
+###############################################################################

@@ -1,4 +1,6 @@
-# Updated 08-09-2018
+# Updated 01-04-2019
+# Path = /config/sensors/snmp.yaml
+
 # Trying to extend scan_interval: 30
 # Added Wireless Access Points 12-02-2018
 # Added DNS Server 20-03-2018
@@ -7,111 +9,120 @@
 # New Router still trying to work out how to monitor ADSL State so disabled 27-05-2018
 # Network Changes 02-06-2018
 # Added router Uptime and WAN Traffic Stats 08-09-2018
+# Changed Down notifications for Linux Boxes to use unknown from the uptime OID 12-09-2018
+# Changed Host Uptime Senesor to use SNMP due to sensor.last_boot changes in V84 12-12-2018
+# Added Proxy Server 04-01-2019
+# Moved Bendroom WAP to Ben's Bedrom 11-03-2019
+# Added Alarm MQTT RPI 01-04-2019
 
 ###############################################################################
 # SNMP Monitoring
 ###############################################################################
 # Printer Page Count
 - platform: snmp
-  scan_interval: 30
+  scan_interval: 300
   accept_errors: true
   name: "Printer Page Count"
-  host: 192.168.0.55
+  host: !secret printer
   port: 161
   community: !secret snmp_read2  
   baseoid: 1.3.6.1.2.1.43.10.2.1.4.1.1
 #-----------------------------------------------------------------------------#
-# Router WAN 1 Bytes In
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "Router WAN 1 RX"
-  host: 192.168.0.1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.31.1.1.1.6.5
-  accept_errors: true
-  unit_of_measurement: 'GB'
-  #value_template: '{{((value | int) / 1000000000) | int}}'
-  value_template: '{{((value | int) / 1000000000) | round(2)}}'
-#-----------------------------------------------------------------------------#
-# Router WAN 1 Bytes Out 
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "Router WAN 1 TX"
-  host: 192.168.0.1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.31.1.1.1.10.5
-  accept_errors: true
-  unit_of_measurement: 'GB'
-  #value_template: '{{((value | int) / 1000000000) | int}}'
-  value_template: '{{((value | int) / 1000000000) | round(2)}}'
-#-----------------------------------------------------------------------------#
-# Router WAN 2 Bytes In
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "Router WAN 2 RX"
-  host: 192.168.0.1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.31.1.1.1.6.6
-  accept_errors: true
-  unit_of_measurement: 'GB'
-  #value_template: '{{((value | int) / 1000000000) | int}}'
-  value_template: '{{((value | int) / 1000000000) | round(2)}}'
-#-----------------------------------------------------------------------------#
-# Router WAN 2 Bytes Out 
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "Router WAN 2 TX"
-  host: 192.168.0.1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.31.1.1.1.10.6
-  accept_errors: true
-  unit_of_measurement: 'GB'
-  #value_template: '{{((value | int) / 1000000000) | int}}'
-  value_template: '{{((value | int) / 1000000000) | round(2)}}'
-#-----------------------------------------------------------------------------#
 ###############################################################################
-# Router Template to add Both WAN TX & Both WAN RX Sensors together 
+# START WAN Ports Monitoring Currently Broken Thanks Cisco!
 ###############################################################################
-- platform: template
-  sensors:
-   router_wan_rx:
-     friendly_name: 'WAN In'
-     unit_of_measurement: 'GB'
-     value_template: >-
-          {{ ( (states('sensor.router_wan_1_rx')|float) + (states('sensor.router_wan_2_rx')|float) )|round(2) }}
-#-----------------------------------------------------------------------------#
-- platform: template
-  sensors:
-   router_wan_tx:
-     friendly_name: 'WAN Out'
-     unit_of_measurement: 'GB'
-     value_template: >-
-          {{ ( (states('sensor.router_wan_1_tx')|float) + (states('sensor.router_wan_2_tx')|float) )|round(2) }}
-#-----------------------------------------------------------------------------#
-# Router Uptime 
+## Router WAN 1 Bytes In
+#- platform: snmp
+#  version: 2c
+#  scan_interval: 120
+#  accept_errors: true
+#  name: "Router WAN 1 RX"
+#  host: !secret router
+#  port: 161
+#  community: !secret snmp_read 
+#  baseoid: 1.3.6.1.2.1.31.1.1.1.6.5
+#  unit_of_measurement: 'GB'
+#  value_template: '{{((value | int) / 1000000000) | round(2)}}'
+##-----------------------------------------------------------------------------#
+## Router WAN 1 Bytes Out 
+#- platform: snmp
+#  version: 2c
+#  scan_interval: 120
+#  accept_errors: true
+#  name: "Router WAN 1 TX"
+#  host: !secret router
+#  port: 161
+#  community: !secret snmp_read 
+#  baseoid: 1.3.6.1.2.1.31.1.1.1.10.5
+#  unit_of_measurement: 'GB'
+#  value_template: '{{((value | int) / 1000000000) | round(2)}}'
+##-----------------------------------------------------------------------------#
+## Router WAN 2 Bytes In
+#- platform: snmp
+#  version: 2c
+#  scan_interval: 120
+#  accept_errors: true
+#  name: "Router WAN 2 RX"
+#  host: !secret router
+#  port: 161
+#  community: !secret snmp_read 
+#  baseoid: 1.3.6.1.2.1.31.1.1.1.6.6
+#  unit_of_measurement: 'GB'
+#  value_template: '{{((value | int) / 1000000000) | round(2)}}'
+##-----------------------------------------------------------------------------#
+## Router WAN 2 Bytes Out 
+#- platform: snmp
+#  version: 2c
+#  accept_errors: true
+#  scan_interval: 120
+#  name: "Router WAN 2 TX"
+#  host: !secret router
+#  port: 161
+#  community: !secret snmp_read 
+#  baseoid: 1.3.6.1.2.1.31.1.1.1.10.6
+#  unit_of_measurement: 'GB'
+#  value_template: '{{((value | int) / 1000000000) | round(2)}}'
+##-----------------------------------------------------------------------------#
+################################################################################
+## Router Template to add Both WAN TX & Both WAN RX Sensors together 
+################################################################################
+#- platform: template
+#  sensors:
+#   router_wan_rx:
+#     friendly_name: 'WAN In'
+#     unit_of_measurement: 'GB'
+#     value_template: >-
+#          {{ ( (states('sensor.router_wan_1_rx')|float) + (states('sensor.router_wan_2_rx')|float) )|round(2) }}
+##-----------------------------------------------------------------------------#
+#- platform: template
+#  sensors:
+#   router_wan_tx:
+#     friendly_name: 'WAN Out'
+#     unit_of_measurement: 'GB'
+#     value_template: >-
+#          {{ ( (states('sensor.router_wan_1_tx')|float) + (states('sensor.router_wan_2_tx')|float) )|round(2) }}
+##-----------------------------------------------------------------------------#
+###############################################################################
+# END WAN Ports Monitoring Currently Broken Thanks Cisco!
+###############################################################################
+
+# Router Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
+  accept_errors: true
   name: "Router Uptime"
-  host: 192.168.0.1
+  host: !secret router
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.1.3.0
-  accept_errors: true
   value_template: >-
-      {% set time = value | int %}
-      {% set minutes = ((time % 360000) / 6000) | int%}
-      {% set hours = ((time % 8640000) / 360000) | int %}
-      {% set days = (time / 8640000) | int %}
-      {%- if time < 6000 -%}
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
         Less than a minute
       {%- else -%}
         {%- if days > 0 -%}
@@ -126,9 +137,9 @@
             {{ ', ' }}
           {%- endif -%}
           {%- if hours == 1 -%}
-            1 hour
+            1 hr
           {%- else -%}
-            {{ hours }} hours
+            {{ hours }} hrs
           {%- endif -%}
         {%- endif -%}
         {%- if minutes > 0 -%}
@@ -136,39 +147,365 @@
             {{ ', ' }}
           {%- endif -%}
           {%- if minutes == 1 -%}
-            1 minute
+            1 min
           {%- else -%}
-            {{ minutes }} minutes
+            {{ minutes }} min
           {%- endif -%}
         {%- endif -%}
       {%- endif -%}
 #-----------------------------------------------------------------------------#
-# Router Status Checking Switch Port 24 is Up  
+# DNS-1 Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
 - platform: snmp
   version: 2c
-  scan_interval: 30
-  name: "Router"
-  host: 192.168.0.20
+  scan_interval: 60
+  accept_errors: true
+  name: "DNS 1 Uptime"
+  host: !secret dns_1
   port: 161
   community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.24  
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# DNS-2 Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "DNS 2 Uptime"
+  host: !secret dns_2
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# DNS-VIP Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "DNS VIP Uptime"
+  host: !secret dns_vip
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# VPN Server Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "VPN Server Uptime"
+  host: !secret vpn
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# NGINX Proxy Server Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Proxy Server Uptime"
+  host: !secret proxy
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# Alarm MQTT RPI Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Alarm MCU Uptime"
+  host: !secret alarm
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# Host Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Host Uptime"
+  host: !secret jarvis
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
 #-----------------------------------------------------------------------------#
 # Lounge Switch Checking Switch Port 7 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "Lounge Switch"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.7
 #-----------------------------------------------------------------------------#
-# Bat Cave Switch Checking Switch Port 5 is Up  
+# Office Switch Checking Switch Port 5 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
-  name: "Bat Cave Switch"
-  host: 192.168.0.20
+  scan_interval: 60
+  name: "Office Switch"
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.5
@@ -176,29 +513,19 @@
 # POE Switch Checking Switch Port 6 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "POE Switch"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.6
 #-----------------------------------------------------------------------------#
-# VPN Server Checking Switch Port 21 is Up  
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "VPN Server"
-  host: 192.168.0.20
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.21
-#-----------------------------------------------------------------------------#
 # Dining Room Wireless Access Point Checking Switch Port 20 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "Dining Room WAP"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.20
@@ -206,9 +533,9 @@
 # Kitchen Wireless Access Point Checking Switch Port 3 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "Kitchen WAP"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.3
@@ -216,9 +543,9 @@
 # Lounge Wireless Access Point Checking Switch Port 13 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "Lounge WAP"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.13
@@ -226,62 +553,32 @@
 # Hallway Wireless Access Point Checking Switch Port 22 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "Hallway WAP"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.22
 #-----------------------------------------------------------------------------#
-# Bedroom Wireless Access Point Checking Switch Port 8 is Up  
+# Bedroom Wireless Access Point Checking Switch Port 11 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
-  name: "Bedroom WAP"
-  host: 192.168.0.20
+  scan_interval: 60
+  name: "Bens Bedroom WAP"
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.8
+  baseoid: 1.3.6.1.2.1.2.2.1.8.11
 #-----------------------------------------------------------------------------#
 # The Burrow Wireless Access Point Checking Switch Port 16 is Up  
 - platform: snmp
   version: 2c
-  scan_interval: 30
+  scan_interval: 60
   name: "The Burrow WAP"
-  host: 192.168.0.20
+  host: !secret switch_1
   port: 161
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.16
-#-----------------------------------------------------------------------------#
-# DNS 1 Server Checking Switch Port 19 is Up  
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "DNS 1"
-  host: 192.168.0.20
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.19
-#-----------------------------------------------------------------------------#
-# DNS 2 Server Checking Switch Port 18 is Up  
-- platform: snmp
-  version: 2c
-  scan_interval: 30
-  name: "DNS 2"
-  host: 192.168.0.21
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.13
-#-----------------------------------------------------------------------------#
-# IP camera Server Checking Switch Port 21 is Up  
-#- platform: snmp
-#  version: 2c
-#  scan_interval: 30
-#  name: "IP Camera Server"
-#  host: 192.168.0.21
-#  port: 161
-#  community: !secret snmp_read 
-#  baseoid: 1.3.6.1.2.1.2.2.1.8.21
 ###############################################################################
   
 ###############################################################################    
@@ -289,67 +586,64 @@
 ###############################################################################
 - platform: template
   sensors:
-#   adsl_line_1_state:
-#     value_template: '{% if is_state("sensor.adsl_line_1", "1") %}Up{% else %}Down{% endif %}'
-#     friendly_name: 'ADSL Line 1'
-#-----------------------------------------------------------------------------#
-#   adsl_line_2_state:
-#     value_template: '{% if is_state("sensor.adsl_line_2", "1") %}Up{% else %}Down{% endif %}'
-#     friendly_name: 'ADSL Line 2'
 #-----------------------------------------------------------------------------#
    router_state:
-     value_template: '{% if is_state("sensor.router", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Router'
+     value_template: '{% if is_state("sensor.router_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "Router"
 #-----------------------------------------------------------------------------#
    vpn_server_state:
-     value_template: '{% if is_state("sensor.vpn_server", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'VPN Server'
+     value_template: '{% if is_state("sensor.vpn_server_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "VPN Server"
+#-----------------------------------------------------------------------------#
+   proxy_server_state:
+     value_template: '{% if is_state("sensor.proxy_server_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "Proxy Server"
+#-----------------------------------------------------------------------------#
+   alarm_mcu_state:
+     value_template: '{% if is_state("sensor.alarm_mcu_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "Alarm MCU"
 #-----------------------------------------------------------------------------#
    lounge_switch_state:
      value_template: '{% if is_state("sensor.lounge_switch", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Lounge Switch'
+     friendly_name: "Lounge Switch"
 #-----------------------------------------------------------------------------#
-   bat_cave_switch_state:
-     value_template: '{% if is_state("sensor.bat_cave_switch", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Bat Cave Switch'
+   office_switch_state:
+     value_template: '{% if is_state("sensor.office_switch", "1") %}Up{% else %}Down{% endif %}'
+     friendly_name: "Office Switch"
 #-----------------------------------------------------------------------------#
    poe_switch_state:
      value_template: '{% if is_state("sensor.poe_switch", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'POE Switch'
+     friendly_name: "POE Switch"
 #-----------------------------------------------------------------------------#
    dining_room_wap_state:
      value_template: '{% if is_state("sensor.dining_room_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Dining Room WAP'        
+     friendly_name: "Dining Room WAP"
 #-----------------------------------------------------------------------------#
    kitchen_wap_state:
      value_template: '{% if is_state("sensor.kitchen_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Kitchen WAP'        
+     friendly_name: "Kitchen WAP"
 #-----------------------------------------------------------------------------#
    lounge_wap_state:
      value_template: '{% if is_state("sensor.lounge_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Lounge WAP'        
+     friendly_name: "Lounge WAP"
 #-----------------------------------------------------------------------------#
    hallway_wap_state:
      value_template: '{% if is_state("sensor.hallway_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Hallway WAP'        
+     friendly_name: "Hallway WAP"
 #-----------------------------------------------------------------------------#
-   bedroom_wap_state:
-     value_template: '{% if is_state("sensor.bedroom_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'Bedroom WAP'        
+   bens_bedroom_wap_state:
+     value_template: '{% if is_state("sensor.bens_bedroom_wap", "1") %}Up{% else %}Down{% endif %}'
+     friendly_name: "Ben's Bedroom WAP"
 #-----------------------------------------------------------------------------#
    the_burrow_wap_state:
      value_template: '{% if is_state("sensor.the_burrow_wap", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'The Burrow WAP'        
+     friendly_name: "The Burrow WAP"
 #-----------------------------------------------------------------------------#
    dns_1_state:
-     value_template: '{% if is_state("sensor.dns_1", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'DNS 1'        
+     value_template: '{% if is_state("sensor.dns_1_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "DNS 1"
 #-----------------------------------------------------------------------------#
    dns_2_state:
-     value_template: '{% if is_state("sensor.dns_2", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: 'DNS 2'        
-#-----------------------------------------------------------------------------#
-#   ip_camera_server_state:
-#     value_template: '{% if is_state("sensor.ip_camera_server", "1") %}Up{% else %}Down{% endif %}'
-#     friendly_name: 'IP Camera Server'        
+     value_template: '{% if is_state("sensor.dns_2_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "DNS 2"
 ###############################################################################

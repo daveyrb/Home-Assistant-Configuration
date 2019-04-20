@@ -1,0 +1,26 @@
+# Updated 19-03-2019
+# Path = /config/automation/voice_announcements.yaml
+
+# Added group_door_bell so that Mum gets alerts as well 19-03-2019
+ 
+###############################################################################
+# Front Door left open #
+###############################################################################
+- alias: 'Front Door Left Open'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: 
+        - binary_sensor.alarm_front_door
+      to: 'on'
+      from: 'off'
+      for: '00:05:00'
+  action:
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id: 
+           #media_player.hall_speaker
+           group.door_bell
+       message: >
+         Attention. The front door has been left open for the last five minutes
+###############################################################################

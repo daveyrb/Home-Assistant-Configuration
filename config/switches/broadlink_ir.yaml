@@ -1,23 +1,25 @@
 # Updated 30-04-2017
+# Path = /config/switches/broadlink_ir.yaml
+
 # Doing all the TV and Media via scripts now
 
 ###############################################################################
 # Broadlink IR / RF Blaster #
 ###############################################################################
  - platform: broadlink
-   host: 192.168.0.150
+   host: broadlink-rm-pro
    mac: '34:EA:34:F4:35:4C'
    timeout: 15
-   switches:
+#   switches:
 ###############################################################################
 
 ###############################################################################
 # Door Bell RF Code #
 ###############################################################################
-    door_bell:
-      friendly_name: "Door Bell"
-      command_on: 'sgUsABkbGRoaGhozGZgaZhl+GpgamBqXGWUaZRllGn8afhl/GpgafhlmGn4ZAAKnAAAAAAAAAAAAAAAA'
-      command_off: ''
+#    door_bell:
+#      friendly_name: "Door Bell"
+#      command_on: 'sgUsABkbGRoaGhozGZgaZhl+GpgamBqXGWUaZRllGn8afhl/GpgafhlmGn4ZAAKnAAAAAAAAAAAAAAAA'
+#      command_off: ''
 ###############################################################################
     
 

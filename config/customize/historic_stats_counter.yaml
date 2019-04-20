@@ -1,0 +1,10 @@
+# Updated 07-03-2019
+# Path = /config/customize/histroric_stats_counter.yaml
+
+###############################################################################
+# Customize Historic Stats Counters #
+############################################################################### 
+sensor.door_bell_presses_today:
+  icon: mdi:doorbell-video
+sensor.door_bell_presses_yesterday:  
+  icon: mdi:doorbell-video

@@ -1,28 +1,38 @@
-# Updated 17-05-2018
+# Updated 12-12-2018
+# Path = /config/customize/jarvis.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 # Added Uptime & Version Sensor 17-05-2018
+# Changed Host Uptime Senesor to use SNMP due to sensor.last_boot changes in V84 12-12-2018
 
 ###############################################################################
 # Customize Jarvis Sensors #
 ############################################################################### 
 # Jarvis CPU Temp #
 sensor.cpu_temp:
-  friendly_name: 'CPU Temperature'
+  friendly_name: "CPU Temperature"
   icon: mdi:thermometer
 #-----------------------------------------------------------------------------#
 # HA (Jarvis) Uptime Sensor #
 sensor.jarvis_uptime:
-  #friendly_name: 'Jarvis Uptime'
+  #friendly_name: "Jarvis Uptime"
+  icon: mdi:clock
+#-----------------------------------------------------------------------------#
+# Host Uptime Sensor #
+sensor.host_uptime:
+  #friendly_name: "Host Uptime"
   icon: mdi:clock
 #-----------------------------------------------------------------------------#
 # Last Reboot Sensor #
-sensor.since_last_boot_adjusted:
-  friendly_name: 'Last Reboot'
-  icon: mdi:clock
+#sensor.since_last_boot_adjusted:
+#  friendly_name: "Last Reboot"
+#  icon: mdi:clock
 #-----------------------------------------------------------------------------#
 # HA Version Sensor #
 sensor.ha_installed_version:
-  friendly_name: 'HA Version'
+  friendly_name: "HA Installed Version"
   icon: mdi:home-assistant
+#updater.updater:
+#  friendly_name: "HA Latest Version"
+#  icon: mdi:home-assistant
 ###############################################################################
-

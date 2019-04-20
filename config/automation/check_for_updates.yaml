@@ -1,4 +1,5 @@
 # Updated 19-03-2017
+# Path = /config/automation/check_for_updates.yaml
 
 ###############################################################################
 # Automation Check for HA Update #
@@ -9,7 +10,7 @@
      platform: state
      entity_id: updater.updater
   action:
-    service: notify.email
+    service: notify.ralph
     data:
       title: " Home Assistant Update"
       message: "Update for Home Assistant is available"

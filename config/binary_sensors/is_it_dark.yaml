@@ -1,0 +1,18 @@
+# Updated 14-03-2019
+# Path = /config/binary_sensors/is_it_dark.yaml
+
+###############################################################################
+# Binary Sensor Is it dark yet #
+###############################################################################
+- platform: template
+  sensors:
+    dark:
+      #  states.sensor.time (which is always true) so that the template sensor is evaluated every minute
+      entity_id:
+        - sensor.time
+        - input_boolean.force_dark
+        - sun.sun
+      #value_template: "{{ states.sensor.time and (is_state('input_boolean.force_dark', 'on')  or  states.sun.sun.attributes.elevation < 10.0) }}"
+      value_template: "{{ states.sensor.time and (is_state('input_boolean.force_dark', 'on')  or  states.sun.sun.attributes.elevation < 5.0) }}"
+      friendly_name: "Dark"
+###############################################################################

@@ -1,0 +1,29 @@
+# Updated 07-03-2019
+# Path = /config/sensors/historic_stats_counter.yaml
+
+# Started to create some history stats
+
+###############################################################################
+# Doorbell presses in the last 2 days
+###############################################################################
+
+###############################################################################
+- platform: history_stats
+  name: "Door Bell Presses Today"
+  entity_id: binary_sensor.door_bell
+  state: 'on'
+  type: count
+  start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  end: '{{ now() }}'
+###############################################################################
+
+###############################################################################
+- platform: history_stats
+  name: "Door Bell Presses Yesterday"
+  entity_id: binary_sensor.door_bell
+  state: 'on'
+  type: count
+  end: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+  duration:
+    hours: 24
+###############################################################################

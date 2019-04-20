@@ -1,0 +1,28 @@
+# Updated 13-03-2019
+# Path = /config/sensors/media_centre_templates.yaml
+
+# Added Mum's Roku Box 27-12-2018
+# Added Fire TV 13-03-2019
+
+###############################################################################    
+# Media Centre Status 
+###############################################################################
+- platform: template
+  sensors:
+#-----------------------------------------------------------------------------#
+   apple_tv_lounge_media_title:
+     value_template: "{{ states.media_player.apple_tv.attributes['media_title'] | default('Nothing playing') }}"
+     friendly_name: "Apple TV Lounge"
+#-----------------------------------------------------------------------------#
+   roku_dining_room_media_title:
+     value_template: "{{ states.media_player.dining_room.attributes['app_name'] | default('Nothing playing') }}"
+     friendly_name: "Roku TV Dining Room"
+#-----------------------------------------------------------------------------#
+   roku_mum_media_title:
+     value_template: "{{ states.media_player.mum.attributes['app_name'] | default('Nothing playing') }}"
+     friendly_name: "Roku TV Mum's Lounge"
+#-----------------------------------------------------------------------------#
+   fire_tv_office_media_title:
+     value_template: "{{ states.media_player.fire_tv_office.attributes['source'] | default('Nothing playing') }}"
+     friendly_name: "Fire TV Office"
+#-----------------------------------------------------------------------------#

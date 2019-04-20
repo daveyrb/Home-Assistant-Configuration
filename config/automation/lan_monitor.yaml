@@ -1,0 +1,205 @@
+# Updated 20-03-2019
+# Path = /config/automation/lan_monitor.yaml
+
+# Monitor critical network components
+# Added DNS Server & Computer Room Switch 20-03-2018
+# Added 2nd DNS Server 25-03-2018
+# Changed Email Settings 15-04-2018
+# Changed notification to notify group 19-04-2018
+# Network Changes 02-06-2018
+# Added Proxy Server 04-01-2019
+# Moved WAN port monitoring to wan_monitor.yaml 02-03-2019
+# Added voice notification 20-03-2019
+
+###############################################################################
+# Automation for LAN Monitoring and Notifications #
+###############################################################################
+- alias: 'POE Switch Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.poe_switch_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "POE Switch Down"
+       message: "Sorry to disturb you Sir, but the Power Over Ethernet Switch seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Power Over Ethernet Switch seems to be Down
+#-----------------------------------------------------------------------------#   
+- alias: 'VPN Server Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.vpn_server_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "VPN Server"
+       message: "Sorry to disturb you Sir, but the VPN Server seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the VPN Server seems to be Down
+#-----------------------------------------------------------------------------#   
+- alias: 'Proxy Server Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.proxy_server_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Proxy Server"
+       message: "Sorry to disturb you Sir, but Proxy Server seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Proxy Server seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'DNS 1 Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.dns_1_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Domain Name Server 1"
+       message: "Sorry to disturb you Sir, but the Domain Name Server 1 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Domain Name Server 1 seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'DNS 2 Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.dns_2_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Domain Name Server 2"
+       message: "Sorry to disturb you Sir, but the Domain Name Server 2 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Domain Name Server 2 seems to be Down
+#-----------------------------------------------------------------------------#      
+- alias: 'Lounge Switch Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.lounge_switch_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Lounge Switch"
+       message: "Sorry to disturb you Sir, but the Lounge Switch seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Lounge Switch seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'Offcie Switch Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.office_switch_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Office Switch"
+       message: "Sorry to disturb you Sir, but the Office Switch seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but the Office Switch seems to be Down
+###############################################################################

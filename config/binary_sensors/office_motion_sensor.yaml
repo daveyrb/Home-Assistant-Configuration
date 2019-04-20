@@ -1,0 +1,14 @@
+# Updated 30-01-2019
+# Path = /config/binary_sensors/office_motion_sensor.yaml
+
+###############################################################################
+# Office Philips Sensor Motion #
+###############################################################################
+- platform: "mqtt"
+  name: "Office Motion"
+  state_topic: "zigbee2mqtt/0x0017880104b5599b"
+  availability_topic: "zigbee2mqtt/bridge/state"
+  payload_on: true
+  payload_off: false
+  value_template: "{{ value_json.occupancy }}"
+  device_class: "motion"

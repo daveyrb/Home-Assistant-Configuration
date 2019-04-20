@@ -1,0 +1,17 @@
+# Updated 20-04-2019
+# Path = /config/cameras/front_door.yaml
+
+###############################################################################
+# Front Door Camera  #
+###############################################################################
+- platform: mjpeg
+  mjpeg_url: http://192.168.0.73:8080/++video?cameraNum=2&width=640&height=480&8325
+  username: !secret sp_id
+  password: !secret sp_pw
+  name: Front Door
+  authentication: basic
+
+# Dummy camera to capture the last door bell image
+- platform: local_file
+  name: front_door_snapshot
+  file_path: /config/www/cameras/front_door/snapshot/snaphot.jpg

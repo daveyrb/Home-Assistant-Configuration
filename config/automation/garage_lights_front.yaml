@@ -1,0 +1,72 @@
+# Updated 07-04-2019
+# Path = /config/automation/garage_lights.yaml
+
+# Added Hallway Lights 14-02-2019
+# Added automation to turn on the Garage lights when I arrive home after Sunset 07-04-2019
+
+###############################################################################
+# Automation for the Front Garden Garage lights #
+###############################################################################
+- alias: 'Front Garage Lights On'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.alarm_front_door
+      to: 'on'  
+  condition:
+    condition: or
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+  action:
+    service: light.turn_on
+    entity_id: group.lights_front_door_open
+#-----------------------------------------------------------------------------#
+- alias: 'Front Garage Lights Off'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.alarm_front_door 
+      to: 'off'
+      from: 'on'
+      for: '00:03:00'
+  action:
+    service: light.turn_off
+    entity_id: group.lights_front_door_open
+###############################################################################
+
+###############################################################################
+# Garage Lights when arriving home #
+###############################################################################
+- alias: 'Garage Lights Home On'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: device_tracker.ralph_daveys_iphone
+      from: 'not_home'
+      to: 'home'
+  condition:
+    condition: or
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+  action:
+    service: light.turn_on
+    entity_id: light.front_garage_lights
+#-----------------------------------------------------------------------------#
+- alias: 'Garage Lights Home Off'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: device_tracker.ralph_daveys_iphone
+      to: 'home'
+      from: 'not_home'
+      for: '00:03:00'
+  action:
+    service: light.turn_off
+    entity_id: group.lights_front_door_open
+###############################################################################

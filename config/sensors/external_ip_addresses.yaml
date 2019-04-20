@@ -1,0 +1,19 @@
+# Updated 06-03-2019
+# Path = /config/sensors/external_ip_addresses.yaml
+
+###############################################################################
+# External IP Addresses #
+###############################################################################
+
+- platform: dnsip
+  hostname: !secret wan1_ip
+  name: "WAN 1 External Address"
+  scan_interval: 300
+  resolver: 1.1.1.1
+
+- platform: dnsip
+  hostname: !secret wan2_ip
+  name: "WAN 2 External Address"
+  scan_interval: 300
+  resolver: 1.1.1.1
+  

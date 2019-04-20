@@ -1,0 +1,34 @@
+# Updated 28-01-2019
+# Path = /config/scripts/office_lights.yaml
+
+###############################################################################
+# Script to turn on the Office Zigbee Lights Night & Day Mode  #
+###############################################################################
+office_lights_night:
+    alias: 'Office Lights Night'
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_lights
+          brightness: 130
+          color_temp: 454 
+#-----------------------------------------------------------------------------#
+office_lights_day:
+    alias: 'Office Lights Day'
+    sequence:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_lights
+          brightness: 191
+          color_temp: 318
+#-----------------------------------------------------------------------------#
+#office_lights_off:
+#    alias: 'Office Lights Off'
+#    sequence:
+#      - service: light.turn_off
+#        data:
+#          entity_id: light.office_lights
+#          brightness: 191
+#          color_temp: 318
+###############################################################################
+

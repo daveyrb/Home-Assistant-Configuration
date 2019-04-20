@@ -1,0 +1,4 @@
+# Updated 14-03-2019
+# Path = /config/sensors/moon.yaml
+
+- platform: moon

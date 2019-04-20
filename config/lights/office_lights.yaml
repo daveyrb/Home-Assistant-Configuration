@@ -1,0 +1,52 @@
+# Updated 28-01-2019
+# Path = /config/lights/office_lights.yaml
+
+###############################################################################    
+# Office ZigBee Lights  
+###############################################################################
+
+#-----------------------------------------------------------------------------#
+# Offcie Light 1
+ - platform: "mqtt"
+   name: "Office Light 1"
+   state_topic: "zigbee2mqtt/0xd0cf5efffebd892c"
+   availability_topic: "zigbee2mqtt/bridge/state"
+   brightness: true
+   color_temp: true
+   schema: "json"
+   command_topic: "zigbee2mqtt/0xd0cf5efffebd892c/set"
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+# Offcie Light 2
+ - platform: "mqtt"
+   name: "Office Light 2"
+   state_topic: "zigbee2mqtt/0xd0cf5efffec80fde"
+   availability_topic: "zigbee2mqtt/bridge/state"
+   brightness: true
+   color_temp: true
+   schema: "json"
+   command_topic: "zigbee2mqtt/0xd0cf5efffec80fde/set"
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+# Offcie Light 3
+ - platform: "mqtt"
+   name: "Office Light 3"
+   state_topic: "zigbee2mqtt/0xd0cf5efffec2dca2"
+   availability_topic: "zigbee2mqtt/bridge/state"
+   brightness: true
+   color_temp: true
+   schema: "json"
+   command_topic: "zigbee2mqtt/0xd0cf5efffec2dca2/set"
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+ # All Office Lights
+ - platform: group
+   name: "Office Lights"
+   entities:
+     - light.office_light_1
+     - light.office_light_2
+     - light.office_light_3
+#-----------------------------------------------------------------------------#

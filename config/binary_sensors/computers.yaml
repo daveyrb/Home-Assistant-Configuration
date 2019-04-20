@@ -1,44 +1,73 @@
-# Updated 10-05-2018
+# Updated 02-03-2019
+# Path = /config/binary_sensors/computers.yaml
+
 # Added Amy's iPad
 # Added Ben's PC 12-04-2018
 # Updated IP addresses 18-04-2018
 # Removed some PC's 10-05-2018
+# Removed ' from binary Sensor names V0.85.0 Change 10-01-2019
+# Changed to Ping (ICMP) Binary sensor 02-03-2019
 
 ###############################################################################
 # Binary Sensor to monitor on line computers #
 ###############################################################################
-- platform: command_line
-  name: Amy's PC
-  command: ping -W 1 -c 1 192.168.0.142 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  payload_on: "success"
-  payload_off: "fail"
+#- platform: command_line
+#  name: Amys PC
+#  command: ping -W 1 -c 1 amy-pc > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"
+- platform: ping
+  name: "Amys PC"
+  host: !secret amy_pc
+  count: 5
+  scan_interval: 300
 #-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Big Mac
-  command: ping -W 1 -c 1 192.168.0.75 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  payload_on: "success"
-  payload_off: "fail"
+#- platform: command_line
+#  name: Big Mac
+#  command: ping -W 1 -c 1 mac-pro > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"
+- platform: ping
+  name: "Big Mac"
+  host: !secret big_mac
+  count: 5
+  scan_interval: 300
 #-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Ben's PC
-  command: ping -W 1 -c 1 192.168.0.78 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  payload_on: "success"
-  payload_off: "fail"    
+#- platform: command_line
+#  name: Bens PC
+#  command: ping -W 1 -c 1 ben-pc > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"    
+- platform: ping
+  name: "Bens PC"
+  host: !secret ben_pc
+  count: 5
+  scan_interval: 300
 #-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Sonic Music Player
-  command: ping -W 1 -c 1 192.168.0.50 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  payload_on: "success"
-  payload_off: "fail"    
+#- platform: command_line
+#  name: Sonic Music Player
+#  command: ping -W 1 -c 1 sonic > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"    
+- platform: ping
+  name: "Sonic Music Player"
+  host: !secret sonic
+  count: 5
+  scan_interval: 300
 #-----------------------------------------------------------------------------#
-- platform: command_line
-  name: Ben's Xbox
-  command: ping -W 1 -c 1 192.168.0.138 > /dev/null 2>&1 && echo success || echo fail
-  device_class: connectivity
-  payload_on: "success"
-  payload_off: "fail"    
+#- platform: command_line
+#  name: Bens Xbox
+#  command: ping -W 1 -c 1 xbox-1 > /dev/null 2>&1 && echo success || echo fail
+#  device_class: connectivity
+#  payload_on: "success"
+#  payload_off: "fail"    
+- platform: ping
+  name: "Bens Xbox"
+  host: !secret ben_xbox
+  count: 5
+  scan_interval: 300
 ###############################################################################

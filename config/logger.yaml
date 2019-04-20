@@ -1,0 +1,40 @@
+# Updated 12-03-2019
+# Path = /config/logger.yaml
+
+# Log Severities: notset, debug, info, warn, warning, error, fatal, critical
+# You can filter anything betwen the []'s
+# Temporally turned on all logging to see what to filter 05-03-2019
+# Tuning the logs 12-03-2019
+
+###############################################################################
+default: info
+logs:
+  #homeassistant.components.binary_sensor: error
+  #homeassistant.components.sensor: error
+  #homeassistant.components.switch: debug
+  #homeassistant.components.light: debug
+  homeassistant.components.sensor.command_line: warning
+  homeassistant.components.http.view: warning
+  homeassistant.setup: error
+  hole: critical
+  homeassistant.components.sensor.pi_hole: critical
+###############################################################################
+#  aiohttp.access: critical
+#  aiohttp.server: critical
+#  homeassistant.core: error
+#  homeassistant.components.automation: info
+#  homeassistant.components.binary_sensor: error
+#  homeassistant.components.sensor: error
+#  homeassistant.components.device_tracker: error
+#  homeassistant.components.discovery: warn
+#  homeassistant.components.feedreader: warn
+#  homeassistant.components.http: warn
+#  homeassistant.components.media_player: info
+#  homeassistant.components.sensor.pi_hole: critical
+#  homeassistant.components.sensor.rest: critical
+#  homeassistant.components.recorder: error
+#  homeassistant.components.sensor.darksky: warn
+#  homeassistant.helpers.script: info
+#  homeassistant.helpers.entity: critical
+#  homeassistant.exceptions: info
+###############################################################################

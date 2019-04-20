@@ -1,10 +1,11 @@
 # Updated 19-04-2018
+# Path = /config/customize/printers.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 
 ###############################################################################
 # Customize Printers #
 ############################################################################### 
 sensor.printer_page_count:
-  friendly_name: 'Printer Page Count'
   icon: mdi:printer
 ###############################################################################

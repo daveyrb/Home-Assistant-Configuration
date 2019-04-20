@@ -1,10 +1,12 @@
 # Updated 19-04-2018
+# Path = /config/customize/door_bell.yaml
+
 # Breaking down customize into separate parts 19-04-2018
 
 ###############################################################################
 # Customize Door Bell Press Button #
 ############################################################################### 
 switch.door_bell:
-  friendly_name: 'Door Bell'
+  friendly_name: "Door Bell"
   icon: mdi:bell-ring
 ###############################################################################

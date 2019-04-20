@@ -1,0 +1,58 @@
+# Updated 24-03-2019
+# Path = /config/scripts/alarm.yaml
+# See Also/config/automation/alarm.yaml
+
+# First Crack at setting up an alarm 21-02-2019
+# Turn on automation.alarm_reset 24-03-2019
+
+###############################################################################
+# This script is called from "automation.alarm_live_frontdoor"
+###############################################################################
+front_door_alarm:
+    alias: 'Front Door Alarm'
+    sequence:
+      - delay:
+          # supports seconds, milliseconds, minutes, hours
+          seconds: 60
+      - service: switch.turn_on
+        data:
+          entity_id: 
+            - switch.test_led_2 #Pretend Siren
+            #- switch.alarm_siren
+      #- service: notify.alarm
+      - service: notify.ralph_email
+        data_template:
+          title: "Alarm"
+          message: "Sorry to disturb you Sir, but the Front Door sensor has been activated it seems we have an intruder"                 
+#      - delay:
+#          # supports seconds, milliseconds, minutes, hours
+#          seconds: 1
+
+###############################################################################
+# This script is called from "automation.alarm_live_motion"
+###############################################################################
+motion_detection_alarm:
+    alias: 'Motion Detection Alarm'
+    sequence:
+      - service: switch.turn_on
+        data:
+          entity_id: 
+            - switch.test_led_2 #Pretend Siren
+            #- switch.alarm_siren
+
+###############################################################################
+# This script is Called from " automation.alarm_on"
+###############################################################################          
+alarm_on:
+    alias: 'Alarm On'
+    sequence:
+      - delay:
+          # supports seconds, milliseconds, minutes, hours
+          seconds: 120
+      - service: automation.turn_on
+      #- service: automation.toggle
+        data:
+          entity_id: 
+            - automation.alarm_live_frontdoor
+            - automation.alarm_live_motion
+            - automation.alarm_reset

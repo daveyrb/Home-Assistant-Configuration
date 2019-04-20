@@ -1,27 +1,28 @@
 # Updated 21-04-2017
+# Path = /config/zones.yaml
 
 ###############################################################################    
 # Zones for Location tracking
 ###############################################################################
-- name: Home
+- name: "Home"
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   radius: 50
   icon: mdi:home
 #-----------------------------------------------------------------------------#
-- name: School
+- name: "School"
   latitude: !secret school_latitude
   longitude: !secret school_longitude
   radius: 250
   icon: mdi:school
 #-----------------------------------------------------------------------------#
-- name: Work
+- name: "Work"
   latitude: !secret work_latitude
   longitude: !secret work_longitude
   radius: 150
   icon: mdi:worker
 #-----------------------------------------------------------------------------#
-- name: Asda
+- name: "Asda"
   latitude: !secret asda_latitude
   longitude: !secret asda_longitude
   radius: 250

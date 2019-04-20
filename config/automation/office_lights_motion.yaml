@@ -1,0 +1,52 @@
+# Updated 30-01-2019
+# Path = /config/automation/office_lights_motion.yaml
+
+###############################################################################
+# Automation for the Office lights Motion Detection #
+###############################################################################
+- alias: 'Office Lights Motion On Day'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id:  binary_sensor.office_motion
+      to: 'on'  
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        before: sunset
+      - condition: sun
+        after: sunrise
+  action:
+    service: script.turn_on
+    entity_id: script.office_lights_day
+#-----------------------------------------------------------------------------#
+- alias: 'Office Lights Motion On Night'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id:  binary_sensor.office_motion
+      to: 'on'  
+  condition:
+    condition: or
+    conditions:
+      - condition: sun
+        after: sunset
+      - condition: sun
+        before: sunrise
+  action:
+    service: script.turn_on
+    entity_id: script.office_lights_night
+#-----------------------------------------------------------------------------#
+- alias: 'Office Lights Motion Off'
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id:  binary_sensor.office_motion 
+      to: 'off'
+      from: 'on'
+      for: '00:15:00'
+  action:
+    service: light.turn_off
+    entity_id: light.office_lights
+#-----------------------------------------------------------------------------#

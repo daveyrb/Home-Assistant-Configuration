@@ -1,0 +1,96 @@
+# Updated 06-02-2019
+# Path = /config/notify/notify.yaml
+
+###############################################################################
+# Notifications #
+- name: "ralph_email"
+  platform: smtp
+  server: !secret email_server
+  port: 587
+  sender: !secret email_sender
+  username: !secret email_username
+  password: !secret email_password
+  recipient: !secret email_recipient_ralph
+  sender_name: !secret email_sender_name
+
+- name: "tracy_email"
+  platform: smtp
+  server: !secret email_server
+  port: 587
+  sender: !secret email_sender
+  username: !secret email_username
+  password: !secret email_password
+  recipient: !secret email_recipient_tracy
+  sender_name: !secret email_sender_name
+
+- name: "ben_email"
+  platform: smtp
+  server: !secret email_server
+  port: 587
+  sender: !secret email_sender
+  username: !secret email_username
+  password: !secret email_password
+  recipient: !secret email_recipient_ben
+  sender_name: !secret email_sender_name
+
+- name: "amy_email"
+  platform: smtp
+  server: !secret email_server
+  port: 587
+  sender: !secret email_sender
+  username: !secret email_username
+  password: !secret email_password
+  recipient: !secret email_recipient_amy
+  sender_name: !secret email_sender_name
+
+- name: "mum_email"
+  platform: smtp
+  server: !secret email_server
+  port: 587
+  sender: !secret email_sender
+  username: !secret email_username
+  password: !secret email_password
+  recipient: !secret email_recipient_mum
+  sender_name: !secret email_sender_name
+
+- name: "twitter"
+  platform: twitter
+  consumer_key: !secret twitter_consumer_key
+  consumer_secret: !secret twitter_consumer_secret
+  access_token: !secret twitter_access_token
+  access_token_secret: !secret twitter_access_token_secret    
+###############################################################################
+
+###############################################################################
+# Group notifications #
+- name: "ralph"
+  platform: group
+  services:
+    - service: ralph_email
+    - service: ios_ralph_daveys_iphone
+      
+- name: "alarm"
+  platform: group
+  services:
+    - service: ralph_email
+    - service: tracy_email
+    - service: ios_ralph_daveys_iphone
+    - service: ios_tracys_iphone
+
+- name: "doorbell"
+  platform: group
+  services:
+    - service: ralph_email
+    - service: tracy_email
+    - service: ios_ralph_daveys_iphone
+    - service: ios_tracys_iphone
+
+- name: "family_email"
+  platform: group
+  services:
+    - service: ralph_email
+    - service: tracy_email
+    - service: ben_email
+    - service: amy_email
+    - service: mum_email
+############################################################################### 

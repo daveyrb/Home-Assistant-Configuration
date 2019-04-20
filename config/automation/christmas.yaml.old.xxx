@@ -1,0 +1,536 @@
+# Updated 12-03-2019
+# Merged all the Christmas Automations into one file
+# Breaking change with V0.89.0 Renamed all the TP link switches
+# Added automation to Activate Christmas Automations 12-03-2019
+
+###############################################################################
+# Activate Christmas #
+###############################################################################    
+- alias: 'Activate Christmas Pre New Year'
+  initial_state: True
+  trigger:
+      - platform: template
+#        value_template: >-
+#          {{ now().strftime('%F') >= (now().strftime('%Y') | int ) ~ "-11-25" 
+#          and now().strftime('%F') <= (now().strftime('%Y') | int ) ~ "-12-31" }}
+        value_template: >-
+          {{ now().strftime('%F') == (now().strftime('%Y') | int ) ~ "-03-13" }}
+  action:
+     # Actions are scripts so can also be a list of actions
+     - service: automation.turn_on
+       data:    
+         entity_id: 
+           - group.christmas_automations
+#-----------------------------------------------------------------------------#    
+- alias: 'Activate Christmas Post New Year'
+  initial_state: True
+  trigger:
+      - platform: template
+        value_template: >-
+          {{ now().strftime('%F') >= (now().strftime('%Y') | int ) ~ "-01-01" 
+          and now().strftime('%F') <= (now().strftime('%Y') | int ) ~ "-01-13" }}
+  action:
+     # Actions are scripts so can also be a list of actions
+     - service: automation.turn_on
+       data:    
+         entity_id: 
+           - group.christmas_automations
+###############################################################################
+# De-Activate Christmas #
+###############################################################################    
+- alias: 'De-Activate Christmas'
+  initial_state: True
+  trigger:
+      - platform: template
+#        value_template: >-
+#          {{ now().strftime('%F') == (now().strftime('%Y') | int ) ~ "-01-14" }}
+        value_template: >-
+          {{ now().strftime('%F') == (now().strftime('%Y') | int ) ~ "-03-14" }}
+  action:
+     # Actions are scripts so can also be a list of actions
+     - service: automation.turn_off
+       data:    
+         entity_id: 
+           - group.christmas_automations
+     - service: switch.turn_off
+       data:    
+         entity_id: 
+           - group.christmas_lights
+###############################################################################  
+
+
+###############################################################################
+# Automations for Christmas #
+###############################################################################
+###############################################################################
+# Christmas Back Porch #
+###############################################################################
+- alias: 'Christmas Back Porch On Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '07:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun     
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_4
+#-----------------------------------------------------------------------------#    
+- alias: 'Christmas Back Porch Off Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun  
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_4
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Back Porch On Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '06:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_4
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Back Porch Off Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '09:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_4
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Back Porch On Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '15:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_4
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Back Porch Off Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_4
+###############################################################################
+    
+###############################################################################
+# Automation Christmas The Front Garden #
+###############################################################################
+- alias: 'Christmas Front Garden on Evening'
+  initial_state: False
+  trigger:
+     platform: sun
+     event: sunset   
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_7
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Front Garden Off Evening'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_7
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Front Garden On Morning'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '06:00:00'
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_7
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Front Garden off Morning'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '08:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_7
+###############################################################################
+
+###############################################################################
+# Christmas The Lounge Window #
+###############################################################################
+- alias: 'Christmas Lounge Window on Evening'
+  initial_state: False
+  trigger:
+     platform: sun
+     event: sunset   
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_2
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Lounge Window Off Evening'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_2
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Lounge Window On Morning'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '06:00:00'
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_2
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Lounge Window off Morning'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '08:00:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_2
+###############################################################################
+
+###############################################################################
+# Christmas in the Office #
+###############################################################################
+# Reset Christmas The Office lights because the lights have a shorter on/off 
+# timer built in
+###############################################################################
+- alias: 'Christmas Office On Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '07:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun     
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekend Reset'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '14:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun     
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office On Weekend Reset'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '14:01:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun  
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekend Reset II'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '20:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun     
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office On Weekend Reset II'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '20:01:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun  
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun  
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office On Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '06:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '09:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office On Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '15:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekday PM Reset'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '18:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office On Weekday PM Reset'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '18:01:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_5
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Office Off Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_5
+###############################################################################
+
+###############################################################################
+# Christmas Tree #
+###############################################################################
+- alias: 'Christmas Tree On Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '07:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun     
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_3
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Tree Off Weekend'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun  
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_3
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Tree On Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '06:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_3
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Tree Off Weekday AM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '09:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_3
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Tree On Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '15:00:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_on
+    entity_id: switch.tp_3
+#-----------------------------------------------------------------------------#
+- alias: 'Christmas Tree Off Weekday PM'
+  initial_state: False
+  trigger:
+     platform: time
+     at: '23:59:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri        
+  action:
+    service: switch.turn_off
+    entity_id: switch.tp_3
+###############################################################################

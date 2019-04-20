@@ -1,0 +1,21 @@
+# Updated 21-03-2017
+# Path = /config/lights/butterfly_lights.yaml
+
+###############################################################################
+# Kitchen Butterfly Lights  #
+###############################################################################
+ - platform: mqtt
+   name: "Butterfly Lights"
+   state_topic: "stat/Butterfly/POWER"
+   command_topic: "cmnd/Butterfly/POWER"
+   availability_topic: "tele/Butterfly/LWT"
+   qos: 0
+   payload_on: "ON"
+   payload_off: "OFF"
+   payload_available: "Online"
+   payload_not_available: "Offline"  
+   optimistic: false
+   retain: true
+###############################################################################
+
+

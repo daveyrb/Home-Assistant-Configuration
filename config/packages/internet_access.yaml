@@ -1,0 +1,52 @@
+# Updated 07-04-2019
+# Path = /config/packages/internet_access.yaml
+
+# Control internet access by turning on and off switch ports
+
+###############################################################################
+homeassistant:
+
+  customize:
+    switch.test_pi_internet_access:
+       icon: mdi:wan 
+    switch.bens_pc_internet_access:
+       icon: mdi:wan 
+###############################################################################
+
+###############################################################################
+automation:
+
+  - alias: 'Bens Internet Access'
+    initial_state: True
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.kill_switch
+        to: 'on'
+    action:
+      - service: switch.toggle
+        entity_id: switch.bens_pc_internet_access
+#        entity_id: switch.test_pi_internet_access
+###############################################################################
+
+###############################################################################
+switch:
+
+  - platform: snmp
+    name: "Test Pi Internet Access"
+    host: !secret switch_3
+    community: !secret snmp_write
+    # ifAdminStatus
+    baseoid: 1.3.6.1.2.1.2.2.1.7.1
+    payload_on: 1
+    payload_off: 2
+
+  - platform: snmp
+    name: "Bens PC Internet Access"
+    host: !secret switch_2
+    community: !secret snmp_write
+    # ifAdminStatus
+    baseoid: 1.3.6.1.2.1.2.2.1.7.20
+    payload_on: 1
+    payload_off: 2
+###############################################################################
+

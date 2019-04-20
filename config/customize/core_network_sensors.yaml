@@ -1,0 +1,39 @@
+# Updated 01-04-2019
+# Path = /config/customize/core_network_sensors.yaml
+
+# Added proxy server 04-01-2019
+# Added Alarm MCU 01-04-2019
+
+###############################################################################
+# Customize Core Network Sensors #
+############################################################################### 
+sensor.router_state:
+  icon: mdi:network
+#sensor.router_wan_rx:
+#  icon: mdi:download-network
+#sensor.router_wan_tx:
+#  icon: mdi:upload-network
+sensor.router_uptime:
+  icon: mdi:network
+sensor.dns_1_uptime:
+  icon: mdi:dns
+sensor.dns_2_uptime:
+  icon: mdi:dns
+sensor.dns_vip_uptime:
+  icon: mdi:dns
+sensor.vpn_server_uptime:
+  icon: mdi:vpn
+sensor.vpn_server_state:
+  icon: mdi:vpn
+sensor.proxy_server_uptime:
+  icon: mdi:arrow-decision
+sensor.proxy_server_state:
+  icon: mdi:arrow-decision
+sensor.dns_1_state:
+  icon: mdi:dns
+sensor.dns_2_state:
+  icon: mdi:dns
+sensor.alarm_mcu_uptime:
+  icon: mdi:alarm-bell
+###############################################################################
+

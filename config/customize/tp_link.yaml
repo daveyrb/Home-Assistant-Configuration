@@ -1,0 +1,35 @@
+# Updated 07-03-2019
+# Path = /config/customize/tp_link.yaml
+
+# # Breaking change with V0.89.0 Renamed all the TP link switches
+
+###############################################################################
+# Customise TP Link Switches and Lights #
+############################################################################### 
+switch.tp_1:
+  friendly_name: "Back Porch Laser"
+  #name: "Back Porch Laser"
+  icon: mdi:pine-tree
+switch.tp_2:
+  friendly_name: "Christmas Lounge Window"
+  icon: mdi:pine-tree
+switch.tp_3:
+  friendly_name: "Christmas Tree"
+  icon: mdi:pine-tree
+switch.tp_4:
+  friendly_name: "Christmas Back Porch"
+  icon: mdi:pine-tree
+switch.tp_5:
+  friendly_name: "Christmas Office"
+  icon: mdi:pine-tree
+switch.tp_6:
+  #entity_id: switch.office_fan
+  friendly_name: "Office Fan"
+  #name: "Office Fan"
+  icon: mdi:fan
+switch.tp_7:
+  friendly_name: "Christmas Front Garden"
+  icon: mdi:pine-tree
+switch.tp_8:
+  friendly_name: "Lounge Pyramid Light"
+  icon: mdi:lightbulb     

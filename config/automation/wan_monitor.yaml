@@ -1,0 +1,145 @@
+# Modified 22-03-2019
+# Path = /config/automation/wan_monitor.yaml
+
+# Increased WAN Down timeout to 5 minutes 08-03-2019
+# Added voice announcement when WAN ports fails 20-03-2019
+# Increased WAN Down timeout to 10 minutes 22-03-2019
+ 
+###############################################################################
+# Automation for WAN Monitoring and Notifications #
+###############################################################################
+
+###############################################################################
+# WAN Ports Monitor #
+###############################################################################
+- alias: 'WAN 1 is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id:  binary_sensor.wan_1
+     to: 'off'
+     for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+  action:
+   - service: notify.ralph
+     data:
+       title: "WAN 1"
+       message: "Sorry to disturb you Sir, but WAN 1 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but WAN 1 seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'WAN 2 is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id:  binary_sensor.wan_2
+     to: 'off'
+     for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+  action:
+   - service: notify.ralph
+     data:
+       title: "WAN 2"
+       message: "Sorry to disturb you Sir, but WAN 2 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but WAN 2 seems to be Down
+#-----------------------------------------------------------------------------#
+
+###############################################################################
+# Certificate Expiry Warning #
+###############################################################################
+- alias: 'SSL Certificate expiry WAN 1 notification'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_certificate_expiry_wan_1
+    below: 21
+  action:
+    service: notify.ralph
+    data:
+      message: "Sorry to disturb you Sir, but the SSL certificate for WAN 1 expires in 20 days and has not been automatically renewed"
+#-----------------------------------------------------------------------------#
+- alias: 'SSL Certificate expiry WAN 2 notification'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_certificate_expiry_wan_2
+    below: 21
+  action:
+    service: notify.ralph
+    data:
+      message: "Sorry to disturb you Sir, but the SSL certificate for WAN 2 expires in 20 days and has not been automatically renewed"
+#-----------------------------------------------------------------------------#
+
+###############################################################################
+# Certificate Renewed Confirmation #
+###############################################################################
+- alias: 'SSL Certificate renewed WAN 1 notification'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_certificate_expiry_wan_1
+    above: 89
+  action:
+    service: notify.ralph
+    data:
+      message: "Sorry to disturb you Sir, but the SSL certificate for WAN 1 has been renewed please backup the SD card"
+#-----------------------------------------------------------------------------#
+- alias: 'SSL Certificate renewed WAN 2 notification'
+  initial_state: True
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_certificate_expiry_wan_2
+    above: 89
+  action:
+    service: notify.ralph
+    data:
+      message: "Sorry to disturb you Sir, but the SSL certificate for WAN 2 has been renewed please backup the SD card"
+#-----------------------------------------------------------------------------#
+
+###############################################################################
+# WAN IP address Changed  #
+###############################################################################
+- alias: 'WAN 1 IP address Changed'
+  initial_state: on 
+  trigger:
+    platform: state 
+    entity_id: sensor.wan_1_external_address
+  action:
+    service: notify.ralph
+    data_template:
+      message: "Sorry to disturb you Sir, but we have a new external IP address for WAN 1 it is now {{ states('sensor.wan_1_external_address') }}"
+#-----------------------------------------------------------------------------#
+- alias: 'WAN 2 IP address Changed'
+  initial_state: on 
+  trigger:
+    platform: state 
+    entity_id: sensor.wan_2_external_address
+  action:
+    service: notify.ralph
+    data_template:
+      message: "Sorry to disturb you Sir, but we have a new external IP address for WAN 2 it is now {{ states('sensor.wan_2_external_address') }}"
+#-----------------------------------------------------------------------------#
+###############################################################################
