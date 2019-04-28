@@ -1,9 +1,10 @@
-# Updated 10-01-2019
+# Updated 27-04-2019
 # Path = /config/customize/computers.yaml
 
 # Breaking down customize into separate parts 19-04-2018
 # Removed some PC's 10-05-2018
 # Removed ' from binary Sensor names V0.85.0 Change 10-01-2019
+# Added Minecraft Server 27-04-2019
 
 ###############################################################################
 # Customize Computers #
@@ -21,4 +22,6 @@ binary_sensor.bens_xbox:
 binary_sensor.bens_pc:
   friendly_name: "Ben's PC"
   icon: mdi:desktop-tower       
+binary_sensor.minecraft_vm:
+  icon: mdi:minecraft      
 ###############################################################################

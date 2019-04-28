@@ -1,8 +1,11 @@
-# Updated 13-03-2019
+# Updated 27-04-2019
 # Path = /config/sensors/media_centre_templates.yaml
+# See also:
+# Path = /config/packages/media_players.yaml
 
 # Added Mum's Roku Box 27-12-2018
 # Added Fire TV 13-03-2019
+# Added App Names to Fire TV 27-04-2019
 
 ###############################################################################    
 # Media Centre Status 
@@ -22,7 +25,11 @@
      value_template: "{{ states.media_player.mum.attributes['app_name'] | default('Nothing playing') }}"
      friendly_name: "Roku TV Mum's Lounge"
 #-----------------------------------------------------------------------------#
+#   fire_tv_office_media_title:
+#     value_template: "{{ states.media_player.fire_tv_office.attributes['source'] | default('Nothing playing') }}"
+#     friendly_name: "Fire TV Office"
+#-----------------------------------------------------------------------------#
    fire_tv_office_media_title:
-     value_template: "{{ states.media_player.fire_tv_office.attributes['source'] | default('Nothing playing') }}"
+     value_template: "{{ states.media_player.fire_tv_office.attributes['app_name'] | default('Nothing playing') }}"
      friendly_name: "Fire TV Office"
 #-----------------------------------------------------------------------------#

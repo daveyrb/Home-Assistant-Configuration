@@ -1,79 +1,85 @@
-# Updated 26-01-2019
+# Updated 25-04-2019
 # Path = /config/scripts/lounge_tv.yaml
+
+# Breaking change in V0.92 changed service to broadlink.send and added host: 25-04-2019
 
 ###############################################################################
 # Control The Lounge Media devices via a Broadlink RM2 #
 ###############################################################################
+
+#-----------------------------------------------------------------------------#
 tv:
     alias: TV
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgBgAAABJpEUERQRExEUERQRExEUNRQRFDUUNhM2FDUUNRQ2ExEUNhMRFDYTERQRFDUUERQRExEUNRQRFDUUNhMRFDUUNhQ1FAAFFAABJkgUAAw8AAEmSBQADDwAASZIFAANBQAAAAAAAAAA'
 #-----------------------------------------------------------------------------#
-
 sky:
     alias: Sky
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgAwAFgdDhANEA4eDR4dDw4PDg8OEA4PHB4dDw4PDh4ODw4PDg8OEA4PHBANHg4PDgANBQAAAAAAAAAA'
 #-----------------------------------------------------------------------------#
-
 dvd:
     alias: DVD
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet:
             - 'JgCEAyoRFhEqERYSFhEWESoRKhEqAAGYUREqERYRKhEWEikSFhEWERYSKRIWESoRKhEWESoRFhIWERYRKhEqESoAAZhRESoRFhEqERYSKRIWERYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWESoRFhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIqERYRKhEWESoSFRIWERYRKhEWEikSKRIWESoRFhIWERYRKhEqESoAAZdREikSFhEqERYRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ETKBIWESoRFhEqERcRFhEWESoRFxEpEikSFRIqERYSFhEWESoRKhEqAAGXURIpEhYRKhEWESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEqERYRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWESoRFhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIpEhYRKhEWESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEqERYRKhEWEhYRFhEqERYSKRIpEhYRKhIVERYSFhEqESoRKgABl1ESKRIWESoRFhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIpEhYRKhEWESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEqEhURKhEWEhYRFhEqERYSKRIpEhYRKhEWERcSFREqESoRKgABl1ESKhEWESoRFhEqEhYRFhEWESoRFxEpEikSFhEqERYSFhEWESoRKhEqAAGYUREqERYRKhEWEikSFhIVERYSKRIWESoRKhEWESoRFhIWERYRKhEqESoAAZdREikSFhEqERYRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWESoRFhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIpEhYRKhEWESoRFhIWERYRKhEWEikSKRIWESkSFhEWEhYRKRIpEikAAZhRESoRFhIpEhYRKhEWERYSFhEqERYRKhEqEhUSKRIWERYRFhIpEikSKQANBQAAAAA='            
 #-----------------------------------------------------------------------------#
-            
 amplifier:
     alias: Amplifier
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet:
             - 'JgBoAAABJZMSExE4ERMSNxI4ETgROBETEjcSExE4ERQRExITERMSNxI3EjcSNxI4ETgRExITERMSExETEhMRExITETgROBI3EgAFIAABJUoSAAxDAAElShIADEQAASRLEQAMRAABJUoSAA0F'            
 #-----------------------------------------------------------------------------#
-
 pause_sky:
     alias: Pause Sky
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgAuAFgdDg8OEA4dDh4dDw4PDg8OEA4PHB4dDw4PDh4ODw4PDg8dHg4PHB4ODw4ADQUAAAAAAAAAAAAA'
 #-----------------------------------------------------------------------------#
-
 pause_dvd:
     alias: Pause DVD
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgCEAykSFhEqERYRFhIWESoRKhEqAAGXURIpEhYRFhEqESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWERYRKhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURMoEhYRFhEqESoSFhEWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWERYRKhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIpEhYRFhEqESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREikSFhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKQABmFERKhEWEhYRKhEqERYRFhIWESoRFhEqESoRFhIpEhYRFhEWEikSKRIpAAGYUREqERYSFhEqESoRFhEWEhYRKhEWESoRKhEWEikSFhEWERYSKRIpEikAAZhRESoRFhIWESoRKhEWERYSFhEqERYRKhEqERYSKRIWERYRFhIpEikSKQABmFERKhEWEhYRKRIpEhYRFhEWEikSFhEqESoRFhEqERYSFhEWESoRKhEqAAGYUREqERYRFhIpEikSFhEWERYSKRIWESoRKhEWESoRFhIWERYRKhEqESoAAZhRESoRFhEWEikSKRIWERYRFhIpEhYRKRIpEhYRKhEWERYSFhEqESoRKgABl1ESKRIWERYRKhEqERYSFhEWESoRFhIpEikSFhEpEhYRFhIWESoRKRIpAAGYURIpEhYRFhEqESoRFhEWEhYRKhEWESoRKhEWEikSFhEWERYSKRIpEikAAZhRESoRFhIWESoRKhEWERYSFhEqERYRKhEqERYRKhEWEhYRFhEqESoRKgABmFERKhEWERYSKRIpEhYRFhEWEikSFhEqESkSFhEqERYSFhEWESoRKhEqAAGXURIpEhYRFhEqESoRFhIWERYRKhEWEikSKRIWESkSFhEWEhUSKRIpEikAAZhRESoRFhIWESoRKhEWERYSFhEqERYRKhEqERYSKRIWERYRFhIpEikSKQANBQAAAAA='
 #-----------------------------------------------------------------------------#
-
 play_dvd:
     alias: Play DVD
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgCEAykSFhEqERYRFhIWESoRKhEqAAGXURIWESoRFhEqESoRFhIWERYRKhIVEikSKRIWESoRFhEWEhYRKhEqESoAAZdREhYRKhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESFhEqERYRKhEqERYSFhEWESoRFhIpESoSFhEqERYRFhIWESoRKhEqAAGXURIWESoRFhEqESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREhYRKhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESFhEqERYRKhEqERYSFhEWESoRFhIpEikSFhEqERYRFhIWESoRKhEqAAGXURIWESoRFhEqESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREhYRKhIVESoSKRIWERYRFhEqEhYRKRIpEhYRKhEWEhYRFhEqESoRKgABl1IRFhEqERYSKRIpEhYRFhEWESoSFhEqESoRFhEqERYSFhEWESoRKhEqAAGYUREWESoRFhIpEikSFhEWERYSKRIWESoRKhEWESoRFhIWERYRKhEqESoAAZhRERYRKhEWEikSKRIWERYRFhIpEhYRKhEqERYRKhEWEhYRFhEqESoRKgABl1IRFhEqERYSKRIpEhYRFhEWESoRFhIpEikSFhEqERYRFxEWESoRKhEqAAGXURIWESoRFhEqESoRFhIWERYRKhEWEikSKRIWESoRFhEWEhYRKhEqESoAAZdREhYRKhEWESoRKhEWEhYRFhEqERYSKRIpEhYRKhEWERYSFhEqESoRKgABl1ESFhEqERYRKhEqERYSFhEWESoRFhEqESoRFxEpEhYRFhEXESkSKRIpAAGYUREWEikSFhEqESoRFhEWEhYRKhEWESoRKhEWEikSFhEWERYSKRIpEikAAZhRERYSKRIWESoRKhEWERYSFhEqERYRKhEqERYSKRIWERYRFhIpEikSKQABmFESFhEpEhYRKhEqERYRFxEWESoRFhEqESoRFhIpEhYRFhEXESkSKRIpAAGYUREXESkSFhEqESoRFhEXERYRKhEWESoRKhEWEikSFhEWERcRKRIpEikAAZhREhYRKhEWESoRKhEWEhYRFhEqERYSKREqERYSKRIWERYSFhEpEikSKQANBQAAAAA='
 #-----------------------------------------------------------------------------#
-
 pause_apple_tv:
     alias: Pause Apple TV
     sequence:
-      - service: switch.broadlink_send_packet_broadlink_rm_pro
+      - service: broadlink.send
         data:
+          host: !secret broadlink_lounge
           packet: 
             - 'JgBIAAABK5AVEBQ1FDQVNBUQFDUUNRQ0FTQVNBU0FBEUERQQFRAUNRQRFDQVNBU0FTQVEBQ1FBAVNBU0FTQUERQRFBAVEBQ1FQANBQ'
+#-----------------------------------------------------------------------------#
 #pause_apple_tv:
 #    alias: Pause Apple TV
 #    sequence:

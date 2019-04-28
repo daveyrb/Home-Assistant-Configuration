@@ -1,16 +1,18 @@
-# Updated 16-04-2019
+# Updated 27-04-2019
 # Not used kept as a backup
 # Path = /config/u--lovelace.yaml
 
 title: Jarvis
 views:
-  - cards:
+  - badges: []
+    cards:
       - entities:
           - entity: binary_sensor.amys_pc
           - entity: binary_sensor.big_mac
           - entity: binary_sensor.bens_pc
           - entity: switch.bens_pc_internet_access
           - entity: binary_sensor.bens_xbox
+          - entity: binary_sensor.minecraft_vm
         show_header_toggle: false
         title: Computers / Game Consoles
         type: entities
@@ -103,7 +105,6 @@ views:
         show_header_toggle: false
         title: Tracker
         type: entities
-    badges: []
     icon: 'mdi:home'
     path: homeview
     title: Home
@@ -168,6 +169,7 @@ views:
         type: entities
       - entities:
           - entity: sensor.apple_tv_lounge_media_title
+          - entity: media_player.apple_tv
           - entity: sensor.roku_dining_room_media_title
           - entity: sensor.roku_mum_media_title
           - entity: sensor.fire_tv_office_media_title
@@ -253,6 +255,11 @@ views:
         show_header_toggle: false
         title: Door Bell
         type: entities
+      - camera_image: camera.front_door_snapshot
+        entities:
+          - entity: binary_sensor.test_switch
+        name: Door Bell Image
+        type: picture-glance
     icon: 'mdi:alarm-bell'
     path: alarmview
     title: Burglar Alarm

@@ -1,6 +1,9 @@
-# Updated 20-04-2019
+# Updated 27-04-2019
 # Path = /config/packages/media_players.yaml
+# See also:
+# Path = /config/sensors/media_centre_templates.yaml
 
+# Added App Names to Fire TV 27-04-2019
 
 ###############################################################################
 homeassistant:
@@ -56,14 +59,14 @@ roku:
   - host: !secret roku_mum_lounge
     # Dining Room Roku
   - host: !secret roku_dining_room
-  
+
 cast:
   media_player:
       # Hallway GCC Audio
     - host: !secret gcc_hallway
       # Office GCC Audio
     - host: !secret gcc_office
-    
+
 media_player:
   - platform: androidtv
     # Office Fire TV Stick
@@ -72,7 +75,21 @@ media_player:
     host: !secret fire_tv_office
     adbkey: "/config/fire_tv_1/adbkey"
     get_sources: false
-    
+    apps:
+      com.amazon.tv.launcher: "Home"
+      gov.nasa.amazon: "NASA TV"
+      com.amazon.bueller.music: "Amazon Music"
+      com.netflix.ninja: "Netflix"
+      uk.co.bbc.iplayer: "BBC iPlayer"
+      com.amazon.avod: "Prime Video"
+      com.amazon.bueller.photos: "Photos"
+      com.onemainstream.skynews.android: "Sky News"
+      air.ITVMobilePlayer: "ITV Hub"
+      uk.co.bbc.news: "BBC News"
+      com.amazon.venezia: "Updating"
+      com.mobileiq.demand5: "My 5"
+      com.channel4.ondemand: "All 4"
+
   - platform: kodi
     # Mum's Lounge RPI Kodi
     name: Mum Speaker

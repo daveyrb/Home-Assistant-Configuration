@@ -77,13 +77,17 @@
     - service: ios_ralph_daveys_iphone
     - service: ios_tracys_iphone
 
-- name: "doorbell"
+- name: "doorbell_ios"
+  platform: group
+  services:
+    - service: ios_ralph_daveys_iphone
+    - service: ios_tracys_iphone
+
+- name: "doorbell_email"
   platform: group
   services:
     - service: ralph_email
     - service: tracy_email
-    - service: ios_ralph_daveys_iphone
-    - service: ios_tracys_iphone
 
 - name: "family_email"
   platform: group

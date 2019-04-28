@@ -1,10 +1,11 @@
-# Updated 11-04-2019
+# Updated 20-04-2019
 # Path = /config/automation/door_bell.yaml
 
 # Ring the door bell and pause the TV & DVD
 # Now using Google Chromecast Audio 02-03-2019
 # Changed to a single automation remove TV stuff for now 05-03-2019
 # Added Snapshot photo with email notification 11-04-2019
+# Added IOS notification 20-04-2019
 
 ###############################################################################
 # Door Bell 
@@ -33,8 +34,15 @@
      data:
        entity_id: camera.front_door
        filename: '/config/www/cameras/front_door/snapshot/snaphot.jpg'
-   - service: notify.doorbell
-#   - service: notify.ralph
+   - service: notify.doorbell_ios
+     data:
+       title: "Someone is at the door"
+       message: 'Someone is at the door'
+       data:
+         attachment:
+           content-type: jpeg
+           url: !secret door_bell_snapshot
+   - service: notify.doorbell_email
      data:
        title: "Someone is at the door"
        message: 'Someone is at the door'
@@ -42,4 +50,5 @@
            images:
                - /config/www/cameras/front_door/snapshot/snaphot.jpg
 ###############################################################################
+
 

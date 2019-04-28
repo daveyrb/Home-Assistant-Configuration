@@ -104,6 +104,7 @@ logbook: !include logbook.yaml
 frontend:
   #javascript_version: es5
   javascript_version: latest
+#  javascript_version: auto
 ###############################################################################
 
 ###############################################################################
