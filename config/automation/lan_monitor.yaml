@@ -1,4 +1,4 @@
-# Updated 20-03-2019
+# Updated 01-06-2019
 # Path = /config/automation/lan_monitor.yaml
 
 # Monitor critical network components
@@ -10,15 +10,16 @@
 # Added Proxy Server 04-01-2019
 # Moved WAN port monitoring to wan_monitor.yaml 02-03-2019
 # Added voice notification 20-03-2019
+# Added Core Switches 01-06-2019
 
 ###############################################################################
 # Automation for LAN Monitoring and Notifications #
 ###############################################################################
-- alias: 'POE Switch Down'
+- alias: 'POE Camera Switch Down'
   initial_state: True
   trigger:
      platform: state
-     entity_id: sensor.poe_switch_state
+     entity_id: sensor.poe_camera_switch_state
      to: 'Down'
      for:
         hours: 0
@@ -27,8 +28,8 @@
   action:
    - service: notify.ralph
      data:
-       title: "POE Switch Down"
-       message: "Sorry to disturb you Sir, but the Power Over Ethernet Switch seems to be Down"
+       title: "POE Camera Switch Down"
+       message: "Sorry to disturb you Sir, but the Power Over Ethernet Camera Switch seems to be Down"
    - service: media_player.volume_set
      data_template:
        entity_id:
@@ -39,7 +40,7 @@
        entity_id:
            media_player.office_speaker
        message: >
-         Sorry to disturb you Sir, but the Power Over Ethernet Switch seems to be Down
+         Sorry to disturb you Sir, but the Power Over Ethernet Camera Switch seems to be Down
 #-----------------------------------------------------------------------------#   
 - alias: 'VPN Server Is Down'
   initial_state: True
@@ -202,4 +203,58 @@
            media_player.office_speaker
        message: >
          Sorry to disturb you Sir, but the Office Switch seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'Core Switch 1 Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.core_switch_1_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Core Switch 1"
+       message: "Sorry to disturb you Sir, but Core Switch 1 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but Core Switch 1 seems to be Down
+#-----------------------------------------------------------------------------#
+- alias: 'Core Switch 2 Is Down'
+  initial_state: True
+  trigger:
+     platform: state
+     entity_id: sensor.core_switch_2_state
+     to: 'Down'
+     for:
+        hours: 0
+        minutes: 0 
+        seconds: 30
+  action:
+   - service: notify.ralph
+     data:
+       title: "Core Switch 2"
+       message: "Sorry to disturb you Sir, but Core Switch 1 seems to be Down"
+   - service: media_player.volume_set
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       volume_level: 0.4
+   - service: tts.amazon_polly_say
+     data_template:
+       entity_id:
+           media_player.office_speaker
+       message: >
+         Sorry to disturb you Sir, but Core Switch 2 seems to be Down
 ###############################################################################

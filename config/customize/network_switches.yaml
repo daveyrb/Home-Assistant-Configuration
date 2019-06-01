@@ -1,16 +1,27 @@
-# Updated 06-09-2018
+# Updated 01-06-2019
 # Path = /config/customize/network_switches.yaml
 
 # Breaking down customize into separate parts 19-04-2018
 # Network Changes 02-06-2018
+# Added Core Switches 01-06-2019
 
 ###############################################################################
 # Customize Network Switches #
 ############################################################################### 
-sensor.poe_switch_state:
+sensor.poe_camera_switch_state:
   icon: mdi:switch
 sensor.lounge_switch_state:
   icon: mdi:switch
 sensor.office_switch_state:
+  icon: mdi:switch
+sensor.office_switch_uptime:
+  icon: mdi:switch
+sensor.core_switch_1_state:
+  icon: mdi:switch
+sensor.core_switch_1_uptime:
+  icon: mdi:switch
+sensor.core_switch_2_state:
+  icon: mdi:switch
+sensor.core_switch_2_uptime:
   icon: mdi:switch
 ###############################################################################

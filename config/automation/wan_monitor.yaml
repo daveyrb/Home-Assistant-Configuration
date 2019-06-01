@@ -1,4 +1,4 @@
-# Modified 22-03-2019
+# Modified 14-05-2019
 # Path = /config/automation/wan_monitor.yaml
 
 # Increased WAN Down timeout to 5 minutes 08-03-2019
@@ -101,7 +101,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ssl_certificate_expiry_wan_1
-    above: 89
+    above: 88
   action:
     service: notify.ralph
     data:
@@ -112,7 +112,7 @@
   trigger:
     platform: numeric_state
     entity_id: sensor.ssl_certificate_expiry_wan_2
-    above: 89
+    above: 88
   action:
     service: notify.ralph
     data:

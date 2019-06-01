@@ -1,4 +1,4 @@
-# Updated 27-04-2019
+# Updated 30-04-2019
 # Path = /config/binary_sensors/computers.yaml
 
 # Added Amy's iPad
@@ -8,19 +8,20 @@
 # Removed ' from binary Sensor names V0.85.0 Change 10-01-2019
 # Changed to Ping (ICMP) Binary sensor 02-03-2019
 # Added Mincraft Server 27-04-2019
+# Added Amy's new laptop 30-04-2019
 
 ###############################################################################
 # Binary Sensor to monitor on line computers #
 ###############################################################################
 #- platform: command_line
-#  name: Amys PC
-#  command: ping -W 1 -c 1 amy-pc > /dev/null 2>&1 && echo success || echo fail
+#  name: Amys Laptop
+#  command: ping -W 1 -c 1 amy-laptop-wi-fi > /dev/null 2>&1 && echo success || echo fail
 #  device_class: connectivity
 #  payload_on: "success"
 #  payload_off: "fail"
 - platform: ping
-  name: "Amys PC"
-  host: !secret amy_pc
+  name: "Amys Laptop"
+  host: !secret amy-laptop-wi-fi
   count: 5
   scan_interval: 300
 #-----------------------------------------------------------------------------#

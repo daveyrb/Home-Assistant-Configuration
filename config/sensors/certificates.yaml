@@ -1,5 +1,8 @@
-# Updated 06-03-2019
+# Updated 14-05-2019
 # Path = /config/sensors/certificates.yaml
+
+# Added external web sites 08-05-2019
+# Changed Scan Interval to 6 hours instead of 12 14-05-2019 Removed
 
 ###############################################################################
 # Monitor Certificate Expiry #
@@ -7,7 +10,18 @@
 
 - platform: cert_expiry
   name: "SSL Certificate Expiry WAN 1"
+  #scan_interval: 21600
+  #scan_interval: 6
   host: !secret wan1_cert
 - platform: cert_expiry
   name: "SSL Certificate Expiry WAN 2"
   host: !secret wan2_cert
+- platform: cert_expiry
+  name: "SSL Certificate Expiry Woodingdean.net"
+  host: woodingdean.net
+- platform: cert_expiry
+  name: "SSL Certificate Expiry Woodingdean.org"
+  host: woodingdean.org
+- platform: cert_expiry
+  name: "SSL Certificate Expiry The-Tardis.org"
+  host: the-tardis.org

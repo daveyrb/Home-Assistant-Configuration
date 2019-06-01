@@ -1,4 +1,4 @@
-# Updated 26-03-2019
+# Updated 01-06-2019
 # Path = /config/history.yaml
 
 ###############################################################################
@@ -18,6 +18,8 @@
     entities:
       - sensor.bens_bedroom_wap
       - sensor.office_switch
+      - sensor.core_switch_1
+      - sensor.core_switch_2
       - sensor.dining_room_wap
       - sensor.dns_1
       - sensor.dns_2
@@ -26,7 +28,7 @@
       - sensor.lounge_temperature
       - sensor.lounge_wap
       - sensor.lounge_switch
-      - sensor.poe_switch
+      - sensor.poe_camera_switch
       - sensor.router
       - sensor.the_burrow_wap
       - sensor.vpn_server
@@ -64,6 +66,9 @@
       - sensor.dns_2_uptime
       - sensor.dns_vip_uptime
       - sensor.vpn_server_uptime
+      - sensor.office_switch_uptime
+      - sensor.core_switch_1_uptime
+      - sensor.core_switch_2_uptime
       - sensor.next_rocket_launch_date
       - sensor.nas_1_uptime
       - sensor.disk_1_status

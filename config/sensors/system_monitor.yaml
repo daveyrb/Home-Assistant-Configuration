@@ -1,9 +1,10 @@
-# Updated 21-02-2019
+# Updated 12-05-2019
 # Path = /config/sensors/system_monitor.yaml
 
 # Added Uptime and Version 17-05-2018
 # Changed Host Uptime Senesor to use SNMP due to sensor.last_boot changes in V84 12-12-2018
 # Added - platform: cpuspeed should now work in Docker 21-02-2019
+# Added HA Database Size Sensor 12-05-2019
  
 ###############################################################################
 # System Monitor #
@@ -30,6 +31,18 @@
   name: "HA Installed Version"
   scan_interval: 86400
 ###############################################################################  
+
+###############################################################################
+# HA Database size #
+###############################################################################
+- platform: sql
+  db_url: !secret database
+  queries:
+  - name: HA Database Size
+    query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="ha" GROUP BY table_schema'
+    column: 'value'
+    unit_of_measurement: MB
+###############################################################################
 
 ###############################################################################
 # Home Assistant Uptime #

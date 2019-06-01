@@ -1,9 +1,10 @@
-# Updated 12-12-2018
+# Updated 12-05-2019
 # Path = /config/customize/jarvis.yaml
 
 # Breaking down customize into separate parts 19-04-2018
 # Added Uptime & Version Sensor 17-05-2018
 # Changed Host Uptime Senesor to use SNMP due to sensor.last_boot changes in V84 12-12-2018
+# Added HA Database Size Sensor 12-05-2019
 
 ###############################################################################
 # Customize Jarvis Sensors #
@@ -35,4 +36,9 @@ sensor.ha_installed_version:
 #updater.updater:
 #  friendly_name: "HA Latest Version"
 #  icon: mdi:home-assistant
+#-----------------------------------------------------------------------------#
+# HA Database Size Sensor #
+sensor.ha_database_size:
+  icon: mdi:database
+#-----------------------------------------------------------------------------#
 ###############################################################################

@@ -1,4 +1,4 @@
-# Updated 01-04-2019
+# Updated 01-06-2019
 # Path = /config/sensors/snmp.yaml
 
 # Trying to extend scan_interval: 30
@@ -14,6 +14,7 @@
 # Added Proxy Server 04-01-2019
 # Moved Bendroom WAP to Ben's Bedrom 11-03-2019
 # Added Alarm MQTT RPI 01-04-2019
+# Added Core Switches 01-06-2019
 
 ###############################################################################
 # SNMP Monitoring
@@ -490,7 +491,161 @@
         {%- endif -%}
       {%- endif -%}
 #-----------------------------------------------------------------------------#
-# Lounge Switch Checking Switch Port 7 is Up  
+# Core Switch 1 Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Core Switch 1 Uptime"
+  host: !secret switch_1
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# Core Switch 2 Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Core Switch 2 Uptime"
+  host: !secret switch_2
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# Office Switch Uptime
+# Converts 100's of a second (TimeTick) to Days, Hours & Minutes 
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  accept_errors: true
+  name: "Office Switch Uptime"
+  host: !secret switch_3
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.1.3.0
+  value_template: >-
+      {% set timetick = value | int %}
+      {% set minutes = ((timetick % 360000) / 6000) | int%}
+      {% set hours = ((timetick % 8640000) / 360000) | int %}
+      {% set days = (timetick / 8640000) | int %}
+      {%- if timetick < 6000 -%}
+        Less than a minute
+      {%- else -%}
+        {%- if days > 0 -%}
+          {%- if days == 1 -%}
+            1 day
+          {%- else -%}
+            {{ days }} days
+          {%- endif -%}
+        {%- endif -%}
+        {%- if hours > 0 -%}
+          {%- if days > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours == 1 -%}
+            1 hr
+          {%- else -%}
+            {{ hours }} hrs
+          {%- endif -%}
+        {%- endif -%}
+        {%- if minutes > 0 -%}
+          {%- if days > 0 or hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 min
+          {%- else -%}
+            {{ minutes }} min
+          {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
+#-----------------------------------------------------------------------------#
+# POE Camera Switch Checking Core Switch 1 Port 6 is Up  
+- platform: snmp
+  version: 2c
+  scan_interval: 60
+  name: "POE Camera Switch"
+  host: !secret switch_1
+  port: 161
+  community: !secret snmp_read 
+  baseoid: 1.3.6.1.2.1.2.2.1.8.6
+#-----------------------------------------------------------------------------#
+# Lounge Switch Checking Core Switch 1 Port 7 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -500,27 +655,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.7
 #-----------------------------------------------------------------------------#
-# Office Switch Checking Switch Port 5 is Up  
-- platform: snmp
-  version: 2c
-  scan_interval: 60
-  name: "Office Switch"
-  host: !secret switch_1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.5
-#-----------------------------------------------------------------------------#
-# POE Switch Checking Switch Port 6 is Up  
-- platform: snmp
-  version: 2c
-  scan_interval: 60
-  name: "POE Switch"
-  host: !secret switch_1
-  port: 161
-  community: !secret snmp_read 
-  baseoid: 1.3.6.1.2.1.2.2.1.8.6
-#-----------------------------------------------------------------------------#
-# Dining Room Wireless Access Point Checking Switch Port 20 is Up  
+# Dining Room Wireless Access Point Checking Core Switch 1 Port 20 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -530,7 +665,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.20
 #-----------------------------------------------------------------------------#
-# Kitchen Wireless Access Point Checking Switch Port 3 is Up  
+# Kitchen Wireless Access Point Checking Core Switch 1 Port 3 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -540,7 +675,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.3
 #-----------------------------------------------------------------------------#
-# Lounge Wireless Access Point Checking Switch Port 13 is Up  
+# Lounge Wireless Access Point Checking Core Switch 1 Port 13 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -550,7 +685,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.13
 #-----------------------------------------------------------------------------#
-# Hallway Wireless Access Point Checking Switch Port 22 is Up  
+# Hallway Wireless Access Point Checking Core Switch 1 Port 22 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -560,7 +695,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.22
 #-----------------------------------------------------------------------------#
-# Bedroom Wireless Access Point Checking Switch Port 11 is Up  
+# Ben's Bedroom Wireless Access Point Checking Core Switch 1 Port 11 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -570,7 +705,7 @@
   community: !secret snmp_read 
   baseoid: 1.3.6.1.2.1.2.2.1.8.11
 #-----------------------------------------------------------------------------#
-# The Burrow Wireless Access Point Checking Switch Port 16 is Up  
+# The Burrow Wireless Access Point Checking Core Switch 1 Port 16 is Up  
 - platform: snmp
   version: 2c
   scan_interval: 60
@@ -607,13 +742,21 @@
      value_template: '{% if is_state("sensor.lounge_switch", "1") %}Up{% else %}Down{% endif %}'
      friendly_name: "Lounge Switch"
 #-----------------------------------------------------------------------------#
+   core_switch_1_state:
+     value_template: '{% if is_state("sensor.core_switch_1_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "Core Switch 1"
+#-----------------------------------------------------------------------------#
+   core_switch_2_state:
+     value_template: '{% if is_state("sensor.core_switch_2_uptime", "unknown") %}Down{% else %}Up{% endif %}'
+     friendly_name: "Core Switch 2"
+#-----------------------------------------------------------------------------#
    office_switch_state:
-     value_template: '{% if is_state("sensor.office_switch", "1") %}Up{% else %}Down{% endif %}'
+     value_template: '{% if is_state("sensor.office_switch_uptime", "unknown") %}Down{% else %}Up{% endif %}'
      friendly_name: "Office Switch"
 #-----------------------------------------------------------------------------#
-   poe_switch_state:
-     value_template: '{% if is_state("sensor.poe_switch", "1") %}Up{% else %}Down{% endif %}'
-     friendly_name: "POE Switch"
+   poe_camera_switch_state:
+     value_template: '{% if is_state("sensor.poe_camera_switch", "1") %}Up{% else %}Down{% endif %}'
+     friendly_name: "POE Camera Switch"
 #-----------------------------------------------------------------------------#
    dining_room_wap_state:
      value_template: '{% if is_state("sensor.dining_room_wap", "1") %}Up{% else %}Down{% endif %}'
