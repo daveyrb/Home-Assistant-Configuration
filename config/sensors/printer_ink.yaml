@@ -1,0 +1,19 @@
+# Updated 01-06-2019
+# Path = /config/sensors/printer_ink.yaml
+
+###############################################################################
+
+###############################################################################
+# Office Printer Ink Levels
+###############################################################################
+- platform: command_line
+  command: "ssh -i /config/.ssh/id_ecdsa -oStrictHostKeyChecking=no pi@ps cat /home/pi/jarvis/office_printer/ink_colour.txt"
+  name: "Office Printer Colour Ink"
+  scan_interval: 900
+  unit_of_measurement: "%"
+- platform: command_line
+  command: "ssh -i /config/.ssh/id_ecdsa -oStrictHostKeyChecking=no pi@ps cat /home/pi/jarvis/office_printer/ink_black.txt"
+  name: "Office Printer Black Ink"
+  scan_interval: 900
+  unit_of_measurement: "%"
+###############################################################################

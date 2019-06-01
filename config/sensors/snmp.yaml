@@ -19,12 +19,12 @@
 ###############################################################################
 # SNMP Monitoring
 ###############################################################################
-# Printer Page Count
+# Office Printer Page Count
 - platform: snmp
   scan_interval: 300
   accept_errors: true
-  name: "Printer Page Count"
-  host: !secret printer
+  name: "Office Printer Page Count"
+  host: !secret office_printer
   port: 161
   community: !secret snmp_read2  
   baseoid: 1.3.6.1.2.1.43.10.2.1.4.1.1

@@ -1,11 +1,16 @@
-# Updated 19-04-2018
+# Updated 01-06-2018
 # Path = /config/customize/printers.yaml
 
 # Breaking down customize into separate parts 19-04-2018
+# Added Ink Levels 01-06-2019
 
 ###############################################################################
 # Customize Printers #
 ############################################################################### 
-sensor.printer_page_count:
+sensor.office_printer_page_count:
+  icon: mdi:printer
+sensor.office_printer_black_ink:
+  icon: mdi:printer
+sensor.office_printer_colour_ink:
   icon: mdi:printer
 ###############################################################################
